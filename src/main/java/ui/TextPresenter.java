@@ -1,5 +1,6 @@
 package ui;
 
+import core.Grid;
 import core.Presenter;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
@@ -16,5 +17,9 @@ public class TextPresenter implements Presenter {
     public void displayMessage(String s) {
 //        terminal.writer().println(s);
         System.out.println(s);
+    }
+
+    public void displayGrid(Grid g) {
+
     }
 }
