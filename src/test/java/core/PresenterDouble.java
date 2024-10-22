@@ -11,6 +11,10 @@ public class PresenterDouble implements Presenter {
         displayedMessages.add(s);
     }
 
+    public void displayGrid(Grid g) {
+        // TODO
+    }
+
     public void offerChoice(String prompt, Map<String, Runnable> choices) {
 
     }
