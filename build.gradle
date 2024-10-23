@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id("com.diffplug.spotless") version "6.25.0"
 }
 
 group = 'org.example'
@@ -30,4 +31,13 @@ run {
     mainClass = 'Main'
     standardInput = System.in
     jvmArgs += ["--enable-native-access=ALL-UNNAMED"]
+}
+
+spotless {
+    java {
+        importOrder()
+        removeUnusedImports()
+        cleanthat()
+        googleJavaFormat().aosp().reflowLongStrings()
+    }
 }

@@ -1,9 +1,8 @@
 import core.Presenter;
-import ui.TextPresenter;
-
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ui.TextPresenter;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -17,5 +16,4 @@ public class Main {
         Logger logger = Logger.getLogger("org.jline");
         logger.setLevel(Level.ALL);
     }
-
 }

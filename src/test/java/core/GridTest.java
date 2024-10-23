@@ -1,8 +1,8 @@
 package core;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 class GridTest {
     Grid testGrid = new Grid(3, 3);
@@ -15,9 +15,9 @@ class GridTest {
 
     @Test
     public void aNewGridHasNoneNullCells() {
-        for (int i = 0; i < testGrid.numCols(); i++){
-            for (int j = 0; j < testGrid.numRows(); j++){
-                assertNotEquals(null, testGrid.get(i,j));
+        for (int i = 0; i < testGrid.numCols(); i++) {
+            for (int j = 0; j < testGrid.numRows(); j++) {
+                assertNotEquals(null, testGrid.get(i, j));
             }
         }
     }

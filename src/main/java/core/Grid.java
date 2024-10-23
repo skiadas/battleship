@@ -18,12 +18,11 @@ public class Grid {
 
         grid = new Cell[rows][cols];
 
-        for (int i = 0 ; i < cols ; i++) {
-            for (int j = 0 ; j < rows ; j++) {
+        for (int i = 0; i < cols; i++) {
+            for (int j = 0; j < rows; j++) {
                 grid[i][j] = new Cell();
             }
         }
-
     }
 
     public Cell get(int row, int col) {
