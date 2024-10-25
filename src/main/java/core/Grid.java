@@ -18,15 +18,15 @@ public class Grid {
 
         grid = new Cell[rows][cols];
 
-        for (int i = 0; i < cols; i++) {
-            for (int j = 0; j < rows; j++) {
-                grid[i][j] = new Cell();
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                grid[row][col] = new Cell();
             }
         }
     }
 
     public Cell get(int row, int col) {
-        return grid[col][row];
+        return grid[row][col];
     }
 
     public int numRows() {
@@ -36,4 +36,6 @@ public class Grid {
     public int numCols() {
         return cols;
     }
+
+
 }
