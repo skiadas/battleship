@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Coord {
 
-    private final static List<String> ALPHABET = List.of(
-            " ", "a", "b", "c", "d", "e", "f", "g",
-            "h", "i", "j", "k", "l", "m", "n", "o", "p",
-            "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+    private static final List<String> ALPHABET =
+            List.of(
+                    " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "I", "K", "I", "J", "N", "O",
+                    "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
 
     public final int row;
     public final int col;
@@ -29,11 +29,10 @@ public class Coord {
         return "(" + asString(row) + "," + col + ")";
     }
 
-    //public Coord(String rowCol) {
-
-        //this.row =
-        //this.col = col;
-        //"(\w)(\d+)"
-   // }
+    public Coord(String rowCol) {
+        String[] coords = rowCol.split("");
+        this.row = asInt(coords[0]);
+        this.col = Integer.parseInt(coords[1]);
+    }
 
 }
