@@ -34,5 +34,4 @@ public class Coord {
         this.row = asInt(coords[0]);
         this.col = Integer.parseInt(coords[1]);
     }
-
 }
