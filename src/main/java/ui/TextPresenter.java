@@ -6,11 +6,13 @@ import core.Presenter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Map;
 import java.util.Scanner;
 
 public class TextPresenter implements Presenter {
     private PrintStream output;
     private InputStream input;
+    private Scanner scanner;
 
     // Terminal terminal;
 
@@ -77,5 +79,26 @@ public class TextPresenter implements Presenter {
                 output.print("Not within the Grid!");
             }
         }
+    }
+
+    public void displayOptions(String prompt, Map<String, Runnable> choices) {
+        output.println(prompt);
+        printOptions(choices);
+
+        while (true) {
+            output.print("Enter your choice: ");
+            String userInput = scanner.nextLine();
+            if (choices.containsKey(userInput)) {
+                choices.get(userInput).run();
+                return;
+            } else {
+                output.println("Invalid option. Please try again.");
+            }
+        }
+    }
+
+
+    private void printOptions(Map<String, Runnable> choices) {
+        choices.keySet().forEach(option -> output.println("- " + option));
     }
 }

@@ -4,9 +4,41 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import core.Coord;
 import core.Grid;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 class TextPresenterTest {
+
+    @Test
+    void whenUserChoosesOption_thenTheCorrectFunctionIsCalled() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(baos, true, StandardCharsets.UTF_8);
+        InputStream in = System.in;
+        Grid grid = new Grid(3, 3);
+        ByteArrayInputStream input = new ByteArrayInputStream("Start\n".getBytes());
+        var ref = new Object() {
+            boolean startCalled = false;
+            boolean stopCalled = false;
+        };
+        TextPresenter presenter = new TextPresenter(out, in);
+        presenter.displayOptions("prompt", Map.of(
+                "Start", () -> {
+                    ref.startCalled = true;
+                },
+                "Stop", () -> {
+                    ref.stopCalled = true;
+                }));
+        assertTrue(ref.startCalled);
+        assertFalse(ref.stopCalled);
+    }
+
     @Test
     void whenDisplayGridIsCalled_TheGridIsSentToTheOutputStream() {
         TestIOProvider ioProvider = TestIOProvider.withInput("");
