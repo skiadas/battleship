@@ -40,4 +40,21 @@ public class Ship {
     public String getName() {
         return name;
     }
+
+    public boolean containsCell(int row, int col) {
+        if (this.direction == Direction.HORIZONTAL) {
+            if (row == this.startRow) {
+                for (int i = 0; i < this.size; i++) {
+                    if (col == this.startCol + i) return true;
+                }
+            }
+        } else {
+            if (col == this.startCol) {
+                for (int i = 0; i < this.size; i++) {
+                    if (row == this.startRow + i) return true;
+                }
+            }
+        }
+        return false;
+    }
 }

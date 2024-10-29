@@ -1,7 +1,7 @@
 package core;
 
 import static core.Ship.Direction.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,5 +32,15 @@ class ShipTest {
     @Test
     public void getNameReturnsNameFromField() {
         assertEquals("BattleShip", ship.getName());
+    }
+
+    @Test
+    public void hitsShipCorrectlyReturnsTrue() {
+        assertTrue(ship.containsCell(1, 2));
+    }
+
+    @Test
+    public void hitsShipCorrectlyReturnsFalse() {
+        assertFalse(ship.containsCell(3, 3));
     }
 }
