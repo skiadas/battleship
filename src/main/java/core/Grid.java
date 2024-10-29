@@ -32,5 +32,4 @@ public class Grid {
     public int numRows() {
         return rows;
     }
-    
 }
