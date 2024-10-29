@@ -11,8 +11,6 @@ public class Grid {
     private List<Cell> shipList;
     private List<Cell> chosenCells;
 
-    private int x;
-
     public Grid(int rows, int cols) {
 
         this.rows = rows;
