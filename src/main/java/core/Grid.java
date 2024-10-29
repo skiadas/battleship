@@ -10,7 +10,8 @@ public class Grid {
 
     private List<Cell> shipList;
     private List<Cell> chosenCells;
-    //change
+
+    private int x;
 
     public Grid(int rows, int cols) {
 
