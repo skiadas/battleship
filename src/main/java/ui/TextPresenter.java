@@ -6,12 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-import org.jline.terminal.Terminal;
-
 public class TextPresenter implements Presenter {
     private PrintStream output;
     private InputStream input;
-    //Terminal terminal;
+
+    // Terminal terminal;
 
     public TextPresenter() throws IOException {
         //        terminal = TerminalBuilder.builder().providers("ffm").build();
@@ -36,10 +35,9 @@ public class TextPresenter implements Presenter {
         // create a if statement that throws a error if numRows()
         // return a number higher then 26
 
-
         String[] letter = {
-            " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
-            "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q",
+            "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         };
         // now we need to display the grid using its rows and colunms
         // while also displaying the numbers of the x-axis and letters on the y-axis
@@ -47,14 +45,14 @@ public class TextPresenter implements Presenter {
             if (num == 0) {
                 output.print("   ");
             } else {
-                output.printf(" %2d ",(num));
+                output.printf(" %2d ", (num));
             }
         }
         output.print("\n\n");
         for (int row = 0; row < numOfRows; row++) {
             output.print(" " + (letter[row]) + " ");
             for (int col = 0; col < numOfCols; col++) {
-                //output.print("  " + g.get(col, row) + " ");
+                // output.print("  " + g.get(col, row) + " ");
                 output.print("  " + "-" + " ");
             }
             output.print("\n\n");
