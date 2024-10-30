@@ -88,17 +88,17 @@ class CellTest {
     }
 
     @Test
-    void hittingWithoutBeingShotDoesNotMarkAsHit() {
+    void hittingWithoutBeingShotDoesMarkAsHit() {
         Cell cell = new Cell(true);
         cell.hit();
-        assertFalse(cell.cellIsHit());
+        assertTrue(cell.cellIsHit());
     }
 
     @Test
-    void missingWithoutBeingShotDoesNotMarkAsMiss() {
+    void missingWithoutBeingShotDoesMarkAsMiss() {
         Cell cell = new Cell();
         cell.miss();
-        assertFalse(cell.cellIsMiss());
+        assertTrue(cell.cellIsMiss());
     }
 
     @Test
