@@ -18,8 +18,7 @@ public class TextPresenter implements Presenter {
 
     public TextPresenter() throws IOException {
         //        terminal = TerminalBuilder.builder().providers("ffm").build();
-        output = System.out;
-        input = System.in;
+        this(System.out, System.in);
     }
 
     public TextPresenter(IOProvider provider) {
@@ -29,6 +28,7 @@ public class TextPresenter implements Presenter {
     public TextPresenter(PrintStream output, InputStream input) {
         this.output = output;
         this.input = input;
+        this.scanner = new Scanner(input);
     }
 
     public void displayMessage(String s) {

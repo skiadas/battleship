@@ -1,5 +1,6 @@
 package ui;
 
+import static java.lang.System.in;
 import static org.junit.jupiter.api.Assertions.*;
 
 import core.Coord;
@@ -20,9 +21,9 @@ class TextPresenterTest {
     void whenUserChoosesOption_thenTheCorrectFunctionIsCalled() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(baos, true, StandardCharsets.UTF_8);
-        InputStream in = System.in;
+        ByteArrayInputStream in = new ByteArrayInputStream("Start\n".getBytes());
+
         Grid grid = new Grid(3, 3);
-        ByteArrayInputStream input = new ByteArrayInputStream("Start\n".getBytes());
         var ref = new Object() {
             boolean startCalled = false;
             boolean stopCalled = false;
@@ -56,6 +57,32 @@ class TextPresenterTest {
                         + "\n";
         assertEquals(expected, ioProvider.getOutput());
     }
+
+
+    @Test
+    void whenUserChoosesStopOption_thenStopFunctionIsCalled() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(baos, true, StandardCharsets.UTF_8);
+        ByteArrayInputStream input = new ByteArrayInputStream("Stop\n".getBytes(StandardCharsets.UTF_8));
+
+        var ref = new Object() {
+            boolean startCalled = false;
+            boolean stopCalled = false;
+        };
+
+        TextPresenter presenter = new TextPresenter(out, input);  // Pass `input` here
+        presenter.displayOptions("prompt", Map.of(
+                "Start", (Runnable) () -> {
+                    ref.startCalled = true;
+                },
+                "Stop", (Runnable) () -> {
+                    ref.stopCalled = true;
+                }));
+
+        assertFalse(ref.startCalled);
+        assertTrue(ref.stopCalled);
+    }
+
 
     @Test
     void whenDisplayGridIsCalled_CreatesRectangularGrid() {
