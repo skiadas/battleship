@@ -15,7 +15,7 @@ public class Ship {
     private int size;
     private Direction direction;
     private String name;
-    private List<Coord> CoordList;
+    private List<Coord> coordList;
 
     public Ship(int startRow, int startCol, int size, Direction direction, String name) {
         this.startRow = startRow;
@@ -23,7 +23,7 @@ public class Ship {
         this.size = size;
         this.direction = direction;
         this.name = name;
-        this.CoordList = getCoordList();
+        this.coordList = getCoordList();
     }
 
     public int getSize() {
@@ -47,26 +47,26 @@ public class Ship {
     }
 
     public boolean containsCoord(Coord coord) {
-        for (Coord c : CoordList) {
-            if (c.equals(coord)) {
+        for (Coord c : coordList) {
+            if (coord.isEqual(c)) {
                 return true;
             }
         }
         return false;
     }
 
-    public List<Coord> getCoordList(){
-        List<Coord> CoordList = new ArrayList<Coord>();
+    public List<Coord> getCoordList() {
+        List<Coord> coordList = new ArrayList<Coord>();
         if (direction == Direction.HORIZONTAL) {
             for (int i = 0; i < this.size; i++) {
-                CoordList.add(new Coord(startRow, startCol + i));
+                coordList.add(new Coord(startRow, startCol + i));
             }
         } else {
             for (int i = 0; i < this.size; i++) {
-                CoordList.add(new Coord(startRow + i, startCol));
+                coordList.add(new Coord(startRow + i, startCol));
             }
         }
-        return CoordList;
+        return coordList;
     }
 
     /*
