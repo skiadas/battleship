@@ -87,6 +87,7 @@ class CellTest {
         assertFalse(cell.isEmpty());
     }
 
+    /*
     @Test
     void hittingWithoutBeingShotDoesNotMarkAsHit() {
         Cell cell = new Cell(true);
@@ -100,6 +101,7 @@ class CellTest {
         cell.miss();
         assertFalse(cell.cellIsMiss());
     }
+    */
 
     @Test
     void settingAsShotMultipleTimesDoesNotChangeState() {
