@@ -21,4 +21,16 @@ class GridTest {
             }
         }
     }
+
+    @Test
+    public void isTheCoordinateWithinGrid() {
+        Boolean result = testGrid.isValid(new Coord(3, 2));
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void isTheCoordinateNotWithinGrid() {
+        Boolean result = testGrid.isValid(new Coord(5, 6));
+        assertEquals(false, result);
+    }
 }
