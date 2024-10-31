@@ -3,20 +3,14 @@ package ui;
 import static org.junit.jupiter.api.Assertions.*;
 
 import core.Grid;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Test;
 
 class TextPresenterTest {
     @Test
     void whenDisplayGridIsCalled_TheGridIsSentToTheOutputStream() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream out = new PrintStream(baos, true, StandardCharsets.UTF_8);
-        InputStream in = System.in;
+        TestIOProvider ioProvider = TestIOProvider.withInput("");
         Grid grid = new Grid(3, 3);
-        TextPresenter presenter = new TextPresenter(out, in);
+        TextPresenter presenter = new TextPresenter(ioProvider);
         presenter.displayGrid(grid);
         String expected =
                 "     1   2   3 \n"
@@ -27,16 +21,14 @@ class TextPresenterTest {
                         + "\n"
                         + " C   -   -   - \n"
                         + "\n";
-        String actual = baos.toString(StandardCharsets.UTF_8);
-        assertEquals(expected, actual);
+        assertEquals(expected, ioProvider.getOutput());
     }
 
     @Test
     void whenDisplayGridIsCalled_CreatesRectangularGrid() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream out = new PrintStream(baos, true, StandardCharsets.UTF_8);
+        TestIOProvider ioProvider = TestIOProvider.withInput("");
         Grid grid = new Grid(2, 3);
-        TextPresenter presenter = new TextPresenter(out, null);
+        TextPresenter presenter = new TextPresenter(ioProvider);
         presenter.displayGrid(grid);
         String expected =
                 "     1   2   3 \n"
@@ -45,7 +37,6 @@ class TextPresenterTest {
                         + "\n"
                         + " B   -   -   - \n"
                         + "\n";
-        String actual = baos.toString(StandardCharsets.UTF_8);
-        assertEquals(expected, actual);
+        assertEquals(expected, ioProvider.getOutput());
     }
 }
