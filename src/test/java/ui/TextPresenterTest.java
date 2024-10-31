@@ -3,11 +3,6 @@ package ui;
 import static org.junit.jupiter.api.Assertions.*;
 
 import core.Grid;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
-
 import org.junit.jupiter.api.Test;
 
 class TextPresenterTest {

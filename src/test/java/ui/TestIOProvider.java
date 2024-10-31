@@ -36,5 +36,4 @@ final class TestIOProvider implements IOProvider {
     private ByteArrayOutputStream baos() {
         return baos;
     }
-
 }

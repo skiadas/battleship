@@ -21,6 +21,7 @@ public class TextPresenter implements Presenter {
     public TextPresenter(IOProvider provider) {
         this(provider.out(), provider.in());
     }
+
     public TextPresenter(PrintStream output, InputStream input) {
         this.output = output;
         this.input = input;
