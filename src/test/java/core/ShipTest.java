@@ -48,7 +48,7 @@ class ShipTest {
 
     @Test
     public void isSunkReturnsTrueIfAllCellsMarkedAsHit() {
-        Grid g  = new Grid(5, 5);
+        Grid g = new Grid(5, 5);
         Coord c1 = new Coord(1, 2);
         Coord c2 = new Coord(2, 2);
         Coord c3 = new Coord(3, 2);
