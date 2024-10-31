@@ -36,11 +36,13 @@ class ShipTest {
 
     @Test
     public void hitsShipCorrectlyReturnsTrue() {
-        assertTrue(ship.containsCell(1, 2));
+        Coord coordInShip = new Coord(1, 2);
+        assertTrue(ship.containsCoord(coordInShip));
     }
 
     @Test
     public void hitsShipCorrectlyReturnsFalse() {
-        assertFalse(ship.containsCell(3, 3));
+        Coord coordNotInShip = new Coord(3, 3);
+        assertFalse(ship.containsCoord(coordNotInShip));
     }
 }
