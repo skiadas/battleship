@@ -45,4 +45,17 @@ class ShipTest {
         Coord coordNotInShip = new Coord(3, 3);
         assertFalse(ship.containsCoord(coordNotInShip));
     }
+
+    @Test
+    public void isSunkReturnsTrueIfAllCellsMarkedAsHit() {
+        Grid g  = new Grid(5, 5);
+        Coord c1 = new Coord(1, 2);
+        Coord c2 = new Coord(2, 2);
+        Coord c3 = new Coord(3, 2);
+        g.get(c1).setAsHit();
+        g.get(c2).setAsHit();
+        assertFalse(ship.isSunk(g));
+        g.get(c3).setAsHit();
+        assertTrue(ship.isSunk(g));
+    }
 }

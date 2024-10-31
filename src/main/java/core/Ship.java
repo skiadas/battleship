@@ -69,15 +69,13 @@ public class Ship {
         return coordList;
     }
 
-    /*
-    public boolean isSunk() {
-        for (Coord coord : CoordList) {
-            if (!(Grid.get(coord).cellIsHit())) {
+    public boolean isSunk(Grid grid) {
+        for (Coord coord : coordList) {
+            if (!(grid.get(coord).cellIsHit())) {
                 return false;
             }
         }
         return true;
     }
-    */
 
 }
