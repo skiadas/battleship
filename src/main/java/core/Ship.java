@@ -77,4 +77,21 @@ public class Ship {
         }
         return true;
     }
+
+    public boolean isOverlapping(Ship other) {
+        for (Coord coord : other.getCoordList()) {
+            if (this.containsCoord(coord)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isOnGrid(Grid g) {
+        for (Coord coord : this.getCoordList()) {
+            if (coord.row < 1 || coord.row > g.numRows()) return false;
+            if (coord.col < 1 || coord.col > g.numCols()) return false;
+        }
+        return true;
+    }
 }

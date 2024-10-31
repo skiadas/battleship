@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 class ShipTest {
 
     Ship ship = new Ship(1, 2, 3, VERTICAL, "BattleShip");
+    Grid grid = new Grid(5, 5);
 
     @Test
     public void getStartRowReturnsStartRowFromField() {
@@ -47,15 +48,37 @@ class ShipTest {
     }
 
     @Test
-    public void isSunkReturnsTrueIfAllCellsMarkedAsHit() {
-        Grid g = new Grid(5, 5);
+    public void isSunkReturnsTrueOnlyIfAllCellsMarkedAsHit() {
         Coord c1 = new Coord(1, 2);
         Coord c2 = new Coord(2, 2);
         Coord c3 = new Coord(3, 2);
-        g.get(c1).setAsHit();
-        g.get(c2).setAsHit();
-        assertFalse(ship.isSunk(g));
-        g.get(c3).setAsHit();
-        assertTrue(ship.isSunk(g));
+        grid.get(c1).setAsHit();
+        grid.get(c2).setAsHit();
+        assertFalse(ship.isSunk(grid));
+        grid.get(c3).setAsHit();
+        assertTrue(ship.isSunk(grid));
+    }
+
+    @Test
+    public void shipOverlapsReturnsTrueWhenShipsOverlap() {
+        Ship otherShip = new Ship(1, 2, 3, VERTICAL, "BattleShip");
+        assertTrue(ship.isOverlapping(otherShip));
+    }
+
+    @Test
+    public void shipOverlapsReturnsFalseWhenShipsDoNotOverlap() {
+        Ship otherShip = new Ship(4, 4, 2, VERTICAL, "BattleShip");
+        assertFalse(ship.isOverlapping(otherShip));
+    }
+
+    @Test
+    public void isOnGridReturnsTrueWhenShipIsOnGrid() {
+        assertTrue(ship.isOnGrid(grid));
+    }
+
+    @Test
+    public void isOnGridReturnsFalseWhenShipIsOnGrid() {
+        Ship otherShip = new Ship(1, 2, 6, VERTICAL, "BattleShip");
+        assertFalse(otherShip.isOnGrid(grid));
     }
 }
