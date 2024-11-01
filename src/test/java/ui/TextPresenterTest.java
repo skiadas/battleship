@@ -53,6 +53,7 @@ class TextPresenterTest {
         assertEquals(expected.row, actual.row);
         assertEquals(expected.col, actual.col);
     }
+
     @Test
     void whenAskForCoordinateIsFalse() {
         Grid grid = new Grid(2, 3);
