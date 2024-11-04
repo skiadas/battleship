@@ -70,7 +70,7 @@ class TextPresenterTest {
             boolean stopCalled = false;
         };
 
-        TextPresenter presenter = new TextPresenter(out, input);  // Pass `input` here
+        TextPresenter presenter = new TextPresenter(out, input);
         presenter.displayOptions("prompt", Map.of(
                 "Start", (Runnable) () -> {
                     ref.startCalled = true;
