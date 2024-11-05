@@ -7,32 +7,41 @@ import java.util.Random;
 class AIShips {
     private Grid grid;
     private List<Ship> ships;
+    private List<Integer> shipSizes;
 
-    public AIShips(Grid grid) {
+    public AIShips(Grid grid, List<Integer> shipSizes) {
         this.grid = grid;
+        this.shipSizes = shipSizes;
         this.ships = new ArrayList<>();
     }
 
-    private void setShips(List<Integer> shipsSizes) {
-        List<Ship> ships = new ArrayList<>();
-        while (!shipsSizes.isEmpty()) {
-            Ship newShip = getShip(shipsSizes);
+    public void setShips() {
+        this.checkShipSizes();
+        while (!shipSizes.isEmpty()) {
+            Ship newShip = getShip(shipSizes.getFirst());
             if (newShip.isOnGrid(grid)) {
-                if (!conflicts(ships, newShip)) {
+                if (!conflicts(newShip)) {
                     ships.add(newShip);
-                    shipsSizes.removeFirst();
+                    shipSizes.remove(0);
                 }
             }
         }
     }
 
-    private Ship getShip(List<Integer> shipsSizes) {
+    private void checkShipSizes(){
+        for (int i = 0; i < shipSizes.size(); i++){
+            if (shipSizes.get(i) > grid.numRows() || shipSizes.get(i) > grid.numCols()){
+                throw new RuntimeException("INVALID SHIP SIZES GIVEN");
+            }
+        }
+    }
+
+    private Ship getShip(int shipsSize) {
         Random random = new Random();
         int row = getRow(random);
         int col = getCol(random);
         Ship.Direction direction = getDirection(random);
-        Ship newShip = new Ship(row, col, shipsSizes.getFirst(), direction, "Hello");
-        return newShip;
+        return new Ship(row, col, shipsSize, direction, "");
     }
 
     private int getRow(Random random) {
@@ -47,7 +56,7 @@ class AIShips {
         return random.nextBoolean() ? Ship.Direction.VERTICAL : Ship.Direction.HORIZONTAL;
     }
 
-    private boolean conflicts(List<Ship> ships, Ship newShip) {
+    private boolean conflicts(Ship newShip) {
         for (Ship ship : ships) {
             if (newShip.isOverlapping(ship)) {
                 return true;
