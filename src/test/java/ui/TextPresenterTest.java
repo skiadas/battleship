@@ -86,10 +86,19 @@ class TextPresenterTest {
 
     @Test
     void whenDisplayGridIsCalled_CreatesRectangularGrid() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(baos, true, StandardCharsets.UTF_8);
+
+        // Now uses a dummy ByteArrayInputStream instead of null
+        InputStream dummyInput = new ByteArrayInputStream(new byte[0]);
+
         TestIOProvider ioProvider = TestIOProvider.withInput("");
         Grid grid = new Grid(2, 3);
+        TextPresenter presenter = new TextPresenter(out, dummyInput);
+
         TextPresenter presenter = new TextPresenter(ioProvider);
         presenter.displayGrid(grid);
+
         String expected =
                 "     1   2   3 \n"
                         + "\n"
