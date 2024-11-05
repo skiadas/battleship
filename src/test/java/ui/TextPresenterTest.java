@@ -4,13 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import core.Coord;
 import core.Grid;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 class TextPresenterTest {
@@ -22,18 +20,23 @@ class TextPresenterTest {
         ByteArrayInputStream in = new ByteArrayInputStream("Start\n".getBytes());
 
         Grid grid = new Grid(3, 3);
-        var ref = new Object() {
-            boolean startCalled = false;
-            boolean stopCalled = false;
-        };
+        var ref =
+                new Object() {
+                    boolean startCalled = false;
+                    boolean stopCalled = false;
+                };
         TextPresenter presenter = new TextPresenter(out, in);
-        presenter.displayOptions("prompt", Map.of(
-                "Start", () -> {
-                    ref.startCalled = true;
-                },
-                "Stop", () -> {
-                    ref.stopCalled = true;
-                }));
+        presenter.displayOptions(
+                "prompt",
+                Map.of(
+                        "Start",
+                                () -> {
+                                    ref.startCalled = true;
+                                },
+                        "Stop",
+                                () -> {
+                                    ref.stopCalled = true;
+                                }));
         assertTrue(ref.startCalled);
         assertFalse(ref.stopCalled);
     }
@@ -56,31 +59,37 @@ class TextPresenterTest {
         assertEquals(expected, ioProvider.getOutput());
     }
 
-
     @Test
     void whenUserChoosesStopOption_thenStopFunctionIsCalled() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(baos, true, StandardCharsets.UTF_8);
-        ByteArrayInputStream input = new ByteArrayInputStream("Stop\n".getBytes(StandardCharsets.UTF_8));
+        ByteArrayInputStream input =
+                new ByteArrayInputStream("Stop\n".getBytes(StandardCharsets.UTF_8));
 
-        var ref = new Object() {
-            boolean startCalled = false;
-            boolean stopCalled = false;
-        };
+        var ref =
+                new Object() {
+                    boolean startCalled = false;
+                    boolean stopCalled = false;
+                };
 
         TextPresenter presenter = new TextPresenter(out, input);
-        presenter.displayOptions("prompt", Map.of(
-                "Start", (Runnable) () -> {
-                    ref.startCalled = true;
-                },
-                "Stop", (Runnable) () -> {
-                    ref.stopCalled = true;
-                }));
+        presenter.displayOptions(
+                "prompt",
+                Map.of(
+                        "Start",
+                                (Runnable)
+                                        () -> {
+                                            ref.startCalled = true;
+                                        },
+                        "Stop",
+                                (Runnable)
+                                        () -> {
+                                            ref.stopCalled = true;
+                                        }));
 
         assertFalse(ref.startCalled);
         assertTrue(ref.stopCalled);
     }
-
 
     @Test
     void whenDisplayGridIsCalled_CreatesRectangularGrid() {

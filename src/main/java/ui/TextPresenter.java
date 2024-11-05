@@ -97,7 +97,6 @@ public class TextPresenter implements Presenter {
         }
     }
 
-
     private void printOptions(Map<String, Runnable> choices) {
         choices.keySet().forEach(option -> output.println("- " + option));
     }
