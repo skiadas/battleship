@@ -2,6 +2,8 @@ package ui;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import core.Cell;
+import core.Coord;
 import core.Grid;
 import org.junit.jupiter.api.Test;
 
@@ -15,11 +17,11 @@ class TextPresenterTest {
         String expected =
                 "     1   2   3 \n"
                         + "\n"
-                        + " A   -   -   - \n"
+                        + " A   0   0   0 \n"
                         + "\n"
-                        + " B   -   -   - \n"
+                        + " B   0   0   0 \n"
                         + "\n"
-                        + " C   -   -   - \n"
+                        + " C   0   0   0 \n"
                         + "\n";
         assertEquals(expected, ioProvider.getOutput());
     }
@@ -33,9 +35,9 @@ class TextPresenterTest {
         String expected =
                 "     1   2   3 \n"
                         + "\n"
-                        + " A   -   -   - \n"
+                        + " A   0   0   0 \n"
                         + "\n"
-                        + " B   -   -   - \n"
+                        + " B   0   0   0 \n"
                         + "\n";
         assertEquals(expected, ioProvider.getOutput());
     }
