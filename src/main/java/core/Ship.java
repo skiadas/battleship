@@ -1,5 +1,8 @@
 package core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ship {
 
     public enum Direction {
@@ -12,6 +15,7 @@ public class Ship {
     private int size;
     private Direction direction;
     private String name;
+    private List<Coord> coordList;
 
     public Ship(int startRow, int startCol, int size, Direction direction, String name) {
         this.startRow = startRow;
@@ -19,6 +23,7 @@ public class Ship {
         this.size = size;
         this.direction = direction;
         this.name = name;
+        this.coordList = getCoordList();
     }
 
     public int getSize() {
@@ -41,20 +46,52 @@ public class Ship {
         return name;
     }
 
-    public boolean containsCell(int row, int col) {
-        if (this.direction == Direction.HORIZONTAL) {
-            if (row == this.startRow) {
-                for (int i = 0; i < this.size; i++) {
-                    if (col == this.startCol + i) return true;
-                }
-            }
-        } else {
-            if (col == this.startCol) {
-                for (int i = 0; i < this.size; i++) {
-                    if (row == this.startRow + i) return true;
-                }
+    public boolean containsCoord(Coord coord) {
+        for (Coord c : coordList) {
+            if (coord.isEqual(c)) {
+                return true;
             }
         }
         return false;
+    }
+
+    public List<Coord> getCoordList() {
+        List<Coord> coordList = new ArrayList<Coord>();
+        if (direction == Direction.HORIZONTAL) {
+            for (int i = 0; i < this.size; i++) {
+                coordList.add(new Coord(startRow, startCol + i));
+            }
+        } else {
+            for (int i = 0; i < this.size; i++) {
+                coordList.add(new Coord(startRow + i, startCol));
+            }
+        }
+        return coordList;
+    }
+
+    public boolean isSunk(Grid grid) {
+        for (Coord coord : coordList) {
+            if (!(grid.get(coord).cellIsHit())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isOverlapping(Ship other) {
+        for (Coord coord : other.getCoordList()) {
+            if (this.containsCoord(coord)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isOnGrid(Grid g) {
+        for (Coord coord : this.getCoordList()) {
+            if (coord.row < 1 || coord.row > g.numRows()) return false;
+            if (coord.col < 1 || coord.col > g.numCols()) return false;
+        }
+        return true;
     }
 }

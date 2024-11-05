@@ -1,10 +1,12 @@
 package ui;
 
+import core.Coord;
 import core.Grid;
 import core.Presenter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 public class TextPresenter implements Presenter {
     private PrintStream output;
@@ -16,6 +18,10 @@ public class TextPresenter implements Presenter {
         //        terminal = TerminalBuilder.builder().providers("ffm").build();
         output = System.out;
         input = System.in;
+    }
+
+    public TextPresenter(IOProvider provider) {
+        this(provider.out(), provider.in());
     }
 
     public TextPresenter(PrintStream output, InputStream input) {
@@ -56,6 +62,20 @@ public class TextPresenter implements Presenter {
                 output.print("  " + "-" + " ");
             }
             output.print("\n\n");
+        }
+    }
+
+    public Coord askForCoordinate(Grid g) {
+        Scanner scanner = new Scanner(input);
+        while (true) {
+            String User_input = scanner.next();
+            Coord coordinate = new Coord(User_input);
+            boolean answer = g.isValid(coordinate);
+            if (answer == true) {
+                return coordinate;
+            } else {
+                output.print("Not within the Grid!");
+            }
         }
     }
 }

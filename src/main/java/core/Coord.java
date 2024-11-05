@@ -34,4 +34,11 @@ public class Coord {
         this.row = asInt(coords[0]);
         this.col = Integer.parseInt(coords[1]);
     }
+
+    public boolean isEqual(Coord other) {
+        if (this.col == other.col && this.row == other.row) {
+            return true;
+        }
+        return false;
+    }
 }
