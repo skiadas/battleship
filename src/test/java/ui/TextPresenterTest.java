@@ -134,4 +134,51 @@ class TextPresenterTest {
         assertEquals(expected_m, ioProvider.getOutput());
         assertEquals(true, Result);
     }
+
+    @Test
+    void whenDisplayGridIsCalled_CreatesRectangularGridThatHas1hit() {
+        TestIOProvider ioProvider = TestIOProvider.withInput("");
+        Grid grid = new Grid(2, 3);
+        TextPresenter presenter = new TextPresenter(ioProvider);
+        Cell cell = grid.get(new Coord(1, 1));
+        cell.setAsShot();
+        presenter.displayGrid(grid);
+        String expected =
+                "     1   2   3 \n"
+                        + "\n"
+                        + " A   X   0   0 \n"
+                        + "\n"
+                        + " B   0   0   0 \n"
+                        + "\n";
+        assertEquals(expected, ioProvider.getOutput());
+    }
+
+    @Test
+    void whenDisplayGridIsCalled_CreatesRectangularGridThatHas2hitsAMissAndAShip() {
+        TestIOProvider ioProvider = TestIOProvider.withInput("");
+        Grid g = new Grid(5, 7);
+        TextPresenter presenter = new TextPresenter(ioProvider);
+
+        g.get(new Coord(1, 1)).setAsShot();
+        g.get(new Coord(4, 5)).setAsShot();
+        g.get(new Coord(5, 7)).setAsShot();
+        g.get(new Coord(2, 6)).setAsMiss();
+        g.get(new Coord(3, 2)).setAsShip();
+
+        presenter.displayGrid(g);
+        String expected =
+                "     1   2   3   4   5   6   7 \n"
+                        + "\n"
+                        + " A   X   0   0   0   0   0   0 \n"
+                        + "\n"
+                        + " B   0   0   0   0   0   *   0 \n"
+                        + "\n"
+                        + " C   0   ~   0   0   0   0   0 \n"
+                        + "\n"
+                        + " D   0   0   0   0   X   0   0 \n"
+                        + "\n"
+                        + " E   0   0   0   0   0   0   X \n"
+                        + "\n";
+        assertEquals(expected, ioProvider.getOutput());
+    }
 }
