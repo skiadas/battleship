@@ -17,9 +17,9 @@ public class Ship {
     private String name;
     private List<Coord> coordList;
 
-    public Ship(int startRow, int startCol, int size, Direction direction, String name) {
-        this.startRow = startRow;
-        this.startCol = startCol;
+    public Ship(Coord coordinate, int size, Direction direction, String name) {
+        this.startRow = coordinate.row;
+        this.startCol = coordinate.col;
         this.size = size;
         this.direction = direction;
         this.name = name;
