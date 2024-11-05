@@ -92,4 +92,20 @@ class CellTest {
         assertTrue(cell.hasBeenShot());
         assertFalse(cell.cellIsHit());
     }
+
+    @Test
+    void resetSetsAllVariablesToFalse() {
+        Cell cell = new Cell(true);
+        cell.setAsShot();
+        cell.reset();
+        assertFalse(cell.hasBeenShot());
+        assertFalse(cell.cellIsHit());
+    }
+
+    @Test
+    void setAsHitWorks() {
+        Cell cell = new Cell(false);
+        cell.setAsHit();
+        assertTrue(cell.cellIsHit());
+    }
 }

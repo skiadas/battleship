@@ -55,6 +55,16 @@ public class Cell {
         this.ship = true;
     }
 
+    public void setAsHit() {
+        this.ship = true;
+        this.shot = true;
+    }
+
+    public void setAsMiss() {
+        this.shot = true;
+        this.ship = false;
+    }
+
     // Reset the cell to its initial state
     public void reset() {
         this.shot = false;
