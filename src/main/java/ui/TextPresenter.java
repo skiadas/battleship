@@ -112,6 +112,16 @@ public class TextPresenter implements Presenter {
         }
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
     private void printOptions(Map<String, Runnable> choices) {
         choices.keySet().forEach(option -> output.println("- " + option));
     }

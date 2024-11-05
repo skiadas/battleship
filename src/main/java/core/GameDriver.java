@@ -1,5 +1,7 @@
 package core;
 
+import ui.TextPresenter;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +22,8 @@ public class GameDriver {
 
     private void startGame() {
         presenter.displayMessage("Game is starting...");
+        Grid grid = new Grid(5, 5); // Temporary grid
+        presenter.displayGrid(grid);
     }
 
     private void stopGame() {
