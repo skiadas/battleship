@@ -38,4 +38,10 @@ public class Grid {
     public int numCols() {
         return cols;
     }
+
+    public boolean isValid(Coord coordinate) {
+        int row = coordinate.row - 1;
+        int col = coordinate.col - 1;
+        return row >= 0 && row < rows && col >= 0 && col < cols;
+    }
 }
