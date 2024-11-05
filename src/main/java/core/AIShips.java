@@ -5,13 +5,11 @@ import java.util.List;
 import java.util.Random;
 
 class AIShips {
-    private final int gridRows;
-    private final int gridCols;
+    private Grid grid;
     private List<Ship> ships;
 
     public AIShips(Grid grid) {
-        this.gridRows = grid.numRows();
-        this.gridCols = grid.numCols();
+        this.grid = grid;
         this.ships = new ArrayList<>();
     }
 
@@ -19,7 +17,7 @@ class AIShips {
         List<Ship> ships = new ArrayList<>();
         while (!shipsSizes.isEmpty()) {
             Ship newShip = getShip(shipsSizes);
-            if (newShip.isOnGrid()) {
+            if (newShip.isOnGrid(grid)) {
                 if (!conflicts(ships, newShip)) {
                     ships.add(newShip);
                     shipsSizes.removeFirst();
@@ -38,11 +36,11 @@ class AIShips {
     }
 
     private int getRow(Random random) {
-        return random.nextInt(0, gridRows);
+        return random.nextInt(0, grid.numRows());
     }
 
     private int getCol(Random random) {
-        return random.nextInt(0, gridCols);
+        return random.nextInt(0, grid.numCols());
     }
 
     private static Ship.Direction getDirection(Random random) {
