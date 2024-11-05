@@ -1,6 +1,5 @@
 package ui;
 
-import static java.lang.System.in;
 import static org.junit.jupiter.api.Assertions.*;
 
 import core.Coord;
@@ -8,7 +7,6 @@ import core.Grid;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
@@ -86,16 +84,8 @@ class TextPresenterTest {
 
     @Test
     void whenDisplayGridIsCalled_CreatesRectangularGrid() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream out = new PrintStream(baos, true, StandardCharsets.UTF_8);
-
-        // Now uses a dummy ByteArrayInputStream instead of null
-        InputStream dummyInput = new ByteArrayInputStream(new byte[0]);
-
         TestIOProvider ioProvider = TestIOProvider.withInput("");
         Grid grid = new Grid(2, 3);
-        TextPresenter presenter = new TextPresenter(out, dummyInput);
-
         TextPresenter presenter = new TextPresenter(ioProvider);
         presenter.displayGrid(grid);
 
