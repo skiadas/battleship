@@ -29,9 +29,9 @@ class AIShips {
         }
     }
 
-    private void checkShipSizes(){
-        for (int i = 0; i < shipSizes.length; i++){
-            if (shipSizes[i] > grid.numRows() || shipSizes[i] > grid.numCols()){
+    private void checkShipSizes() {
+        for (int i = 0; i < shipSizes.length; i++) {
+            if (shipSizes[i] > grid.numRows() || shipSizes[i] > grid.numCols()) {
                 throw new RuntimeException("INVALID SHIP SIZES GIVEN");
             }
         }
@@ -42,7 +42,7 @@ class AIShips {
         int row = getRow(random);
         int col = getCol(random);
         Ship.Direction direction = getDirection(random);
-        return new Ship(row, col, shipsSize, direction, "");
+        return new Ship(new Coord(row, col), shipsSize, direction, "");
     }
 
     private int getRow(Random random) {
