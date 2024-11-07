@@ -5,12 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class GridTest {
-    Grid testGrid = new Grid(3, 2);
+
+    Grid testGrid = new Grid(5, 5, Grid.defaultShipsFor5x5());
 
     @Test
     public void aNewGridHasProvidedDimensions() {
-        assertEquals(testGrid.numRows(), 3);
-        assertEquals(testGrid.numCols(), 2);
+        assertEquals(testGrid.numRows(), 5);
+        assertEquals(testGrid.numCols(), 5);
     }
 
     @Test
@@ -22,6 +23,15 @@ class GridTest {
         }
     }
 
+    @Test
+    public void aNewGridCorrectlyMarksShips() {
+        assertTrue(testGrid.get(new Coord(1, 2)).hasShip());
+        assertTrue(testGrid.get(new Coord(2, 2)).hasShip());
+        assertTrue(testGrid.get(new Coord(3, 2)).hasShip());
+        assertTrue(testGrid.get(new Coord(5, 2)).hasShip());
+        assertFalse(testGrid.get(new Coord(4, 2)).hasShip());
+        assertFalse(testGrid.get(new Coord(1, 1)).hasShip());
+    }
     @Test
     public void isTheCoordinateWithinGrid() {
         Boolean result = testGrid.isValid(new Coord(3, 2));
