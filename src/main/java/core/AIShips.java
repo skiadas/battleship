@@ -32,6 +32,7 @@ class AIShips {
             if (tries == 10) {
                 current_ship = 0;
                 tries = 0;
+                ships.clear();
             }
         }
     }
