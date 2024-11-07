@@ -1,5 +1,8 @@
 package core;
 
+import static core.Ship.Direction.HORIZONTAL;
+import static core.Ship.Direction.VERTICAL;
+
 import java.util.List;
 
 public class Grid {
@@ -8,7 +11,7 @@ public class Grid {
 
     private Cell[][] grid;
 
-    private List<Cell> shipList;
+    private List<Ship> shipList;
     private List<Cell> chosenCells;
 
     public Grid(int rows, int cols) {
@@ -37,6 +40,19 @@ public class Grid {
 
     public int numCols() {
         return cols;
+    }
+
+    public void defaultShipsFor5x5() {
+        Ship ship1 = new Ship(1, 2, 3, VERTICAL, "Submarine");
+        Ship ship2 = new Ship(5, 1, 5, HORIZONTAL, "Carrier");
+        Ship ship3 = new Ship(1, 5, 3, VERTICAL, "Destroyer");
+        shipList = List.of(ship1, ship2, ship3);
+    }
+
+    public static Grid defaultGrid() {
+        Grid g = new Grid(5, 5);
+        g.defaultShipsFor5x5();
+        return g;
     }
 
     public boolean isValid(Coord coordinate) {
