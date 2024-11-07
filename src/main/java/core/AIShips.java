@@ -28,8 +28,8 @@ class AIShips {
                     tries = 0;
                 }
             }
-            tries ++;
-            if (tries == 10){
+            tries++;
+            if (tries == 10) {
                 current_ship = 0;
             }
         }
