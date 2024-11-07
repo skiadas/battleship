@@ -14,7 +14,8 @@ public class PresenterDouble implements Presenter {
     public void displayGrid(Grid g) {
         // TODO
     }
-    public Coord askForCoordinate(Grid g){
+
+    public Coord askForCoordinate(Grid g) {
         return null;
     }
 
