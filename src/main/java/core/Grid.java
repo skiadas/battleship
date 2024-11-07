@@ -3,6 +3,7 @@ package core;
 import static core.Ship.Direction.HORIZONTAL;
 import static core.Ship.Direction.VERTICAL;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Grid {
@@ -14,7 +15,7 @@ public class Grid {
     private List<Ship> shipList;
     private List<Cell> chosenCells;
 
-    public Grid(int rows, int cols) {
+    public Grid(int rows, int cols, List<Ship> shipList) {
 
         this.rows = rows;
         this.cols = cols;
@@ -24,6 +25,21 @@ public class Grid {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 grid[row][col] = new Cell();
+            }
+        }
+
+        this.shipList = shipList;
+        markShipCells();
+    }
+
+    public Grid(int rows, int cols) {
+        this(rows, cols, new ArrayList<>());
+    }
+
+    private void markShipCells() {
+        for (Ship ship : shipList) {
+            for (Coord coord : ship.getCoordList()) {
+                get(coord).setAsShip();
             }
         }
     }
@@ -42,16 +58,15 @@ public class Grid {
         return cols;
     }
 
-    public void defaultShipsFor5x5() {
+    public static List<Ship> defaultShipsFor5x5() {
         Ship ship1 = new Ship(1, 2, 3, VERTICAL, "Submarine");
         Ship ship2 = new Ship(5, 1, 5, HORIZONTAL, "Carrier");
         Ship ship3 = new Ship(1, 5, 3, VERTICAL, "Destroyer");
-        shipList = List.of(ship1, ship2, ship3);
+        return List.of(ship1, ship2, ship3);
     }
 
     public static Grid defaultGrid() {
-        Grid g = new Grid(5, 5);
-        g.defaultShipsFor5x5();
+        Grid g = new Grid(5, 5, defaultShipsFor5x5());
         return g;
     }
 
