@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class ShipTest {
-
-    Ship ship = new Ship(1, 2, 3, VERTICAL, "BattleShip");
+    Coord coordinate = new Coord(1, 2);
+    Ship ship = new Ship(coordinate, 3, VERTICAL, "BattleShip");
     Grid grid = new Grid(5, 5);
 
     @Test
@@ -52,22 +52,27 @@ class ShipTest {
         Coord c1 = new Coord(1, 2);
         Coord c2 = new Coord(2, 2);
         Coord c3 = new Coord(3, 2);
-        grid.get(c1).setAsHit();
-        grid.get(c2).setAsHit();
+        grid.get(c1).setAsShip();
+        grid.get(c2).setAsShip();
+        grid.get(c3).setAsShip();
+        grid.get(c1).setAsShot();
+        grid.get(c2).setAsShot();
         assertFalse(ship.isSunk(grid));
-        grid.get(c3).setAsHit();
+        grid.get(c3).setAsShot();
         assertTrue(ship.isSunk(grid));
     }
 
     @Test
     public void shipOverlapsReturnsTrueWhenShipsOverlap() {
-        Ship otherShip = new Ship(1, 2, 3, VERTICAL, "BattleShip");
+        Coord c1 = new Coord(1, 2);
+        Ship otherShip = new Ship(c1, 3, VERTICAL, "BattleShip");
         assertTrue(ship.isOverlapping(otherShip));
     }
 
     @Test
     public void shipOverlapsReturnsFalseWhenShipsDoNotOverlap() {
-        Ship otherShip = new Ship(4, 4, 2, VERTICAL, "BattleShip");
+        Coord c1 = new Coord(4, 4);
+        Ship otherShip = new Ship(c1, 2, VERTICAL, "BattleShip");
         assertFalse(ship.isOverlapping(otherShip));
     }
 
@@ -78,7 +83,8 @@ class ShipTest {
 
     @Test
     public void isOnGridReturnsFalseWhenShipIsOnGrid() {
-        Ship otherShip = new Ship(1, 2, 6, VERTICAL, "BattleShip");
+        Coord c1 = new Coord(1, 2);
+        Ship otherShip = new Ship(c1, 6, VERTICAL, "BattleShip");
         assertFalse(otherShip.isOnGrid(grid));
     }
 }
