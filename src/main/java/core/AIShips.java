@@ -7,19 +7,19 @@ import java.util.Random;
 class AIShips {
     private Grid grid;
     private List<Ship> ships;
-    private int[] shipSizes;
+    private ShipSpec[] shipSpecs;
 
-    public AIShips(Grid grid, int[] shipSizes) {
+    public AIShips(Grid grid, ShipSpec[] shipSpecs) {
         this.grid = grid;
-        this.shipSizes = shipSizes;
+        this.shipSpecs = shipSpecs;
         this.ships = new ArrayList<>();
         this.checkShipSizes();
     }
 
     public void setShips() {
         int current_ship = 0;
-        while (current_ship != shipSizes.length) {
-            Ship newShip = getShip(shipSizes[current_ship]);
+        while (current_ship != shipSpecs.length) {
+            Ship newShip = getShip(shipSpecs[current_ship]);
             if (newShip.isOnGrid(grid)) {
                 if (!conflicts(newShip)) {
                     ships.add(newShip);
@@ -30,19 +30,19 @@ class AIShips {
     }
 
     private void checkShipSizes() {
-        for (int i = 0; i < shipSizes.length; i++) {
-            if (shipSizes[i] > grid.numRows() || shipSizes[i] > grid.numCols()) {
+        for (int i = 0; i < shipSpecs.length; i++) {
+            if (shipSpecs[i].size > grid.numRows() || shipSpecs[i].size > grid.numCols()) {
                 throw new RuntimeException("INVALID SHIP SIZES GIVEN");
             }
         }
     }
 
-    private Ship getShip(int shipsSize) {
+    private Ship getShip(ShipSpec shipSpec) {
         Random random = new Random();
         int row = getRow(random);
         int col = getCol(random);
         Ship.Direction direction = getDirection(random);
-        return new Ship(new Coord(row, col), shipsSize, direction, "");
+        return new Ship(new Coord(row, col), shipSpec.size, direction, shipSpec.name);
     }
 
     private int getRow(Random random) {
