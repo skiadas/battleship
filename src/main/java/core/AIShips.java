@@ -7,30 +7,31 @@ import java.util.Random;
 class AIShips {
     private Grid grid;
     private List<Ship> ships;
-    private List<Integer> shipSizes;
+    private int[] shipSizes;
 
-    public AIShips(Grid grid, List<Integer> shipSizes) {
+    public AIShips(Grid grid, int[] shipSizes) {
         this.grid = grid;
         this.shipSizes = shipSizes;
         this.ships = new ArrayList<>();
+        this.checkShipSizes();
     }
 
     public void setShips() {
-        this.checkShipSizes();
-        while (!shipSizes.isEmpty()) {
-            Ship newShip = getShip(shipSizes.getFirst());
+        int current_ship = 0;
+        while (current_ship != shipSizes.length) {
+            Ship newShip = getShip(shipSizes[current_ship]);
             if (newShip.isOnGrid(grid)) {
                 if (!conflicts(newShip)) {
                     ships.add(newShip);
-                    shipSizes.remove(0);
+                    current_ship += 1;
                 }
             }
         }
     }
 
     private void checkShipSizes(){
-        for (int i = 0; i < shipSizes.size(); i++){
-            if (shipSizes.get(i) > grid.numRows() || shipSizes.get(i) > grid.numCols()){
+        for (int i = 0; i < shipSizes.length; i++){
+            if (shipSizes[i] > grid.numRows() || shipSizes[i] > grid.numCols()){
                 throw new RuntimeException("INVALID SHIP SIZES GIVEN");
             }
         }
