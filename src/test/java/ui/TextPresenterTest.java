@@ -141,7 +141,7 @@ class TextPresenterTest {
         Grid grid = new Grid(2, 3);
         TextPresenter presenter = new TextPresenter(ioProvider);
         Cell cell = grid.get(new Coord(1, 1));
-        cell.setAsShot();
+        cell.setAsHit();
         presenter.displayGrid(grid);
         String expected =
                 "     1   2   3 \n"
