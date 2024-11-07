@@ -19,7 +19,7 @@ class CoordTest {
     }
 
     @Test
-    public void GetCoordStringReturnsCorrectString() {
+    public void getCoordStringReturnsCorrectString() {
         Coord coord = new Coord(1, 2);
         assertEquals("(A, 2)", coord.getCoordString());
     }
