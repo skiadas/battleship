@@ -59,9 +59,12 @@ public class Grid {
     }
 
     public static List<Ship> defaultShipsFor5x5() {
-        Ship ship1 = new Ship(1, 2, 3, VERTICAL, "Submarine");
-        Ship ship2 = new Ship(5, 1, 5, HORIZONTAL, "Carrier");
-        Ship ship3 = new Ship(1, 5, 3, VERTICAL, "Destroyer");
+        Coord c1 = new Coord(1, 2);
+        Coord c2 = new Coord(5, 1);
+        Coord c3 = new Coord(1, 5);
+        Ship ship1 = new Ship(c1, 3, VERTICAL, "Submarine");
+        Ship ship2 = new Ship(c2, 5, HORIZONTAL, "Carrier");
+        Ship ship3 = new Ship(c3, 3, VERTICAL, "Destroyer");
         return List.of(ship1, ship2, ship3);
     }
 

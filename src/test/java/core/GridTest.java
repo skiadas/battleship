@@ -32,6 +32,7 @@ class GridTest {
         assertFalse(testGrid.get(new Coord(4, 2)).hasShip());
         assertFalse(testGrid.get(new Coord(1, 1)).hasShip());
     }
+
     @Test
     public void isTheCoordinateWithinGrid() {
         Boolean result = testGrid.isValid(new Coord(3, 2));
