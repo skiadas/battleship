@@ -53,7 +53,7 @@ public class Ship {
         return false;
     }
 
-    public List<Coord> genCoordList() {
+    private List<Coord> genCoordList() {
         List<Coord> coordList = new ArrayList<Coord>();
         if (direction == Direction.HORIZONTAL) {
             for (int i = 0; i < this.size; i++) {
