@@ -13,6 +13,7 @@ public class Grid {
     private Cell[][] grid;
 
     private List<Ship> shipList;
+
     private List<Cell> chosenCells;
 
     public Grid(int rows, int cols, List<Ship> shipList) {
@@ -77,5 +78,21 @@ public class Grid {
         int row = coordinate.row - 1;
         int col = coordinate.col - 1;
         return row >= 0 && row < rows && col >= 0 && col < cols;
+    }
+
+    public boolean allShipsAreSunk() {
+        for (Ship ship : shipList) {
+            List<Coord> coords = ship.getCoordList();
+            for (Coord coord : coords) {
+                if (!this.get(coord).cellIsHit()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public List<Ship> getShipList() {
+        return shipList;
     }
 }
