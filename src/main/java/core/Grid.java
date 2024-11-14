@@ -112,4 +112,14 @@ public class Grid {
         }
         return true;
     }
+
+    public void shoot(Coord coordinate) {
+        Cell target = get(coordinate);
+        if (target.hasShip() && !target.hasBeenShot()) {
+            target.setAsHit();
+            target.setAsShot();
+        } else {
+            target.setAsMiss();
+        }
+    }
 }
