@@ -53,6 +53,16 @@ class GridTest {
     }
 
     @Test
+    public void allShipsAreParticallyShot() {
+        Cell cell1 = testGrid.get(new Coord(5, 1));
+        cell1.setAsHit();
+        Cell cell2 = testGrid.get(new Coord(1, 5));
+        cell2.setAsHit();
+        boolean result = testGrid.allShipsAreSunk();
+        assertEquals(false, result);
+    }
+
+    @Test
     public void allShipsAreShot() {
         List<Ship> shipList = testGrid.getShipList();
         for (Ship ship : shipList) {
