@@ -115,11 +115,10 @@ public class Grid {
 
     public void shoot(Coord coordinate) {
         Cell target = get(coordinate);
-        if (target.hasShip() && !target.hasBeenShot()) {
-            target.setAsHit();
+        if (!target.hasBeenShot()) {
             target.setAsShot();
         } else {
-            target.setAsMiss();
+            return;
         }
     }
 }

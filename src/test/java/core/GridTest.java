@@ -48,18 +48,10 @@ class GridTest {
     }
 
     @Test
-    public void whenShootIsMiss() {
-        testGrid.shoot(new Coord(2, 2));
+    public void whenShootingAndNotAlreadyShotChangeCellToShot() {
         Cell shootCell = testGrid.get(new Coord(2, 2));
-        assertTrue(shootCell.cellIsMiss());
-    }
-
-    @Test
-    public void whenShootIsHit() {
-        Cell shootCell = testGrid.get(new Coord(3, 2));
-        shootCell.setAsShip();
-        testGrid.shoot(new Coord(3, 2));
-        assertTrue(shootCell.cellIsHit());
+        testGrid.shoot(new Coord(2, 2));
+        assertTrue(shootCell.hasBeenShot());
     }
 
     @Test
