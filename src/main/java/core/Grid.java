@@ -95,4 +95,21 @@ public class Grid {
     public List<Ship> getShipList() {
         return shipList;
     }
+
+    public boolean isShipSunk(Ship ship) {
+        for (Coord coord : ship.getCoordList()) {
+            if (!(get(coord).cellIsHit())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isShipOnGrid(Ship ship) {
+        for (Coord coord : ship.getCoordList()) {
+            if (coord.row < 1 || coord.row > numRows()) return false;
+            if (coord.col < 1 || coord.col > numCols()) return false;
+        }
+        return true;
+    }
 }
