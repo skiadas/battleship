@@ -21,27 +21,13 @@ public class GameDriver {
     private void startGame() {
         presenter.displayMessage("Game is starting...");
         // User input for grid size
-        Grid grid = new Grid(5, 5); // Temporary grid
-        presenter.displayGrid(grid);
-
-        /*
-        presenter.displayMessage("Insert a coordinate to shoot!");
-
-        while(true) { // infinite loop
+        Grid grid = Grid.defaultGrid(); // Temporary grid
+        while (!grid.allShipsAreSunk()) {
+            presenter.displayGrid(grid);
+            presenter.displayMessage("Insert a coordinate to shoot!");
             Coord playerInputCoord = presenter.askForCoordinate(grid);
-            if(grid.isValid(playerInputCoord)) {
-                grid.get(playerInputCoord);
-            }
+            grid.shoot(playerInputCoord);
         }
-
-        // Place ships (user and AI)
-        // User Shoots then AI shoots
-
-        // loop as long as there are still ships that are above water ask user what coordinate,
-        // hit that coordinate then you have to know if that's a hit or miss
-
-        */
-
     }
 
     private void stopGame() {
