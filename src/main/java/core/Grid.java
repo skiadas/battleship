@@ -70,8 +70,7 @@ public class Grid {
     }
 
     public static Grid defaultGrid() {
-        Grid g = new Grid(5, 5, defaultShipsFor5x5());
-        return g;
+        return new Grid(5, 5, defaultShipsFor5x5());
     }
 
     public boolean isValid(Coord coordinate) {
