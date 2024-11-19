@@ -2,6 +2,7 @@ package core;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class GridTest {
@@ -43,5 +44,35 @@ class GridTest {
     public void isTheCoordinateNotWithinGrid() {
         Boolean result = testGrid.isValid(new Coord(5, 6));
         assertEquals(false, result);
+    }
+
+    @Test
+    public void allShipsHaveNotBeenShot() {
+        boolean result = testGrid.allShipsAreSunk();
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void allShipsAreParticallyShot() {
+        Cell cell1 = testGrid.get(new Coord(5, 1));
+        cell1.setAsHit();
+        Cell cell2 = testGrid.get(new Coord(1, 5));
+        cell2.setAsHit();
+        boolean result = testGrid.allShipsAreSunk();
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void allShipsAreShot() {
+        List<Ship> shipList = testGrid.getShipList();
+        for (Ship ship : shipList) {
+            List<Coord> coords = ship.getCoordList();
+            for (Coord coord : coords) {
+                testGrid.get(coord).setAsShot();
+                testGrid.get(coord).setAsHit();
+            }
+        }
+        boolean result = testGrid.allShipsAreSunk();
+        assertEquals(true, result);
     }
 }
