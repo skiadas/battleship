@@ -1,5 +1,6 @@
 package core;
 
+import static core.Ship.Direction.VERTICAL;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
@@ -47,9 +48,16 @@ class GridTest {
     }
 
     @Test
+    public void whenShootingAndNotAlreadyShotChangeCellToShot() {
+        Cell shootCell = testGrid.get(new Coord(2, 2));
+        testGrid.shoot(new Coord(2, 2));
+        assertTrue(shootCell.hasBeenShot());
+    }
+
+    @Test
     public void allShipsHaveNotBeenShot() {
         boolean result = testGrid.allShipsAreSunk();
-        assertEquals(false, result);
+        assertFalse(result);
     }
 
     @Test
@@ -59,7 +67,7 @@ class GridTest {
         Cell cell2 = testGrid.get(new Coord(1, 5));
         cell2.setAsHit();
         boolean result = testGrid.allShipsAreSunk();
-        assertEquals(false, result);
+        assertFalse(result);
     }
 
     @Test
@@ -73,6 +81,35 @@ class GridTest {
             }
         }
         boolean result = testGrid.allShipsAreSunk();
-        assertEquals(true, result);
+        assertTrue(result);
+    }
+
+    @Test
+    public void isShipOnGridReturnsTrueWhenShipIsShipOnGrid() {
+        List<Ship> ships = testGrid.getShipList();
+        assertTrue(testGrid.isShipOnGrid(ships.get(0)));
+    }
+
+    @Test
+    public void isShipOnGridReturnsFalseWhenShipIsShipOnGrid() {
+        Coord c1 = new Coord(1, 2);
+        Ship otherShip = new Ship(c1, 6, VERTICAL, "BattleShip");
+        assertFalse(testGrid.isShipOnGrid(otherShip));
+    }
+
+    @Test
+    public void isShipSunkReturnsTrueIfAllCellsMarkedAsHit() {
+        Ship ship = new Ship(new Coord(1, 2), 3, VERTICAL, "BattleShip");
+        Coord c1 = new Coord(1, 2);
+        Coord c2 = new Coord(2, 2);
+        Coord c3 = new Coord(3, 2);
+        testGrid.get(c1).setAsShip();
+        testGrid.get(c2).setAsShip();
+        testGrid.get(c3).setAsShip();
+        testGrid.get(c1).setAsShot();
+        testGrid.get(c2).setAsShot();
+        assertFalse(testGrid.isShipSunk(ship));
+        testGrid.get(c3).setAsShot();
+        assertTrue(testGrid.isShipSunk(ship));
     }
 }

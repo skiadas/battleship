@@ -49,14 +49,16 @@ class TextPresenterTest {
         TextPresenter presenter = new TextPresenter(ioProvider);
         presenter.displayGrid(grid);
         String expected =
-                "     1   2   3 \n"
-                        + "\n"
-                        + " A   0   0   0 \n"
-                        + "\n"
-                        + " B   0   0   0 \n"
-                        + "\n"
-                        + " C   0   0   0 \n"
-                        + "\n";
+                """
+                             1   2   3\s
+
+                         A   0   0   0\s
+
+                         B   0   0   0\s
+
+                         C   0   0   0\s
+
+                        """;
         assertEquals(expected, ioProvider.getOutput());
     }
 
@@ -78,15 +80,13 @@ class TextPresenterTest {
                 "prompt",
                 Map.of(
                         "Start",
-                                (Runnable)
-                                        () -> {
-                                            ref.startCalled = true;
-                                        },
+                                () -> {
+                                    ref.startCalled = true;
+                                },
                         "Stop",
-                                (Runnable)
-                                        () -> {
-                                            ref.stopCalled = true;
-                                        }));
+                                () -> {
+                                    ref.stopCalled = true;
+                                }));
 
         assertFalse(ref.startCalled);
         assertTrue(ref.stopCalled);
@@ -100,12 +100,14 @@ class TextPresenterTest {
         presenter.displayGrid(grid);
 
         String expected =
-                "     1   2   3 \n"
-                        + "\n"
-                        + " A   0   0   0 \n"
-                        + "\n"
-                        + " B   0   0   0 \n"
-                        + "\n";
+                """
+                             1   2   3\s
+
+                         A   0   0   0\s
+
+                         B   0   0   0\s
+
+                        """;
         assertEquals(expected, ioProvider.getOutput());
     }
 
@@ -117,7 +119,7 @@ class TextPresenterTest {
         Coord expected = new Coord(2, 3);
         Coord actual = presenter.askForCoordinate(grid);
         boolean Result = expected.isEqual(actual);
-        assertEquals(true, Result);
+        assertTrue(Result);
         assertEquals(expected.row, actual.row);
         assertEquals(expected.col, actual.col);
     }
@@ -132,7 +134,7 @@ class TextPresenterTest {
         boolean Result = expected.isEqual(actual);
         String expected_m = "Not within the Grid!";
         assertEquals(expected_m, ioProvider.getOutput());
-        assertEquals(true, Result);
+        assertTrue(Result);
     }
 
     @Test
@@ -144,12 +146,14 @@ class TextPresenterTest {
         cell.setAsHit();
         presenter.displayGrid(grid);
         String expected =
-                "     1   2   3 \n"
-                        + "\n"
-                        + " A   X   0   0 \n"
-                        + "\n"
-                        + " B   0   0   0 \n"
-                        + "\n";
+                """
+                             1   2   3\s
+
+                         A   X   0   0\s
+
+                         B   0   0   0\s
+
+                        """;
         assertEquals(expected, ioProvider.getOutput());
     }
 
@@ -167,18 +171,20 @@ class TextPresenterTest {
 
         presenter.displayGrid(g);
         String expected =
-                "     1   2   3   4   5   6   7 \n"
-                        + "\n"
-                        + " A   X   0   0   0   0   0   0 \n"
-                        + "\n"
-                        + " B   0   0   0   0   0   *   0 \n"
-                        + "\n"
-                        + " C   0   ~   0   0   0   0   0 \n"
-                        + "\n"
-                        + " D   0   0   0   0   X   0   0 \n"
-                        + "\n"
-                        + " E   0   0   0   0   0   0   X \n"
-                        + "\n";
+                """
+                             1   2   3   4   5   6   7\s
+
+                         A   X   0   0   0   0   0   0\s
+
+                         B   0   0   0   0   0   *   0\s
+
+                         C   0   ~   0   0   0   0   0\s
+
+                         D   0   0   0   0   X   0   0\s
+
+                         E   0   0   0   0   0   0   X\s
+
+                        """;
         assertEquals(expected, ioProvider.getOutput());
     }
 }
