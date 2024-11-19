@@ -11,16 +11,11 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class TextPresenter implements Presenter {
-    private Convert convert = new DefualtConvert();
     private PrintStream output;
     private InputStream input;
     private Scanner scanner;
 
     // Terminal terminal;
-
-    public void setConvert(Convert convert) {
-        this.convert = convert;
-    }
 
     public TextPresenter() throws IOException {
         //        terminal = TerminalBuilder.builder().providers("ffm").build();
@@ -74,12 +69,15 @@ public class TextPresenter implements Presenter {
     }
 
     private void setCellAs(Cell cell) {
-        String symbol = convert.convert(cell);
-        output.print("  " + symbol + " ");
-    }
-
-    private String convert(Cell cell) {
-        return convert.convert(cell);
+        if (cell.cellIsHit()) {
+            output.print("  " + "X" + " ");
+        } else if (cell.hasShip()) {
+            output.print("  " + "~" + " ");
+        } else if (cell.cellIsMiss()) {
+            output.print("  " + "*" + " ");
+        } else if (cell.isEmpty()) {
+            output.print("  " + "0" + " ");
+        }
     }
 
     public Coord askForCoordinate(Grid g) {
@@ -88,7 +86,7 @@ public class TextPresenter implements Presenter {
             String User_input = scanner.next();
             Coord coordinate = new Coord(User_input);
             boolean answer = g.isValid(coordinate);
-            if (answer) {
+            if (answer == true) {
                 return coordinate;
             } else {
                 output.print("Not within the Grid!");

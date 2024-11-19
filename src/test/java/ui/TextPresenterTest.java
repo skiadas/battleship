@@ -51,13 +51,13 @@ class TextPresenterTest {
         String expected =
                 """
                              1   2   3\s
-                        
+
                          A   0   0   0\s
-                        
+
                          B   0   0   0\s
-                        
+
                          C   0   0   0\s
-                        
+
                         """;
         assertEquals(expected, ioProvider.getOutput());
     }
@@ -80,13 +80,13 @@ class TextPresenterTest {
                 "prompt",
                 Map.of(
                         "Start",
-                                        () -> {
-                                            ref.startCalled = true;
-                                        },
+                                () -> {
+                                    ref.startCalled = true;
+                                },
                         "Stop",
-                                        () -> {
-                                            ref.stopCalled = true;
-                                        }));
+                                () -> {
+                                    ref.stopCalled = true;
+                                }));
 
         assertFalse(ref.startCalled);
         assertTrue(ref.stopCalled);
@@ -102,11 +102,11 @@ class TextPresenterTest {
         String expected =
                 """
                              1   2   3\s
-                        
+
                          A   0   0   0\s
-                        
+
                          B   0   0   0\s
-                        
+
                         """;
         assertEquals(expected, ioProvider.getOutput());
     }
@@ -148,11 +148,11 @@ class TextPresenterTest {
         String expected =
                 """
                              1   2   3\s
-                        
+
                          A   X   0   0\s
-                        
+
                          B   0   0   0\s
-                        
+
                         """;
         assertEquals(expected, ioProvider.getOutput());
     }
@@ -173,17 +173,17 @@ class TextPresenterTest {
         String expected =
                 """
                              1   2   3   4   5   6   7\s
-                        
+
                          A   X   0   0   0   0   0   0\s
-                        
+
                          B   0   0   0   0   0   *   0\s
-                        
+
                          C   0   ~   0   0   0   0   0\s
-                        
+
                          D   0   0   0   0   X   0   0\s
-                        
+
                          E   0   0   0   0   0   0   X\s
-                        
+
                         """;
         assertEquals(expected, ioProvider.getOutput());
     }
