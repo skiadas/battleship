@@ -1,7 +1,5 @@
 package core;
 
-import ui.TextPresenter;
-
 import java.util.HashMap;
 import java.util.Map;
 
