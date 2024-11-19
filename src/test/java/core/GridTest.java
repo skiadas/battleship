@@ -57,7 +57,7 @@ class GridTest {
     @Test
     public void allShipsHaveNotBeenShot() {
         boolean result = testGrid.allShipsAreSunk();
-        assertEquals(false, result);
+        assertFalse(result);
     }
 
     @Test
@@ -67,7 +67,7 @@ class GridTest {
         Cell cell2 = testGrid.get(new Coord(1, 5));
         cell2.setAsHit();
         boolean result = testGrid.allShipsAreSunk();
-        assertEquals(false, result);
+        assertFalse(result);
     }
 
     @Test
@@ -81,7 +81,7 @@ class GridTest {
             }
         }
         boolean result = testGrid.allShipsAreSunk();
-        assertEquals(true, result);
+        assertTrue(result);
     }
 
     @Test
