@@ -39,6 +39,7 @@ public class GameDriver {
 
         // loop as long as there are still ships that are above water ask user what coordinate,
         // hit that coordinate then you have to know if that's a hit or miss
+
         */
 
     }
