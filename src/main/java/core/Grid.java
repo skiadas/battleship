@@ -112,4 +112,13 @@ public class Grid {
         }
         return true;
     }
+
+    public void shoot(Coord coordinate) {
+        Cell target = get(coordinate);
+        if (!target.hasBeenShot()) {
+            target.setAsShot();
+        } else {
+            return;
+        }
+    }
 }

@@ -20,6 +20,14 @@ public class GameDriver {
 
     private void startGame() {
         presenter.displayMessage("Game is starting...");
+        // User input for grid size
+        Grid grid = Grid.defaultGrid(); // Temporary grid
+        while (!grid.allShipsAreSunk()) {
+            presenter.displayGrid(grid);
+            presenter.displayMessage("Insert a coordinate to shoot!");
+            Coord playerInputCoord = presenter.askForCoordinate(grid);
+            grid.shoot(playerInputCoord);
+        }
     }
 
     private void stopGame() {
