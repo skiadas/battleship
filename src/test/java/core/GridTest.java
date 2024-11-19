@@ -78,20 +78,20 @@ class GridTest {
     }
 
     @Test
-    public void isOnGridReturnsTrueWhenShipIsOnGrid() {
+    public void isShipOnGridReturnsTrueWhenShipIsShipOnGrid() {
         List<Ship> ships = testGrid.getShipList();
-        assertTrue(testGrid.isOnGrid(ships.get(0)));
+        assertTrue(testGrid.isShipOnGrid(ships.get(0)));
     }
 
     @Test
-    public void isOnGridReturnsFalseWhenShipIsOnGrid() {
+    public void isShipOnGridReturnsFalseWhenShipIsShipOnGrid() {
         Coord c1 = new Coord(1, 2);
         Ship otherShip = new Ship(c1, 6, VERTICAL, "BattleShip");
-        assertFalse(testGrid.isOnGrid(otherShip));
+        assertFalse(testGrid.isShipOnGrid(otherShip));
     }
 
     @Test
-    public void isSunkReturnsTrueIfAllCellsMarkedAsHit() {
+    public void isShipSunkReturnsTrueIfAllCellsMarkedAsHit() {
         Ship ship = new Ship(new Coord(1, 2), 3, VERTICAL, "BattleShip");
         Coord c1 = new Coord(1, 2);
         Coord c2 = new Coord(2, 2);
@@ -101,8 +101,8 @@ class GridTest {
         testGrid.get(c3).setAsShip();
         testGrid.get(c1).setAsShot();
         testGrid.get(c2).setAsShot();
-        assertFalse(testGrid.isSunk(ship));
+        assertFalse(testGrid.isShipSunk(ship));
         testGrid.get(c3).setAsShot();
-        assertTrue(testGrid.isSunk(ship));
+        assertTrue(testGrid.isShipSunk(ship));
     }
 }
