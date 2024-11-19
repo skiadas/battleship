@@ -48,6 +48,13 @@ class GridTest {
     }
 
     @Test
+    public void whenShootingAndNotAlreadyShotChangeCellToShot() {
+        Cell shootCell = testGrid.get(new Coord(2, 2));
+        testGrid.shoot(new Coord(2, 2));
+        assertTrue(shootCell.hasBeenShot());
+    }
+
+    @Test
     public void allShipsHaveNotBeenShot() {
         boolean result = testGrid.allShipsAreSunk();
         assertEquals(false, result);
