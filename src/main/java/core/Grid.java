@@ -96,7 +96,7 @@ public class Grid {
         return shipList;
     }
 
-    public boolean isSunk(Ship ship) {
+    public boolean isShipSunk(Ship ship) {
         for (Coord coord : ship.getCoordList()) {
             if (!(get(coord).cellIsHit())) {
                 return false;
@@ -105,7 +105,7 @@ public class Grid {
         return true;
     }
 
-    public boolean isOnGrid(Ship ship) {
+    public boolean isShipOnGrid(Ship ship) {
         for (Coord coord : ship.getCoordList()) {
             if (coord.row < 1 || coord.row > numRows()) return false;
             if (coord.col < 1 || coord.col > numCols()) return false;
