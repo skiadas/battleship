@@ -35,6 +35,15 @@ public class Ship {
     public int getStartCol() {
         return startcoordinate.col;
     }
+    public boolean isOnGrid(Grid grid) {
+        for (Coord coord : this.getCoordList()) {
+            if (!grid.isValid(coord)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public Direction getDirection() {
         return direction;
