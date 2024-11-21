@@ -66,7 +66,7 @@ public class TextPresenter implements Presenter {
         for (int row = 1; row <= numOfRows; row++) {
             output.print(" " + (letter[row]) + " ");
             for (int col = 1; col <= numOfCols; col++) {
-                Cell cell = g.get(new Coord(row, col));
+                Cell cell = g.getCell(new Coord(row, col));
                 setCellAs(cell);
             }
             output.print("\n\n");

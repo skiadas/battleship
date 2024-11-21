@@ -142,7 +142,7 @@ class TextPresenterTest {
         TestIOProvider ioProvider = TestIOProvider.withInput("");
         Grid grid = new Grid(2, 3);
         TextPresenter presenter = new TextPresenter(ioProvider);
-        Cell cell = grid.get(new Coord(1, 1));
+        Cell cell = grid.getCell(new Coord(1, 1));
         cell.setAsHit();
         presenter.displayGrid(grid);
         String expected =
@@ -163,11 +163,11 @@ class TextPresenterTest {
         Grid g = new Grid(5, 7);
         TextPresenter presenter = new TextPresenter(ioProvider);
 
-        g.get(new Coord(1, 1)).setAsHit();
-        g.get(new Coord(4, 5)).setAsHit();
-        g.get(new Coord(5, 7)).setAsHit();
-        g.get(new Coord(2, 6)).setAsMiss();
-        g.get(new Coord(3, 2)).setAsShip();
+        g.getCell(new Coord(1, 1)).setAsHit();
+        g.getCell(new Coord(4, 5)).setAsHit();
+        g.getCell(new Coord(5, 7)).setAsHit();
+        g.getCell(new Coord(2, 6)).setAsMiss();
+        g.getCell(new Coord(3, 2)).setAsShip();
 
         presenter.displayGrid(g);
         String expected =
