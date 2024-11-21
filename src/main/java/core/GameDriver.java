@@ -1,9 +1,8 @@
 package core;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-
 
 public class GameDriver {
     private final Presenter presenter;
@@ -67,7 +66,8 @@ public class GameDriver {
     }
 
     private void displayInstructions() {
-        presenter.displayMessage("Instructions: Place your ships carefully to sink all enemy ships.");
+        presenter.displayMessage(
+                "Instructions: Place your ships carefully to sink all enemy ships.");
     }
 
     private void goBackToMenu() {
@@ -121,7 +121,8 @@ public class GameDriver {
                     }
                 }
                 if (overlaps) {
-                    presenter.displayMessage("Error: Ship overlaps with an existing ship. Try again.");
+                    presenter.displayMessage(
+                            "Error: Ship overlaps with an existing ship. Try again.");
                     continue;
                 }
 
