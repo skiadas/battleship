@@ -27,6 +27,17 @@ public class GameDriver {
             presenter.displayMessage("Insert a coordinate to shoot!");
             Coord playerInputCoord = presenter.askForCoordinate(grid);
             grid.shoot(playerInputCoord);
+            reportIfShipSunk(grid, playerInputCoord);
+        }
+    }
+
+    private void reportIfShipSunk(Grid grid, Coord playerInputCoord) {
+        for (Ship ship : grid.getShipList()) {
+            for (Coord c : ship.getCoordList()) {
+                if (c.isEqual(playerInputCoord) && grid.isShipSunk(ship)) {
+                    presenter.displayMessage("You sunk your opponents " + ship.getName() + "!");
+                }
+            }
         }
     }
 

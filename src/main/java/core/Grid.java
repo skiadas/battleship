@@ -12,8 +12,7 @@ public class Grid {
 
     private Cell[][] grid;
 
-    private List<Ship> shipList;
-
+    private final List<Ship> shipList = new ArrayList<>();
     private List<Cell> chosenCells;
 
     public Grid(int rows, int cols, List<Ship> shipList) {
@@ -29,23 +28,28 @@ public class Grid {
             }
         }
 
-        this.shipList = shipList;
-        markShipCells();
+        this.shipList.addAll(shipList);
+
+        markAllShipCells();
     }
 
     public Grid(int rows, int cols) {
         this(rows, cols, new ArrayList<>());
     }
 
-    private void markShipCells() {
+    private void markAllShipCells() {
         for (Ship ship : shipList) {
-            for (Coord coord : ship.getCoordList()) {
-                get(coord).setAsShip();
-            }
+            markShipCells(ship);
         }
     }
 
-    public Cell get(Coord coordinate) {
+    private void markShipCells(Ship ship) {
+        for (Coord coord : ship.getCoordList()) {
+            getCell(coord).setAsShip();
+        }
+    }
+
+    public Cell getCell(Coord coordinate) {
         int row = coordinate.row - 1;
         int col = coordinate.col - 1;
         return grid[row][col];
@@ -60,12 +64,9 @@ public class Grid {
     }
 
     public static List<Ship> defaultShipsFor5x5() {
-        Coord c1 = new Coord(1, 2);
-        Coord c2 = new Coord(5, 1);
-        Coord c3 = new Coord(1, 5);
-        Ship ship1 = new Ship(c1, 3, VERTICAL, "Submarine");
-        Ship ship2 = new Ship(c2, 5, HORIZONTAL, "Carrier");
-        Ship ship3 = new Ship(c3, 3, VERTICAL, "Destroyer");
+        Ship ship1 = new Ship(new Coord(1, 2), 3, VERTICAL, "Submarine");
+        Ship ship2 = new Ship(new Coord(5, 1), 5, HORIZONTAL, "Carrier");
+        Ship ship3 = new Ship(new Coord(1, 5), 3, VERTICAL, "Destroyer");
         return List.of(ship1, ship2, ship3);
     }
 
@@ -79,11 +80,16 @@ public class Grid {
         return row >= 0 && row < rows && col >= 0 && col < cols;
     }
 
+    public void addShip(Ship ship) {
+        shipList.add(ship);
+        markShipCells(ship);
+    }
+
     public boolean allShipsAreSunk() {
         for (Ship ship : shipList) {
             List<Coord> coords = ship.getCoordList();
             for (Coord coord : coords) {
-                if (!this.get(coord).cellIsHit()) {
+                if (!this.getCell(coord).cellIsHit()) {
                     return false;
                 }
             }
@@ -97,7 +103,7 @@ public class Grid {
 
     public boolean isShipSunk(Ship ship) {
         for (Coord coord : ship.getCoordList()) {
-            if (!(get(coord).cellIsHit())) {
+            if (!(getCell(coord).cellIsHit())) {
                 return false;
             }
         }
@@ -113,7 +119,7 @@ public class Grid {
     }
 
     public void shoot(Coord coordinate) {
-        Cell target = get(coordinate);
+        Cell target = getCell(coordinate);
         if (!target.hasBeenShot()) {
             target.setAsShot();
         } else {
