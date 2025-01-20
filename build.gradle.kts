@@ -1,8 +1,7 @@
-import org.beryx.jlink.JPackageTask
-
 plugins {
     java
     application
+    jacoco
     id("com.diffplug.spotless") version "6.25.0"
     id("org.beryx.jlink") version "3.1.1"
 }
@@ -45,6 +44,14 @@ dependencies {
 
 tasks.withType(Test::class) {
     useJUnitPlatform()
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
 }
 
 application {
