@@ -73,7 +73,7 @@ spotless {
 }
 
 pmd {
-    toolVersion = "6.55.0"
+    toolVersion = "7.9.0"
     isConsoleOutput = false
     isIgnoreFailures = true
     ruleSetFiles(files("config/pmd.xml"))
