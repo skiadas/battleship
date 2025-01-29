@@ -95,3 +95,10 @@ tasks.javadoc {
         "--add-exports=jdk.javadoc/jdk.javadoc.internal.doclets.toolkit=ALL-UNNAMED",
         "--add-opens=jdk.javadoc/jdk.javadoc.internal.doclets.toolkit.resources.releases=ALL-UNNAMED")
 }
+
+tasks.test {
+    finalizedBy(tasks.named("jacocoTestReport")) // report is always generated after tests run
+}
+tasks.named<Task>("jacocoTestReport") {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+}
