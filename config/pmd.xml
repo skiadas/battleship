@@ -18,7 +18,6 @@
 
     <rule ref="category/java/codestyle.xml">
         <exclude name="ControlStatementBraces"/>
-        <exclude name="DefaultPackage"/>
         <exclude name="CommentDefaultAccessModifier" />
         <exclude name="AtLeastOneConstructor" />
         <exclude name="OnlyOneReturn"></exclude>
@@ -41,7 +40,7 @@
     </rule>
     <rule ref="category/java/codestyle.xml/ShortVariable">
         <properties>
-            <property name="minimum" value="0" />
+            <property name="minimum" value="1" />
         </properties>
     </rule>
 
