@@ -3,6 +3,7 @@ name: Gradle Build and Test
 on:
   pull_request:
   push:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,16 +13,79 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'corretto'
           java-version: '22'
           cache: 'gradle'
-
       - name: Build with Gradle
+        id: gradle-build
         run: ./gradlew build
-
       - name: Run tests with Gradle
         run: ./gradlew test
+      - name: Upload Javadocs
+        uses: actions/upload-artifact@v4
+        with:
+          name: javadocs
+          path: build/docs/javadoc
+      - name: Upload PMD report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pmd-report
+          path: build/reports/pmd/main.html
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: build/reports/jacoco/test/html        
+      - name: Post in Discord
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ steps.gradle-build.outcome }}
+          color:  ${{ steps.gradle-build.outcome == 'failure' && '0xF31C09' || '0x1ac949' }}
+  prepare_site:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ success() && github.event.pull_request.merged && github.event.pull_request.merged_at != null && github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Check out _site directory
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            _site
+      - name: Download Javadocs
+        uses: actions/download-artifact@v4
+        with:
+          name: javadocs
+          path: _site/docs
+      - name: Download coverage report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+          path: _site/coverage
+      - name: Download pmd report
+        uses: actions/download-artifact@v4
+        with:
+          name: pmd-report
+          path: _site/pmd
+      - name: Rename pmd report file
+        run: mv _site/pmd/main.html _site/pmd/index.html
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+  pages_deploy:
+    needs: prepare_site
+    runs-on: ubuntu-latest
+    if: ${{ success() && github.event.pull_request.merged && github.event.pull_request.merged_at != null && github.ref == 'refs/heads/main' }}
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
