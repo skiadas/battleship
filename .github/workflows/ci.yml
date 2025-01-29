@@ -38,8 +38,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: build/reports/jacoco/test/html
-        
+          path: build/reports/jacoco/test/html        
       - name: Post in Discord
         uses: sarisia/actions-status-discord@v1
         if: always()
@@ -47,3 +46,44 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ steps.gradle-build.outcome }}
           color:  ${{ steps.gradle-build.outcome == 'failure' && '0xF31C09' || '0x1ac949' }}
+  prepare_site:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out _site directory
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            _site
+      - name: Download Javadocs
+        uses: actions/download-artifact@v4
+        with:
+          name: javadocs
+          path: _site/docs
+      - name: Download coverage report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+          path: _site/coverage
+      - name: Download pmd report
+        uses: actions/download-artifact@v4
+        with:
+          name: pmd-report
+          path: _site/pmd
+      - name: Rename pmd report file
+        run: mv _site/pmd/main.html _site/pmd/index.html
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+  pages_deploy:
+    needs: prepare_site
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
