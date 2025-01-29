@@ -49,6 +49,7 @@ jobs:
   prepare_site:
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ success() && github.event.pull_request.merged && github.event.pull_request.merged_at != null && github.ref == 'refs/heads/main' }}
     steps:
       - name: Check out _site directory
         uses: actions/checkout@v4
