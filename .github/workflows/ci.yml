@@ -13,21 +13,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'corretto'
           java-version: '22'
           cache: 'gradle'
-
       - name: Build with Gradle
         id: gradle-build
         run: ./gradlew build
-
       - name: Run tests with Gradle
         run: ./gradlew test
-
       - name: Post in Discord
         uses: sarisia/actions-status-discord@v1
         if: always()
