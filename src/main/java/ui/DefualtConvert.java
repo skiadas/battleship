@@ -3,6 +3,7 @@ package ui;
 import core.Cell;
 import core.visualState;
 /**
+ * converts a cell state to a visual representation as a string
  *
  */
 public class DefualtConvert implements Convert {

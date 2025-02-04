@@ -2,7 +2,10 @@ package ui;
 
 import core.Cell;
 import core.visualState;
-
+/**
+ * converts a cell state to an emoji representation as a unicode string
+ *
+ */
 public class EmojiConvert implements Convert {
     @Override
     public String convert(visualState cellState) {
