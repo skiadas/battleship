@@ -1,19 +1,19 @@
 package ui;
 
 import core.Cell;
+import core.visualState;
 
 public class EmojiConvert implements Convert {
-    public EmojiConvert() {}
 
     @Override
-    public String convert(Cell cell) {
-        if (cell.cellIsHit()) {
+    public String convert(visualState cellState) {
+        if (cellState == visualState.HIT) {
             return "☠";
-        } else if (cell.hasShip()) {
+        } else if (cellState == visualState.SHIP) {
             return "\uD83D\uDEA2";
-        } else if (cell.cellIsMiss()) {
+        } else if (cellState == visualState.MISS) {
             return "\uD83D\uDEAB";
-        } else if (cell.isEmpty()) {
+        } else if (cellState == visualState.EMPTY) {
             return "\uD83C\uDF0A";
         }
         return "";

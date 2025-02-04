@@ -1,7 +1,8 @@
 package ui;
 
 import core.Cell;
+import core.visualState;
 
 public interface Convert {
-    String convert(Cell cell);
+    String convert(visualState currState);
 }

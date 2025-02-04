@@ -1,19 +1,21 @@
 package ui;
 
 import core.Cell;
-
+import core.visualState;
+/**
+ *
+ */
 public class DefualtConvert implements Convert {
-    public DefualtConvert() {}
 
     @Override
-    public String convert(Cell cell) {
-        if (cell.cellIsHit()) {
+    public String convert(visualState currState) {
+        if (currState == visualState.HIT) {
             return "X";
-        } else if (cell.hasShip()) {
+        } else if (currState == visualState.SHIP) {
             return "~";
-        } else if (cell.cellIsMiss()) {
+        } else if (currState == visualState.MISS) {
             return "*";
-        } else if (cell.isEmpty()) {
+        } else if (currState == visualState.EMPTY) {
             return "0";
         }
         return "";
