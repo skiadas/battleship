@@ -4,7 +4,6 @@ import core.Cell;
 import core.visualState;
 
 public class EmojiConvert implements Convert {
-
     @Override
     public String convert(visualState cellState) {
         if (cellState == visualState.HIT) {

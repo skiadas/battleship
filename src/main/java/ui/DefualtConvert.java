@@ -6,7 +6,6 @@ import core.visualState;
  *
  */
 public class DefualtConvert implements Convert {
-
     @Override
     public String convert(visualState currState) {
         if (currState == visualState.HIT) {
