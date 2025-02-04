@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Creates a ship object for the Grid class to use to place within its grid. ඞ
+ * Represents a ship object for the Grid class, Describes the different directions it can face,
+ * Describes the length of the ship Has the starting coordinate of the ship, Helps identify the name
+ * of different ships,
  *
- * @author Lily-Kate
+ * <p>ඞ
  */
 public class Ship {
 
@@ -15,40 +17,19 @@ public class Ship {
         VERTICAL
     }
 
-    /**
-     * The starting coordinate within the grid that helps create the starting row, col and coord
-     * list
-     *
-     * @author Lily Kate
-     */
+    /** The starting coordinate of the ship */
     private Coord startcoordinate;
 
-    /**
-     * This describes the length of the Ship object
-     *
-     * @author Lily Kate
-     */
+    /** Length of the Ship object */
     private int size;
 
-    /**
-     * Used to create ships facing different directions Like horizontal and vertical
-     *
-     * @author Lily Kate
-     */
+    /** the directions its facing like horizontal and vertical */
     private Direction direction;
 
-    /**
-     * Used to explain which ship the player or opponent has sunk For example: Battleship
-     *
-     * @author Lily Kate
-     */
+    /** Name of the ship e.g. Battleship */
     private String name;
 
-    /**
-     * The coordinates that the ship resides in as a list
-     *
-     * @author Lily Kate
-     */
+    /** The coordinates of the whole ship */
     private List<Coord> coordList;
 
     public Ship(Coord coordinate, int size, Direction direction, String name) {
