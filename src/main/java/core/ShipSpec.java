@@ -1,10 +1,10 @@
 package core;
 
 public class ShipSpec {
-    public String name;
-    public int size;
+    /** The name of the desired ship */
     public final String name;
 
+    /** The size / length of the desired ship */
     public final int size;
     public ShipSpec(String name, int size) {
         this.name = name;
