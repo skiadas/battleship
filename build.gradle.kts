@@ -72,6 +72,8 @@ spotless {
     }
 }
 
+
+
 pmd {
     toolVersion = "7.9.0"
     isConsoleOutput = false

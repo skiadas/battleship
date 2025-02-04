@@ -3,6 +3,11 @@ package core;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Creates a ship object for the Grid class to use to place within its grid. ඞ
+ *
+ * @author Lily-Kate
+ */
 public class Ship {
 
     public enum Direction {
@@ -10,10 +15,40 @@ public class Ship {
         VERTICAL
     }
 
+    /**
+     * The starting coordinate within the grid that helps create the starting row, col and coord
+     * list
+     *
+     * @author Lily Kate
+     */
     private Coord startcoordinate;
+
+    /**
+     * This describes the length of the Ship object
+     *
+     * @author Lily Kate
+     */
     private int size;
+
+    /**
+     * Used to create ships facing different directions Like horizontal and vertical
+     *
+     * @author Lily Kate
+     */
     private Direction direction;
+
+    /**
+     * Used to explain which ship the player or opponent has sunk For example: Battleship
+     *
+     * @author Lily Kate
+     */
     private String name;
+
+    /**
+     * The coordinates that the ship resides in as a list
+     *
+     * @author Lily Kate
+     */
     private List<Coord> coordList;
 
     public Ship(Coord coordinate, int size, Direction direction, String name) {

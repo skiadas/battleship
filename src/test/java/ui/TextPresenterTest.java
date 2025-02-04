@@ -47,7 +47,7 @@ class TextPresenterTest {
         TestIOProvider ioProvider = TestIOProvider.withInput("");
         Grid grid = new Grid(3, 3);
         TextPresenter presenter = new TextPresenter(ioProvider);
-        presenter.displayGrid(grid);
+        presenter.displayGrid(grid, true);
         String expected =
                 """
                              1   2   3\s
@@ -97,7 +97,7 @@ class TextPresenterTest {
         TestIOProvider ioProvider = TestIOProvider.withInput("");
         Grid grid = new Grid(2, 3);
         TextPresenter presenter = new TextPresenter(ioProvider);
-        presenter.displayGrid(grid);
+        presenter.displayGrid(grid, true);
 
         String expected =
                 """
@@ -144,7 +144,7 @@ class TextPresenterTest {
         TextPresenter presenter = new TextPresenter(ioProvider);
         Cell cell = grid.getCell(new Coord(1, 1));
         cell.setAsHit();
-        presenter.displayGrid(grid);
+        presenter.displayGrid(grid, true);
         String expected =
                 """
                              1   2   3\s
@@ -169,7 +169,7 @@ class TextPresenterTest {
         g.getCell(new Coord(2, 6)).setAsMiss();
         g.getCell(new Coord(3, 2)).setAsShip();
 
-        presenter.displayGrid(g);
+        presenter.displayGrid(g, true);
         String expected =
                 """
                              1   2   3   4   5   6   7\s

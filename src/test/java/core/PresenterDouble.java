@@ -11,7 +11,7 @@ public class PresenterDouble implements Presenter {
         displayedMessages.add(s);
     }
 
-    public void displayGrid(Grid g) {
+    public void displayGrid(Grid g, boolean b) {
         // TODO
     }
 
