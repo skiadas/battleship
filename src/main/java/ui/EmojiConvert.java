@@ -3,10 +3,10 @@ package ui;
 import core.Cell;
 
 public class EmojiConvert implements Convert {
-    public EmojiConvert() {}
+    //public EmojiConvert() {}
 
     @Override
-    public String convert(Cell cell) {
+    public String convert(final Cell cell) {
         if (cell.cellIsHit()) {
             return "☠";
         } else if (cell.hasShip()) {

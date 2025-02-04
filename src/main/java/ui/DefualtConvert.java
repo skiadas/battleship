@@ -2,11 +2,11 @@ package ui;
 
 import core.Cell;
 
-public class DefualtConvert implements Convert {
-    public DefualtConvert() {}
+ public class DefualtConvert implements Convert {
+    //public DefualtConvert() {}
 
     @Override
-    public String convert(Cell cell) {
+    public String convert(final Cell cell) {
         if (cell.cellIsHit()) {
             return "X";
         } else if (cell.hasShip()) {
@@ -17,5 +17,7 @@ public class DefualtConvert implements Convert {
             return "0";
         }
         return "";
+
+
     }
 }
