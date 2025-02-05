@@ -46,10 +46,10 @@ class AIShips {
     }
 
     private Ship getShip(final ShipSpec shipSpec) {
-        Random random = new Random();
-        int row = getRow(random);
-        int col = getCol(random);
-        Ship.Direction direction = getDirection(random);
+        final Random random = new Random();
+        final int row = getRow(random);
+        final int col = getCol(random);
+        final Ship.Direction direction = getDirection(random);
         return new Ship(new Coord(row, col), shipSpec.size, direction, shipSpec.name);
     }
 
