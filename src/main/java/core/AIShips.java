@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 class AIShips {
-    private Grid grid;
-    private List<Ship> ships;
-    private ShipSpec[] shipSpecs;
+    private final Grid grid;
+    private final List<Ship> ships;
+    private final ShipSpec[] shipSpecs;
 
     public AIShips(Grid grid, ShipSpec... shipSpecs) {
         this.grid = grid;
