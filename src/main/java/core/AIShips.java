@@ -37,6 +37,7 @@ class AIShips {
         }
     }
 
+    @SuppressWarnings("PMD.AvoidThrowingRawExceptionTypes")
     private void checkShipSizes() {
         for (ShipSpec shipSpec : shipSpecs) {
             if (shipSpec.size > grid.numRows() || shipSpec.size > grid.numCols()) {
