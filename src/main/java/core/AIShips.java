@@ -38,8 +38,8 @@ class AIShips {
     }
 
     private void checkShipSizes() {
-        for (int i = 0; i < shipSpecs.length; i++) {
-            if (shipSpecs[i].size > grid.numRows() || shipSpecs[i].size > grid.numCols()) {
+        for (ShipSpec shipSpec : shipSpecs) {
+            if (shipSpec.size > grid.numRows() || shipSpec.size > grid.numCols()) {
                 throw new RuntimeException("INVALID SHIP SIZES GIVEN");
             }
         }
