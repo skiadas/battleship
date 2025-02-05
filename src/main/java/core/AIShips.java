@@ -4,11 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
+/**
+ * AIShips is an AI that places ships on an empty grid.
+ * This Class is Used with the {@link Grid} class and {@link ShipSpec} class in order to function
+ */
 class AIShips {
     private final Grid grid;
     private final List<Ship> ships;
     private final ShipSpec[] shipSpecs;
 
+    /**
+     * Creates an instance of the AIShips class
+     * @param grid is an empty grid that should be filled with ships
+     * @param shipSpecs is a list of ShipSpec to provide name and size of ships
+     */
     public AIShips(final Grid grid, final ShipSpec... shipSpecs) {
         this.grid = grid;
         this.shipSpecs = shipSpecs;
@@ -16,6 +26,9 @@ class AIShips {
         this.checkShipSizes();
     }
 
+    /**
+     * AI function, it places the ships on the empty grid provided. Must be called in order to place ships.
+     */
     public void setShips() {
         final int MAX_NUMBER_OF_TRIES = 10;
         int currentShip = 0;
@@ -74,10 +87,16 @@ class AIShips {
         return false;
     }
 
+    /**
+     * @return the amount of ships on the AI's grid
+     */
     public int getShipCount() {
         return ships.size();
     }
 
+    /**
+     * @return the list of ships on the grid
+     */
     public List<Ship> getShips() {
         return ships;
     }
