@@ -9,7 +9,7 @@ class AIShips {
     private final List<Ship> ships;
     private final ShipSpec[] shipSpecs;
 
-    public AIShips(Grid grid, ShipSpec... shipSpecs) {
+    public AIShips(final Grid grid, final ShipSpec... shipSpecs) {
         this.grid = grid;
         this.shipSpecs = shipSpecs;
         this.ships = new ArrayList<>();
@@ -21,7 +21,7 @@ class AIShips {
         int currentShip = 0;
         int tries = 0;
         while (currentShip != shipSpecs.length) {
-            Ship newShip = getShip(shipSpecs[currentShip]);
+            final Ship newShip = getShip(shipSpecs[currentShip]);
             if (grid.isShipOnGrid(newShip)) {
                 if (!conflicts(newShip)) {
                     ships.add(newShip);
@@ -47,7 +47,7 @@ class AIShips {
         }
     }
 
-    private Ship getShip(ShipSpec shipSpec) {
+    private Ship getShip(final ShipSpec shipSpec) {
         Random random = new Random();
         int row = getRow(random);
         int col = getCol(random);
@@ -55,15 +55,15 @@ class AIShips {
         return new Ship(new Coord(row, col), shipSpec.size, direction, shipSpec.name);
     }
 
-    private int getRow(Random random) {
+    private int getRow(final Random random) {
         return random.nextInt(0, grid.numRows());
     }
 
-    private int getCol(Random random) {
+    private int getCol(final Random random) {
         return random.nextInt(0, grid.numCols());
     }
 
-    private static Ship.Direction getDirection(Random random) {
+    private static Ship.Direction getDirection(final Random random) {
         return random.nextBoolean() ? Ship.Direction.VERTICAL : Ship.Direction.HORIZONTAL;
     }
 
