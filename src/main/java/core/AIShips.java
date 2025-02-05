@@ -67,7 +67,7 @@ class AIShips {
     }
 
     private boolean conflicts(Ship newShip) {
-        for (Ship ship : ships) {
+        for (final Ship ship : ships) {
             if (newShip.isOverlapping(ship)) {
                 return true;
             }
