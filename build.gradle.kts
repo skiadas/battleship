@@ -78,6 +78,16 @@ spotless {
         googleJavaFormat().aosp().reflowLongStrings()
     }
 }
+configurations.forEach {
+    println("## Configuration ${it.name}")
+    it.dependencies.forEach {
+        println("  - ${it.name}")
+    }
+}
+
+
+
+
 
 pmd {
     toolVersion = "7.9.0"
