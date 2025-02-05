@@ -5,7 +5,6 @@ import core.Cell;
 public class EmojiConvert implements Convert {
 
     /**
-     *
      * @param cell is a location in the grid
      * @return a visuale repesnation of mac compuers
      */
