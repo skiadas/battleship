@@ -10,7 +10,7 @@ public class Grid {
     private final int rows;
     private final int cols;
 
-    private Cell[][] grid;
+    private Cell[][] cells;
 
     private final List<Ship> shipList = new ArrayList<>();
     private List<Cell> chosenCells;
@@ -20,11 +20,11 @@ public class Grid {
         this.rows = rows;
         this.cols = cols;
 
-        grid = new Cell[rows][cols];
+        cells = new Cell[rows][cols];
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                grid[row][col] = new Cell();
+                cells[row][col] = new Cell();
             }
         }
 
@@ -52,7 +52,7 @@ public class Grid {
     public Cell getCell(Coord coordinate) {
         int row = coordinate.row - 1;
         int col = coordinate.col - 1;
-        return grid[row][col];
+        return cells[row][col];
     }
 
     public int numRows() {
