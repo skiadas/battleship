@@ -3,14 +3,14 @@ package main;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import ui.EmojiConvert;
+import ui.DefualtConverter;
 import ui.TextPresenter;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         setDebugLogging();
         TextPresenter presenter = new TextPresenter();
-        presenter.setConvert(new EmojiConvert());
+        presenter.setConvert(new DefualtConverter());
         core.GameDriver g = new core.GameDriver(presenter);
         g.start();
     }
