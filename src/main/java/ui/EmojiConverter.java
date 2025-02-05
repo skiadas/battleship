@@ -2,7 +2,7 @@ package ui;
 
 import core.Cell;
 
-public class EmojiConvert implements Convert {
+public class EmojiConverter implements Converter {
 
     /**
      * @param cell is a location in the grid

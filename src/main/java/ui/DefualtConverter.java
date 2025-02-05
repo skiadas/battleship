@@ -2,7 +2,7 @@ package ui;
 
 import core.Cell;
 
-public class DefualtConvert implements Convert {
+public class DefualtConverter implements Converter {
 
     /**
      * @param cell is a location in the grid
