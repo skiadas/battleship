@@ -2,11 +2,14 @@ package ui;
 
 import core.Cell;
 
-public class EmojiConvert implements Convert {
-    public EmojiConvert() {}
+public class EmojiConverter implements Converter {
 
+    /**
+     * @param cell is a location in the grid
+     * @return a visuale repesnation of mac compuers
+     */
     @Override
-    public String convert(Cell cell) {
+    public String convert(final Cell cell) {
         if (cell.cellIsHit()) {
             return "☠";
         } else if (cell.hasShip()) {
