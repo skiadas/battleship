@@ -3,6 +3,11 @@ package core;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a ship object for the {@link Grid} class, Describes the different directions it can
+ * face, Describes the length of the ship Has the starting coordinate of the ship, Helps identify
+ * the name of different ships,
+ */
 public class Ship {
 
     public enum Direction {
@@ -10,10 +15,19 @@ public class Ship {
         VERTICAL
     }
 
+    /** The starting coordinate of the ship */
     private Coord startcoordinate;
+
+    /** Length of the Ship object */
     private int size;
+
+    /** the directions its facing like horizontal and vertical */
     private Direction direction;
+
+    /** Name of the ship e.g. Battleship */
     private String name;
+
+    /** The coordinates of the whole ship */
     private List<Coord> coordList;
 
     public Ship(Coord coordinate, int size, Direction direction, String name) {
