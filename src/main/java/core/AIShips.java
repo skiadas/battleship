@@ -17,6 +17,7 @@ class AIShips {
     }
 
     public void setShips() {
+        final int MAX_NUMBER_OF_TRIES = 10;
         int currentShip = 0;
         int tries = 0;
         while (currentShip != shipSpecs.length) {
@@ -29,7 +30,7 @@ class AIShips {
                 }
             }
             tries++;
-            if (tries == 10) {
+            if (tries == MAX_NUMBER_OF_TRIES) {
                 currentShip = 0;
                 tries = 0;
                 ships.clear();
