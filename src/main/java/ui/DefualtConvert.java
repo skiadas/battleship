@@ -1,9 +1,8 @@
 package ui;
 
 import core.Cell;
-/**
- * converts a cell state to a visual representation as a string
- */
+
+/** converts a cell state to a visual representation as a string */
 public class DefualtConvert implements Convert {
     @Override
     public String convert(final Cell cell) {
