@@ -2,11 +2,10 @@ package ui;
 
 import core.Cell;
 
+/** converts a cell state to a visual representation as a string */
 public class DefualtConvert implements Convert {
-    public DefualtConvert() {}
-
     @Override
-    public String convert(Cell cell) {
+    public String convert(final Cell cell) {
         if (cell.cellIsHit()) {
             return "X";
         } else if (cell.hasShip()) {
