@@ -9,7 +9,7 @@ class AIShips {
     private List<Ship> ships;
     private ShipSpec[] shipSpecs;
 
-    public AIShips(Grid grid, ShipSpec[] shipSpecs) {
+    public AIShips(Grid grid, ShipSpec... shipSpecs) {
         this.grid = grid;
         this.shipSpecs = shipSpecs;
         this.ships = new ArrayList<>();
