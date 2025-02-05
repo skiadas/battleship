@@ -5,7 +5,6 @@ import core.Cell;
 /** converts a cell state to an emoji representation as a unicode string */
 public class EmojiConvert implements Convert {
     /**
-     *
      * @param cell is a location in the grid
      * @return a visuale repesnation of mac compuers
      */
