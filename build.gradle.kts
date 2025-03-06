@@ -46,6 +46,9 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.mockito:mockito-core:5.14.2")
 //    implementation("org.jline:jline:3.27.1")
+    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    runtimeOnly("org.hibernate:hibernate-core:6.6.7.Final")
+    runtimeOnly("com.h2database:h2:2.2.220")
 }
 
 tasks.withType(Test::class) {
