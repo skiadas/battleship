@@ -1,8 +1,14 @@
 package core;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
 public class Coord {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     private static final List<String> ALPHABET =
             List.of(
@@ -15,6 +21,11 @@ public class Coord {
     public Coord(int row, int col) {
         this.row = row;
         this.col = col;
+    }
+
+    public Coord() {
+        row = 0;
+        col = 0;
     }
 
     public static int asInt(String row) {
