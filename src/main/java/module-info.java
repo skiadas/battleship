@@ -1,3 +1,3 @@
 module battleship.main {
-    requires java.logging;
+    requires jakarta.persistence;
 }
