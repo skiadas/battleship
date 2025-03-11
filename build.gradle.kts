@@ -25,8 +25,12 @@ jlink {
     imageName = "${project.name}-${version}"
     imageZip = layout.buildDirectory.file("distributions/${imageName}.zip")
     options.addAll(listOf("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages"))
+    addExtraDependencies("jakarta.persistence")
     launcher {
         name = "battleship"
+    }
+    mergedModule {
+        requires("jakarta.persistence")
     }
 }
 

@@ -1,7 +1,6 @@
 package core;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity

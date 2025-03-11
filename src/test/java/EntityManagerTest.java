@@ -7,7 +7,7 @@ public class EntityManagerTest {
     private EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
 
     @Test
-        public void test() {
+    public void test() {
         EntityManager em = factory.createEntityManager();
     }
 }
