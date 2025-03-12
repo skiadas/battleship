@@ -16,19 +16,19 @@ public class Ship {
     }
 
     /** The starting coordinate of the ship */
-    private Coord startcoordinate;
+    private final Coord startcoordinate;
 
     /** Length of the Ship object */
-    private int size;
+    private final int size;
 
     /** the directions its facing like horizontal and vertical */
-    private Direction direction;
+    private final Direction direction;
 
     /** Name of the ship e.g. Battleship */
-    private String name;
+    private final String name;
 
     /** The coordinates of the whole ship */
-    private List<Coord> coordList;
+    private final List<Coord> coordList;
 
     public Ship(Coord coordinate, int size, Direction direction, String name) {
         this.startcoordinate = coordinate;
