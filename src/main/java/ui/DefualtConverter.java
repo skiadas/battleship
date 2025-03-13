@@ -3,7 +3,11 @@ package ui;
 import core.Cell;
 
 /** converts a cell state to a visual representation as a string */
-public class DefualtConvert implements Convert {
+public class DefualtConverter implements Converter {
+    /**
+     * @param cell is a location in the grid
+     * @return a visulale respentaion of the cell for all computers
+     */
     @Override
     public String convert(final Cell cell) {
         if (cell.cellIsHit()) {

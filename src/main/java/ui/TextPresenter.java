@@ -11,15 +11,18 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class TextPresenter implements Presenter {
-    private Convert convert = new DefualtConvert();
+    private Converter converter = new DefualtConverter();
     private PrintStream output;
     private InputStream input;
     private Scanner scanner;
 
     // Terminal terminal;
 
-    public void setConvert(Convert convert) {
-        this.convert = convert;
+    /**
+     * @param converter
+     */
+    public void setConvert(Converter converter) {
+        this.converter = converter;
     }
 
     public TextPresenter() throws IOException {
@@ -74,12 +77,12 @@ public class TextPresenter implements Presenter {
     }
 
     private void setCellAs(Cell cell) {
-        String symbol = convert.convert(cell);
+        String symbol = converter.convert(cell);
         output.print("  " + symbol + " ");
     }
 
     private String convert(Cell cell) {
-        return convert.convert(cell);
+        return converter.convert(cell);
     }
 
     public Coord askForCoordinate(Grid g) {
