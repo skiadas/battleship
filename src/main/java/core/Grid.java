@@ -60,7 +60,6 @@ public class Grid {
         int row = coordinate.row - 1;
         int col = coordinate.col - 1;
         Cell cell = cells[row][col];
-        ;
         if (isCellShip(cell)) {
             return cell.hasBeenShot() ? CellStatus.ShipHit : CellStatus.ShipUnrevealed;
         } else {
@@ -69,14 +68,11 @@ public class Grid {
     }
 
     private boolean isCellShip(Cell cell) {
-
         for (Ship ship : shipList) {
             for (Coord shipCoord : ship.getCoordList()) {
                 int row = shipCoord.row - 1;
                 int col = shipCoord.col - 1;
                 Cell shipCell = cells[row][col];
-                ;
-                ;
                 if (cell == shipCell) {
                     return true;
                 }
