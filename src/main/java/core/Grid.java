@@ -149,9 +149,12 @@ public class Grid {
     }
 
     public void shoot(Coord coordinate) {
+        int row = coordinate.row - 1;
+        int col = coordinate.col - 1;
+        Cell shipCell = cells[row][col];
         CellStatus targetStatus = getStatus(coordinate);
         if (!targetStatus.equals(CellStatus.ShipHit)) {
-            targetStatus = CellStatus.ShipHit;
+            shipCell.setAsShot();
         } else {
             return;
         }
