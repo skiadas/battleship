@@ -40,11 +40,13 @@ public class TextPresenter implements Presenter {
         this.scanner = new Scanner(input);
     }
 
+    @Override
     public void displayMessage(String s) {
         //        terminal.writer().println(s);
         output.println(s);
     }
 
+    @Override
     public void displayGrid(Grid g) {
         // These gets us the dimensions of the grid
         int numOfRows = g.numRows();
@@ -81,6 +83,7 @@ public class TextPresenter implements Presenter {
         output.print("  " + symbol + " ");
     }
 
+    @Override
     public Coord askForCoordinate(Grid g) {
         Scanner scanner = new Scanner(input);
         while (true) {
@@ -95,6 +98,7 @@ public class TextPresenter implements Presenter {
         }
     }
 
+    @Override
     public void displayOptions(String prompt, Map<String, Runnable> choices) {
         output.println(prompt);
         printOptions(choices);
