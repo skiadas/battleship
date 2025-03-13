@@ -75,9 +75,9 @@ class GridTest {
 
     @Test
     public void whenShootingAndNotAlreadyShotChangeCellToShot() {
-        Cell shootCell = testGrid.getCell(new Coord(2, 2));
         testGrid.shoot(new Coord(2, 2));
-        assertTrue(shootCell.hasBeenShot());
+        CellStatus shootCellStatus = testGrid.getStatus(new Coord(2, 2));
+        assertEquals(shootCellStatus, CellStatus.ShipHit);
     }
 
     @Test
