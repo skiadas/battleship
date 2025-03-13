@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Grid {
+
     private final int rows;
     private final int cols;
 
@@ -55,6 +56,35 @@ public class Grid {
         return cells[row][col];
     }
 
+    public CellStatus getStatus(Coord coordinate) {
+        int row = coordinate.row - 1;
+        int col = coordinate.col - 1;
+        Cell cell = cells[row][col];
+        ;
+        if (isCellShip(cell)) {
+            return cell.hasBeenShot() ? CellStatus.ShipHit : CellStatus.ShipUnrevealed;
+        } else {
+            return cell.hasBeenShot() ? CellStatus.Empty : CellStatus.Unknown;
+        }
+    }
+
+    private boolean isCellShip(Cell cell) {
+
+        for (Ship ship : shipList) {
+            for (Coord shipCoord : ship.getCoordList()) {
+                int row = shipCoord.row - 1;
+                int col = shipCoord.col - 1;
+                Cell shipCell = cells[row][col];
+                ;
+                ;
+                if (cell == shipCell) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public int numRows() {
         return rows;
     }
@@ -89,7 +119,7 @@ public class Grid {
         for (Ship ship : shipList) {
             List<Coord> coords = ship.getCoordList();
             for (Coord coord : coords) {
-                if (!this.getCell(coord).cellIsHit()) {
+                if (!this.getStatus(coord).equals(CellStatus.ShipHit)) {
                     return false;
                 }
             }
@@ -103,7 +133,7 @@ public class Grid {
 
     public boolean isShipSunk(Ship ship) {
         for (Coord coord : ship.getCoordList()) {
-            if (!(getCell(coord).cellIsHit())) {
+            if (!this.getStatus(coord).equals(CellStatus.ShipHit)) {
                 return false;
             }
         }
@@ -119,9 +149,9 @@ public class Grid {
     }
 
     public void shoot(Coord coordinate) {
-        Cell target = getCell(coordinate);
-        if (!target.hasBeenShot()) {
-            target.setAsShot();
+        CellStatus targetStatus = getStatus(coordinate);
+        if (!targetStatus.equals(CellStatus.ShipHit)) {
+            targetStatus = CellStatus.ShipHit;
         } else {
             return;
         }
