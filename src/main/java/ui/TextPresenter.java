@@ -81,10 +81,6 @@ public class TextPresenter implements Presenter {
         output.print("  " + symbol + " ");
     }
 
-    private String convert(Cell cell) {
-        return converter.convert(cell);
-    }
-
     public Coord askForCoordinate(Grid g) {
         Scanner scanner = new Scanner(input);
         while (true) {
