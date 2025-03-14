@@ -87,11 +87,11 @@ class GridTest {
     }
 
     @Test
-    public void allShipsAreParticallyShot() {
+    public void allShipsArePartiallyShot() {
         Cell cell1 = testGrid.getCell(new Coord(5, 1));
-        cell1.setAsHit();
+        cell1.setAsShot();
         Cell cell2 = testGrid.getCell(new Coord(1, 5));
-        cell2.setAsHit();
+        cell2.setAsShot();
         boolean result = testGrid.allShipsAreSunk();
         assertFalse(result);
     }
@@ -103,7 +103,7 @@ class GridTest {
             List<Coord> coords = ship.getCoordList();
             for (Coord coord : coords) {
                 testGrid.getCell(coord).setAsShot();
-                testGrid.getCell(coord).setAsHit();
+                testGrid.getCell(coord).setAsShot();
             }
         }
         boolean result = testGrid.allShipsAreSunk();
@@ -129,9 +129,6 @@ class GridTest {
         Coord c1 = new Coord(1, 2);
         Coord c2 = new Coord(2, 2);
         Coord c3 = new Coord(3, 2);
-        testGrid.getCell(c1).setAsShip();
-        testGrid.getCell(c2).setAsShip();
-        testGrid.getCell(c3).setAsShip();
         testGrid.getCell(c1).setAsShot();
         testGrid.getCell(c2).setAsShot();
         assertFalse(testGrid.isShipSunk(ship));
