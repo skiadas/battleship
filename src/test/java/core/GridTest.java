@@ -21,19 +21,19 @@ class GridTest {
     public void aNewGridHasNoneNullCells() {
         for (int i = 1; i <= testGrid.numRows(); i++) {
             for (int j = 1; j <= testGrid.numCols(); j++) {
-                assertNotEquals(null, testGrid.getCell(new Coord(i, j)));
+                assertNotEquals(null, testGrid.getStatus(new Coord(i, j)));
             }
         }
     }
 
     @Test
     public void aNewGridCorrectlyMarksShips() {
-        assertTrue(testGrid.getCell(new Coord(1, 2)).hasShip());
-        assertTrue(testGrid.getCell(new Coord(2, 2)).hasShip());
-        assertTrue(testGrid.getCell(new Coord(3, 2)).hasShip());
-        assertTrue(testGrid.getCell(new Coord(5, 2)).hasShip());
-        assertFalse(testGrid.getCell(new Coord(4, 2)).hasShip());
-        assertFalse(testGrid.getCell(new Coord(1, 1)).hasShip());
+        assertEquals(CellStatus.ShipUnrevealed, testGrid.getStatus(new Coord(1, 2)));
+        assertEquals(CellStatus.ShipUnrevealed, testGrid.getStatus(new Coord(2, 2)));
+        assertEquals(CellStatus.ShipUnrevealed, testGrid.getStatus(new Coord(3, 2)));
+        assertEquals(CellStatus.ShipUnrevealed, testGrid.getStatus(new Coord(5, 2)));
+        assertEquals(CellStatus.Unknown, testGrid.getStatus(new Coord(4, 2)));
+        assertEquals(CellStatus.Unknown, testGrid.getStatus(new Coord(1, 1)));
     }
 
     @Test

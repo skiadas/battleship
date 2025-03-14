@@ -1,6 +1,7 @@
 package ui;
 
 import core.Cell;
+import core.CellStatus;
 
 /** converts a cell state to a visual representation as a string */
 public class DefualtConverter implements Converter {
@@ -18,6 +19,26 @@ public class DefualtConverter implements Converter {
             return "*";
         } else if (cell.isEmpty()) {
             return "0";
+        }
+        return "";
+    }
+
+    @Override
+    public String convert(final CellStatus cellStatus) {
+        switch (cellStatus) {
+            case ShipHit -> {
+                return "X";
+            }
+            case ShipUnrevealed -> {
+                return "~";
+            }
+            case Empty -> {
+                return "*";
+            }
+
+            case Unknown -> {
+                return "0";
+            }
         }
         return "";
     }

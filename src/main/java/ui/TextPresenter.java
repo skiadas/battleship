@@ -1,9 +1,6 @@
 package ui;
 
-import core.Cell;
-import core.Coord;
-import core.Grid;
-import core.Presenter;
+import core.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -71,8 +68,9 @@ public class TextPresenter implements Presenter {
         for (int row = 1; row <= numOfRows; row++) {
             output.print(" " + (letter[row]) + " ");
             for (int col = 1; col <= numOfCols; col++) {
-                Cell cell = g.getCell(new Coord(row, col));
-                setCellAs(cell);
+                CellStatus cellStatus = g.getStatus(new Coord(row, col));
+                String symbol = converter.convert(cellStatus);
+                output.print("  " + symbol + " ");
             }
             output.print("\n\n");
         }
