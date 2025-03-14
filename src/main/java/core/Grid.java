@@ -30,7 +30,6 @@ public class Grid {
         }
 
         this.shipList.addAll(shipList);
-
     }
 
     public Grid(int rows, int cols) {
