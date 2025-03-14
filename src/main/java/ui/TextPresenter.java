@@ -76,11 +76,6 @@ public class TextPresenter implements Presenter {
         }
     }
 
-    private void setCellAs(Cell cell) {
-        String symbol = converter.convert(cell);
-        output.print("  " + symbol + " ");
-    }
-
     @Override
     public Coord askForCoordinate(Grid g) {
         Scanner scanner = new Scanner(input);

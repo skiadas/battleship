@@ -31,23 +31,10 @@ public class Grid {
 
         this.shipList.addAll(shipList);
 
-        markAllShipCells();
     }
 
     public Grid(int rows, int cols) {
         this(rows, cols, new ArrayList<>());
-    }
-
-    private void markAllShipCells() {
-        for (Ship ship : shipList) {
-            markShipCells(ship);
-        }
-    }
-
-    private void markShipCells(Ship ship) {
-        for (Coord coord : ship.getCoordList()) {
-            getCell(coord).setAsShip();
-        }
     }
 
     public Cell getCell(Coord coordinate) {
@@ -108,7 +95,6 @@ public class Grid {
 
     public void addShip(Ship ship) {
         shipList.add(ship);
-        markShipCells(ship);
     }
 
     public boolean allShipsAreSunk() {
