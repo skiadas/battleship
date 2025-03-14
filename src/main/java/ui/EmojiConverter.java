@@ -1,6 +1,7 @@
 package ui;
 
 import core.Cell;
+import core.CellStatus;
 
 /** converts a cell state to an emoji representation as a unicode string */
 public class EmojiConverter implements Converter {
@@ -18,6 +19,26 @@ public class EmojiConverter implements Converter {
             return "\uD83D\uDEAB";
         } else if (cell.isEmpty()) {
             return "\uD83C\uDF0A";
+        }
+        return "";
+    }
+
+    @Override
+    public String convert(final CellStatus cellStatus) {
+        switch (cellStatus) {
+            case ShipHit -> {
+                return "☠";
+            }
+            case ShipUnrevealed -> {
+                return "\uD83D\uDEA2";
+            }
+            case Empty -> {
+                return "\uD83D\uDEAB";
+            }
+
+            case Unknown -> {
+                return "\uD83C\uDF0A";
+            }
         }
         return "";
     }
