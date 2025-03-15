@@ -2,9 +2,9 @@ package ui;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import core.Cell;
 import core.Coord;
 import core.Grid;
+import core.Ship;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -142,8 +142,10 @@ class TextPresenterTest {
         TestIOProvider ioProvider = TestIOProvider.withInput("");
         Grid grid = new Grid(2, 3);
         TextPresenter presenter = new TextPresenter(ioProvider);
-        Cell cell = grid.getCell(new Coord(1, 1));
-        cell.setAsHit();
+        Coord a = new Coord(1, 1);
+        Ship bShip = new Ship(a, 1, Ship.Direction.HORIZONTAL, "a");
+        grid.addShip(bShip);
+        grid.shoot(a);
         presenter.displayGrid(grid);
         String expected =
                 """
@@ -162,12 +164,23 @@ class TextPresenterTest {
         TestIOProvider ioProvider = TestIOProvider.withInput("");
         Grid g = new Grid(5, 7);
         TextPresenter presenter = new TextPresenter(ioProvider);
-
-        g.getCell(new Coord(1, 1)).setAsHit();
-        g.getCell(new Coord(4, 5)).setAsHit();
-        g.getCell(new Coord(5, 7)).setAsHit();
-        g.getCell(new Coord(2, 6)).setAsMiss();
-        g.getCell(new Coord(3, 2)).setAsShip();
+        Coord a = new Coord(4, 5);
+        Ship aShip = new Ship(a, 1, Ship.Direction.HORIZONTAL, "a");
+        g.addShip(aShip);
+        g.shoot(a);
+        Coord b = new Coord(1, 1);
+        Ship bShip = new Ship(b, 1, Ship.Direction.HORIZONTAL, "b");
+        g.addShip(bShip);
+        g.shoot(b);
+        Coord c = new Coord(5, 7);
+        Ship cShip = new Ship(c, 1, Ship.Direction.HORIZONTAL, "c");
+        g.addShip(cShip);
+        g.shoot(c);
+        Coord d = new Coord(2, 6);
+        g.shoot(d);
+        Coord e = new Coord(3, 2);
+        Ship eShip = new Ship(e, 1, Ship.Direction.HORIZONTAL, "e");
+        g.addShip(eShip);
 
         presenter.displayGrid(g);
         String expected =
