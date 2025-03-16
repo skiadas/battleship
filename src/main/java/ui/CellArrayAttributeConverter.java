@@ -28,6 +28,22 @@ public class CellArrayAttributeConverter implements AttributeConverter<Cell[][],
 
     @Override
     public Cell[][] convertToEntityAttribute(byte[] bytes) {
-        return new Cell[0][];
+        int n = bytes[0];
+        int k = bytes[1];
+        Cell[][] result = new Cell[n][k];
+        int byteIndex = 2;
+        int bitIndex = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < k; j++) {
+                boolean shot = (bytes[byteIndex] & (1 << (7 - bitIndex))) != 0;
+                result[i][j] = new Cell(shot);
+                bitIndex++;
+                if (bitIndex == 8) {
+                    bitIndex = 0;
+                    byteIndex++;
+                }
+            }
+        }
+        return result;
     }
 }
