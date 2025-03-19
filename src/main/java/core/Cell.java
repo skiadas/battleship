@@ -1,67 +1,46 @@
-// Raihan and Jonah
 package core;
 
+/** Cell is the individual spots of the grid. Used in the {@link Grid} class. */
 public class Cell {
+    /** Keeps track of if the cell was shot. */
     private boolean shot;
-    private boolean ship;
 
+    /** Sets the default cell to having a false boolean shot. */
     public Cell() {
         this.shot = false;
-        this.ship = false;
     }
 
-    public Cell(boolean ship) {
-        this.ship = ship;
-        this.shot = false;
-    }
-
-    public boolean isEmpty() {
-        return !this.hasShip();
-    }
-
-    // the cell has been shot
+    /**
+     * @return the indication that the cell has been shot
+     */
     public boolean hasBeenShot() {
         return this.shot;
     }
 
-    // the cell contains a ship
-    public boolean hasShip() {
-        return this.ship;
-    }
-
-    // the shot on this cell resulted in a hit
+    /**
+     * @return the status of the cell
+     */
     public boolean cellIsHit() {
-        return this.hasBeenShot() && this.hasShip();
+        return this.hasBeenShot();
     }
 
-    // shot on this cell resulted in a miss
-    public boolean cellIsMiss() {
-        return this.hasBeenShot() && !this.hasShip();
-    }
-
-    // Mark the cell as shot
+    /** marks the cell as shot */
     public void setAsShot() {
         this.shot = true;
     }
 
-    // Place a ship in the cell
-    public void setAsShip() {
-        this.ship = true;
-    }
-
+    /** marks the cell as hit if a ship resided inside it */
     public void setAsHit() {
-        this.ship = true;
         this.shot = true;
     }
 
+    /** marks the cell as missed */
     public void setAsMiss() {
         this.shot = true;
-        this.ship = false;
     }
 
-    // Reset the cell to its initial state
+    /** resets the cell to its initial state */
     public void reset() {
         this.shot = false;
-        this.ship = false;
     }
 }
