@@ -36,7 +36,10 @@ public class CellArrayAttributeConverter implements AttributeConverter<Cell[][],
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < k; j++) {
                 boolean shot = (bytes[byteIndex] & (1 << (7 - bitIndex))) != 0;
-                result[i][j] = new Cell(shot);
+                result[i][j] = new Cell();
+                if (shot) {
+                    result[i][j].setAsShot();
+                }
                 bitIndex++;
                 if (bitIndex == 8) {
                     bitIndex = 0;
