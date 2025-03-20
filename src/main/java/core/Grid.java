@@ -65,29 +65,12 @@ public class Grid {
      */
     public CellStatus getStatus(final Coord coordinate) {
         final Cell cell = getCell(coordinate);
-        if (isCellShip(cell)) {
-            return cell.hasBeenShot() ? CellStatus.ShipHit : CellStatus.ShipUnrevealed;
-        } else {
-            return cell.hasBeenShot() ? CellStatus.Empty : CellStatus.Unknown;
-        }
-    }
-
-    /**
-     * checks whether the cell has a ship placed inside it
-     *
-     * @param cell is the individual spot on the grid
-     * @return true or false if cell contains ship
-     */
-    private boolean isCellShip(final Cell cell) {
         for (final Ship ship : shipList) {
-            for (final Coord shipCoord : ship.getCoordList()) {
-                final Cell shipCell = getCell(shipCoord);
-                if (cell.equals(shipCell)) {
-                    return true;
-                }
+            if (ship.containsCoord(coordinate)) {
+                return cell.hasBeenShot() ? CellStatus.ShipHit : CellStatus.ShipUnrevealed;
             }
         }
-        return false;
+        return cell.hasBeenShot() ? CellStatus.Empty : CellStatus.Unknown;
     }
 
     /**
