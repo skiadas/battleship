@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class GridTest {
 
-    Grid testGrid = new Grid(5, 5, Grid.defaultShipsFor5x5());
+    Grid testGrid = new Grid(5, 5, DefaultGridBuilder.defaultShipsFor5x5());
 
     @Test
     public void aNewGridHasProvidedDimensions() {
