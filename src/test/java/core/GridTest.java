@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class GridTest {
 
-    Grid testGrid = new Grid(5, 5, Grid.defaultShipsFor5x5());
+    Grid testGrid = new Grid(5, 5, DefaultGridBuilder.defaultShipsFor5x5());
 
     @Test
     public void aNewGridHasProvidedDimensions() {
@@ -132,7 +132,7 @@ class GridTest {
         testGrid.getCell(c1).setAsShot();
         testGrid.getCell(c2).setAsShot();
         assertFalse(testGrid.isShipSunk(ship));
-        testGrid.getCell(c3).setAsShot();
+        testGrid.shoot(c3);
         assertTrue(testGrid.isShipSunk(ship));
     }
 }
