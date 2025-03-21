@@ -131,8 +131,8 @@ class GridTest {
         Coord c3 = new Coord(3, 2);
         testGrid.getCell(c1).setAsShot();
         testGrid.getCell(c2).setAsShot();
-        assertFalse(testGrid.isShipSunk(ship));
+        assertFalse(testGrid.isShipSunk(c3, true).isPresent());
         testGrid.shoot(c3);
-        assertTrue(testGrid.isShipSunk(ship));
+        assertTrue(testGrid.isShipSunk(c3, true).isPresent());
     }
 }

@@ -2,9 +2,10 @@ package core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /** Grid is the cells marked as rows and cols. Adds ship functionality. */
-public class Grid {
+public class Grid implements Bounding {
 
     /** The cells in a given horizontal line */
     private final int rows;
@@ -128,21 +129,6 @@ public class Grid {
     }
 
     /**
-     * checks if ship is sunk
-     *
-     * @param ship is a ship in list of ships
-     * @return boolean value for ship status
-     */
-    public boolean isShipSunk(final Ship ship) {
-        for (final Coord coord : ship.getCoordList()) {
-            if (!this.getStatus(coord).equals(CellStatus.ShipHit)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * checks if ship is on grid
      *
      * @return true if ship is on grid, false if not
@@ -153,6 +139,27 @@ public class Grid {
             if (coord.col < 1 || coord.col > numCols()) return false;
         }
         return true;
+    }
+
+    public Optional<Ship> isShipSunk(Coord coordinate, Boolean onlyReturnSunk) {
+        Optional<Ship> optionalShip = Optional.empty();
+        for(Ship ship : this.shipList) {
+            if (ship.containsCoord(coordinate)) {
+                optionalShip = Optional.of(ship);
+                break;
+            }
+        }
+        if(optionalShip.isEmpty()) return optionalShip;
+        for (final Coord coord : optionalShip.get().getCoordList()) {
+            if (!this.getStatus(coord).equals(CellStatus.ShipHit)) {
+                if(!onlyReturnSunk) {
+                    return optionalShip;
+                } else {
+                    return Optional.empty();
+                }
+            }
+        }
+        return optionalShip;
     }
 
     /** changes status of given cell to shoot */

@@ -2,6 +2,7 @@ package core;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class GameDriver {
     private final Presenter presenter;
@@ -32,13 +33,11 @@ public class GameDriver {
     }
 
     private void reportIfShipSunk(Grid grid, Coord playerInputCoord) {
-        for (Ship ship : grid.getShipList()) {
-            for (Coord c : ship.getCoordList()) {
-                if (c.isEqual(playerInputCoord) && grid.isShipSunk(ship)) {
-                    presenter.displayMessage("You sunk your opponents " + ship.getName() + "!");
-                }
-            }
+        Optional<Ship> currShip = grid.isShipSunk(playerInputCoord, true);
+        if (currShip.isPresent()) {
+            presenter.displayMessage("You sunk your opponents " + currShip.get().getName() + "!");
         }
+
     }
 
     private void stopGame() {
