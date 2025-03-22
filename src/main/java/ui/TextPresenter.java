@@ -82,7 +82,7 @@ public class TextPresenter implements Presenter {
         while (true) {
             String User_input = scanner.next();
             Coord coordinate = new Coord(User_input);
-            boolean answer = g.isValid(coordinate);
+            boolean answer = coordinate.isWithin(g);
             if (answer) {
                 return coordinate;
             } else {

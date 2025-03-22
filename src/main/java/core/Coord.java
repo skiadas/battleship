@@ -52,4 +52,10 @@ public class Coord {
     public Coord shiftBy(int verticalDistance, int horizontalDistance) {
         return new Coord(this.row + verticalDistance, this.col + horizontalDistance);
     }
+
+    public Boolean isWithin(Bounding bounding) {
+        final int numRows = bounding.numRows();
+        final int numCols = bounding.numCols();
+        return row - 1 >= 0 && row - 1 < numRows && col - 1 >= 0 && col - 1 < numCols;
+    }
 }

@@ -2,9 +2,10 @@ package core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /** Grid is the cells marked as rows and cols. Adds ship functionality. */
-public class Grid {
+public class Grid implements Bounding {
 
     /** The cells in a given horizontal line */
     private final int rows;
@@ -46,15 +47,9 @@ public class Grid {
         this(rows, cols, new ArrayList<>());
     }
 
-    /**
-     * grabs a cell out of a given coordinate
-     *
-     * @param coordinate is a tuple of a given location
-     * @return the coordinate of the given cell
-     */
-    private Cell getCell(final Coord coordinate) {
-        final int row = coordinate.row - 1;
-        final int col = coordinate.col - 1;
+    private Cell getCell(Coord coordinate) {
+        int row = coordinate.row - 1;
+        int col = coordinate.col - 1;
         return cells[row][col];
     }
 
@@ -89,17 +84,6 @@ public class Grid {
      */
     public int numCols() {
         return cols;
-    }
-
-    /**
-     * checks if the given coordinate is valid given the grid size
-     *
-     * @return the valid coordinate
-     */
-    public boolean isValid(final Coord coordinate) {
-        final int row = coordinate.row - 1;
-        final int col = coordinate.col - 1;
-        return row >= 0 && row < rows && col >= 0 && col < cols;
     }
 
     /** adds ship to list */
@@ -159,6 +143,27 @@ public class Grid {
             if (coord.col < 1 || coord.col > numCols()) return false;
         }
         return true;
+    }
+
+    public Optional<Ship> isShipSunk(Coord coordinate, Boolean onlyReturnSunk) {
+        Optional<Ship> optionalShip = Optional.empty();
+        for (Ship ship : this.shipList) {
+            if (ship.containsCoord(coordinate)) {
+                optionalShip = Optional.of(ship);
+                break;
+            }
+        }
+        if (optionalShip.isEmpty()) return optionalShip;
+        for (final Coord coord : optionalShip.get().getCoordList()) {
+            if (!this.getStatus(coord).equals(CellStatus.ShipHit)) {
+                if (!onlyReturnSunk) {
+                    return optionalShip;
+                } else {
+                    return Optional.empty();
+                }
+            }
+        }
+        return optionalShip;
     }
 
     /** changes status of given cell to shoot */
