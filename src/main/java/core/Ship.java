@@ -93,4 +93,17 @@ public class Ship {
         }
         return false;
     }
+
+    /**
+     * checks if ship is on grid
+     *
+     * @return true if ship is on grid, false if not
+     */
+    public boolean isWithinBounds(Bounding bounding) {
+        for (Coord coord : this.coordList) {
+            if (coord.row < 1 || coord.row > bounding.numRows()) return false;
+            if (coord.col < 1 || coord.col > bounding.numCols()) return false;
+        }
+        return true;
+    }
 }

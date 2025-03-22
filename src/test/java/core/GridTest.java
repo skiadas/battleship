@@ -99,14 +99,14 @@ class GridTest {
     @Test
     public void isShipOnGridReturnsTrueWhenShipIsShipOnGrid() {
         List<Ship> ships = testGrid.getShipList();
-        assertTrue(testGrid.isShipOnGrid(ships.get(0)));
+        assertTrue(ships.get(0).isWithinBounds(testGrid));
     }
 
     @Test
     public void isShipOnGridReturnsFalseWhenShipIsShipOnGrid() {
         Coord c1 = new Coord(1, 2);
         Ship otherShip = new Ship(c1, 6, VERTICAL, "BattleShip");
-        assertFalse(testGrid.isShipOnGrid(otherShip));
+        assertFalse(otherShip.isWithinBounds(testGrid));
     }
 
     @Test

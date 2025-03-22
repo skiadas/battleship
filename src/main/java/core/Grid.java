@@ -17,7 +17,7 @@ public class Grid implements Bounding {
     private Cell[][] cells;
 
     /** Holds the list of different ships */
-    private final List<Ship> shipList = new ArrayList<>();
+    private final ShipList shipList;
 
     /**
      * creates the grid given the 3 parameters
@@ -39,7 +39,7 @@ public class Grid implements Bounding {
             }
         }
 
-        this.shipList.addAll(shipList);
+        this.shipList = new ShipList(shipList);
     }
 
     /** sets the row and col */
@@ -60,7 +60,7 @@ public class Grid implements Bounding {
      */
     public CellStatus getStatus(final Coord coordinate) {
         final Cell cell = getCell(coordinate);
-        for (final Ship ship : shipList) {
+        for (final Ship ship : shipList.getShips()) {
             if (ship.containsCoord(coordinate)) {
                 return cell.hasBeenShot() ? CellStatus.ShipHit : CellStatus.ShipUnrevealed;
             }
@@ -88,7 +88,7 @@ public class Grid implements Bounding {
 
     /** adds ship to list */
     public void addShip(final Ship ship) {
-        shipList.add(ship);
+        shipList.addShip(ship);
     }
 
     /**
@@ -97,7 +97,7 @@ public class Grid implements Bounding {
      * @return boolean answer for check
      */
     public boolean allShipsAreSunk() {
-        for (final Ship ship : shipList) {
+        for (final Ship ship : shipList.getShips()) {
             final List<Coord> coords = ship.getCoordList();
             for (final Coord coord : coords) {
                 if (!this.getStatus(coord).equals(CellStatus.ShipHit)) {
@@ -114,7 +114,7 @@ public class Grid implements Bounding {
      * @return the list of ships
      */
     public List<Ship> getShipList() {
-        return shipList;
+        return shipList.getShips();
     }
 
     /**
@@ -132,22 +132,9 @@ public class Grid implements Bounding {
         return true;
     }
 
-    /**
-     * checks if ship is on grid
-     *
-     * @return true if ship is on grid, false if not
-     */
-    public boolean isShipOnGrid(final Ship ship) {
-        for (final Coord coord : ship.getCoordList()) {
-            if (coord.row < 1 || coord.row > numRows()) return false;
-            if (coord.col < 1 || coord.col > numCols()) return false;
-        }
-        return true;
-    }
-
     public Optional<Ship> isShipSunk(Coord coordinate, Boolean onlyReturnSunk) {
         Optional<Ship> optionalShip = Optional.empty();
-        for (Ship ship : this.shipList) {
+        for (Ship ship : this.getShipList()) {
             if (ship.containsCoord(coordinate)) {
                 optionalShip = Optional.of(ship);
                 break;
