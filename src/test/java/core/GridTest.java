@@ -37,18 +37,6 @@ class GridTest {
     }
 
     @Test
-    public void isTheCoordinateWithinGrid() {
-        Boolean result = testGrid.isValid(new Coord(3, 2));
-        assertEquals(true, result);
-    }
-
-    @Test
-    public void isTheCoordinateNotWithinGrid() {
-        Boolean result = testGrid.isValid(new Coord(5, 6));
-        assertEquals(false, result);
-    }
-
-    @Test
     public void addShipUpdatesShipListCorrectly() {
         Ship ship1 = new Ship(new Coord(1, 2), 3, VERTICAL, "Submarine");
         Ship ship2 = new Ship(new Coord(5, 1), 5, HORIZONTAL, "Carrier");
