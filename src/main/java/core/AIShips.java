@@ -36,7 +36,7 @@ class AIShips {
         int tries = 0;
         while (currentShip != shipSpecs.length) {
             final Ship newShip = getShip(shipSpecs[currentShip]);
-            if (grid.isShipOnGrid(newShip) && !conflicts(newShip)) {
+            if (newShip.isWithinBounds(grid) && !conflicts(newShip)) {
                 ships.add(newShip);
                 currentShip += 1;
                 tries = 0;
