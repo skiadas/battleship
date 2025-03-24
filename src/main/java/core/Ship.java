@@ -1,5 +1,6 @@
 package core;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,12 @@ import java.util.List;
  * face, Describes the length of the ship Has the starting coordinate of the ship, Helps identify
  * the name of different ships,
  */
+@Entity
 public class Ship {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     public enum Direction {
         HORIZONTAL,
@@ -16,19 +22,22 @@ public class Ship {
     }
 
     /** The starting coordinate of the ship */
-    private final Coord startcoordinate;
+    @OneToOne
+    @JoinColumn(name = "startcoordinate_id")
+    private Coord startcoordinate;
 
     /** Length of the Ship object */
-    private final int size;
+    @Column private int size;
 
     /** the directions its facing like horizontal and vertical */
-    private final Direction direction;
+    @Column private Direction direction;
 
     /** Name of the ship e.g. Battleship */
-    private final String name;
+    @Column(nullable = false)
+    private String name;
 
     /** The coordinates of the whole ship */
-    private final List<Coord> coordList;
+    @Transient private List<Coord> coordList;
 
     public Ship(Coord coordinate, int size, Direction direction, String name) {
         this.startcoordinate = coordinate;
@@ -37,6 +46,8 @@ public class Ship {
         this.name = name;
         this.coordList = genCoordList();
     }
+
+    public Ship() {}
 
     public int getSize() {
         return size;
