@@ -2,7 +2,9 @@ package ui;
 
 import core.Coord;
 import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
+@Converter(autoApply = true)
 public class CoordToStringAttributeConverter implements AttributeConverter<Coord, String> {
     @Override
     public String convertToDatabaseColumn(Coord coord) {
