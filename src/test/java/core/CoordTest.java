@@ -21,7 +21,7 @@ class CoordTest {
     @Test
     public void getCoordStringReturnsCorrectString() {
         Coord coord = new Coord(1, 2);
-        assertEquals("(A, 2)", coord.getCoordString());
+        assertEquals("A2", coord.getCoordString());
     }
 
     @Test

@@ -3,10 +3,10 @@ package core;
 import jakarta.persistence.*;
 import java.util.List;
 
-@Entity
+//@Entity
 public class Coord {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private static final List<String> ALPHABET =
@@ -36,7 +36,7 @@ public class Coord {
     }
 
     public String getCoordString() {
-        return "(" + asString(row) + ", " + col + ")";
+        return asString(row) + col;
     }
 
     public Coord(String rowCol) {
