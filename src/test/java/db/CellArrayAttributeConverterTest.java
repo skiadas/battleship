@@ -1,8 +1,9 @@
-package ui;
+package db;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import core.Cell;
+import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 class CellArrayAttributeConverterTest {
@@ -65,24 +66,46 @@ class CellArrayAttributeConverterTest {
         assertEquals(85, bytes[2]);
     }
 
-    //    @Test
-    //    void convertToEntityAttribute() {
-    //        byte[] bytes = {2,1,3};
-    //
-    //        CellArrayAttributeConverter converter = new CellArrayAttributeConverter();
-    //
-    //        Cell[][] cells = converter.convertToEntityAttribute(bytes);
-    //
-    //        Cell[][] actualCells = {{new Cell()},{new Cell()}};
-    //        for (Cell[] cell : actualCells) {
-    //            for (Cell c : cell) {
-    //                c.setAsShot();
-    //            }
-    //        }
-    //
-    //        assertEquals(actualCells.length,cells.length);
-    //        assertEquals(actualCells[0][0].hasBeenShot(), cells[0][0].hasBeenShot());
-    //        assertEquals(actualCells[1][0].hasBeenShot(), cells[1][0].hasBeenShot());
-    //
-    //    }
+    @Test
+    void convertToEntityAttribute() {
+        byte[] bytes = {2, 1, 3};
+
+        CellArrayAttributeConverter converter = new CellArrayAttributeConverter();
+
+        Cell[][] cells = converter.convertToEntityAttribute(bytes);
+
+        Cell[][] actualCells = {{new Cell()}, {new Cell()}};
+        for (Cell[] cell : actualCells) {
+            for (Cell c : cell) {
+                c.setAsShot();
+            }
+        }
+
+        assertEquals(actualCells.length, cells.length);
+        assertEquals(actualCells[0][0].hasBeenShot(), cells[0][0].hasBeenShot());
+        assertEquals(actualCells[1][0].hasBeenShot(), cells[1][0].hasBeenShot());
+    }
+
+    @Test
+    void convertBackAndForthBetweenFunctionsUsingRandomValues() {
+        Random random = new Random();
+        int randomRow = random.nextInt(1, 5);
+        int randomCol = random.nextInt(1, 5);
+        Cell[][] cells = new Cell[randomRow][randomCol];
+        for (int i = 0; i < randomRow; i++) {
+            for (int j = 0; j < randomCol; j++) {
+                cells[i][j] = new Cell();
+                cells[i][j].setAsShot();
+            }
+        }
+
+        CellArrayAttributeConverter converter = new CellArrayAttributeConverter();
+        byte[] bytes = converter.convertToDatabaseColumn(cells);
+        Cell[][] newCells = converter.convertToEntityAttribute(bytes);
+
+        assertEquals(cells.length, newCells.length);
+        assertEquals(bytes[0], randomRow);
+        assertEquals(bytes[1], randomCol);
+        assertEquals(bytes[0], newCells[0].length);
+    }
 }

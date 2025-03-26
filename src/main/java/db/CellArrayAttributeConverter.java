@@ -1,4 +1,4 @@
-package ui;
+package db;
 
 import core.Cell;
 import jakarta.persistence.AttributeConverter;
@@ -35,7 +35,7 @@ public class CellArrayAttributeConverter implements AttributeConverter<Cell[][],
         int bitIndex = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < k; j++) {
-                boolean shot = (bytes[byteIndex] & (1 << (7 - bitIndex))) != 0;
+                boolean shot = (bytes[byteIndex] & (1 << bitIndex)) != 0;
                 result[i][j] = new Cell();
                 if (shot) {
                     result[i][j].setAsShot();
