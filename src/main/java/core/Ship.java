@@ -1,10 +1,9 @@
 package core;
 
 import jakarta.persistence.*;
-import ui.CoordToStringAttributeConverter;
-
 import java.util.ArrayList;
 import java.util.List;
+import ui.CoordToStringAttributeConverter;
 
 /**
  * Represents a ship object for the {@link Grid} class, Describes the different directions it can
@@ -32,8 +31,8 @@ public class Ship {
     }
 
     /** The starting coordinate of the ship */
-    //@OneToOne
-    //@JoinColumn(name = "startcoordinate_id")
+    // @OneToOne
+    // @JoinColumn(name = "startcoordinate_id")
     @Convert(converter = CoordToStringAttributeConverter.class)
     private Coord startcoordinate;
 
@@ -48,9 +47,8 @@ public class Ship {
     private String name;
 
     /** The coordinates of the whole ship */
-    //@Convert(converter = CoordToStringAttributeConverter.class)
-    @Transient
-    private List<Coord> coordList;
+    // @Convert(converter = CoordToStringAttributeConverter.class)
+    @Transient private List<Coord> coordList;
 
     public Ship(Coord coordinate, int size, Direction direction, String name) {
         this.startcoordinate = coordinate;
