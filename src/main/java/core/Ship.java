@@ -1,6 +1,8 @@
 package core;
 
 import jakarta.persistence.*;
+import ui.CoordToStringAttributeConverter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,10 @@ import java.util.List;
 @Entity
 public class Ship {
 
+    public Long getId() {
+        return id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,9 +27,14 @@ public class Ship {
         VERTICAL
     }
 
+    public Coord getStartcoordinate() {
+        return startcoordinate;
+    }
+
     /** The starting coordinate of the ship */
-    @OneToOne
-    @JoinColumn(name = "startcoordinate_id")
+    //@OneToOne
+    //@JoinColumn(name = "startcoordinate_id")
+    @Convert(converter = CoordToStringAttributeConverter.class)
     private Coord startcoordinate;
 
     /** Length of the Ship object */
@@ -37,7 +48,9 @@ public class Ship {
     private String name;
 
     /** The coordinates of the whole ship */
-    @Transient private List<Coord> coordList;
+    //@Convert(converter = CoordToStringAttributeConverter.class)
+    @Transient
+    private List<Coord> coordList;
 
     public Ship(Coord coordinate, int size, Direction direction, String name) {
         this.startcoordinate = coordinate;

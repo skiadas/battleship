@@ -3,12 +3,16 @@ package core;
 import static core.Ship.Direction.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.junit.jupiter.api.Test;
 
 class ShipTest {
     Coord coordinate = new Coord(1, 2);
     Ship ship = new Ship(coordinate, 3, VERTICAL, "BattleShip");
     Grid grid = new Grid(5, 5);
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
 
     @Test
     public void getStartRowReturnsStartRowFromField() {
@@ -59,5 +63,20 @@ class ShipTest {
         Coord c1 = new Coord(4, 4);
         Ship otherShip = new Ship(c1, 2, VERTICAL, "BattleShip");
         assertFalse(ship.isOverlapping(otherShip));
+    }
+
+    @Test
+    public void shipStartCoordStoredInDatabase() {
+        EntityManager entityManager = factory.createEntityManager();
+        entityManager.getTransaction().begin();
+        System.out.println(ship.getStartcoordinate().getCoordString());
+        entityManager.persist(ship);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        EntityManager entityManager2 = factory.createEntityManager();
+        entityManager2.getTransaction().begin();
+        Ship ship2 = entityManager2.find(Ship.class, ship.getId());
+        assertTrue(ship.getStartcoordinate().isEqual(ship2.getStartcoordinate()));
+        assertTrue(ship2.getName().equals(ship.getName()));
     }
 }
