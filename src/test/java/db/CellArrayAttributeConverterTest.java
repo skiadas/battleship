@@ -95,7 +95,6 @@ class CellArrayAttributeConverterTest {
         for (int i = 0; i < randomRow; i++) {
             for (int j = 0; j < randomCol; j++) {
                 cells[i][j] = new Cell();
-                cells[i][j].setAsShot();
             }
         }
 
@@ -106,6 +105,6 @@ class CellArrayAttributeConverterTest {
         assertEquals(cells.length, newCells.length);
         assertEquals(bytes[0], randomRow);
         assertEquals(bytes[1], randomCol);
-        assertEquals(bytes[0], newCells[0].length);
+        assertEquals(bytes[0], newCells.length);
     }
 }
