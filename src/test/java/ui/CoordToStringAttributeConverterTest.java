@@ -12,7 +12,7 @@ class CoordToStringAttributeConverterTest {
         CoordToStringAttributeConverter converter = new CoordToStringAttributeConverter();
         Coord coord = new Coord(1, 0);
         String result = converter.convertToDatabaseColumn(coord);
-        assertEquals("(A, 0)", result);
+        assertEquals("A0", result);
     }
 
     @Test
@@ -20,7 +20,7 @@ class CoordToStringAttributeConverterTest {
         CoordToStringAttributeConverter converter = new CoordToStringAttributeConverter();
         Coord coord = new Coord(3, 7);
         String result = converter.convertToDatabaseColumn(coord);
-        assertEquals("(C, 7)", result);
+        assertEquals("C7", result);
     }
 
     @Test
