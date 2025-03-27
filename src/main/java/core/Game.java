@@ -16,6 +16,10 @@ public class Game {
 
         public abstract Player nextPLayer();
     }
+
+    enum State {
+         Turn, Over;
+    }
     
     private Grid first;
 
@@ -47,8 +51,8 @@ public class Game {
     public void shoot(Coord coordinate) {
         getEnemyGrid().shoot(coordinate);
     }
-
-     public boolean isOver() {
+    
+    public boolean isOver() {
         return state == State.Over;
     }
 
@@ -56,6 +60,19 @@ public class Game {
         return getEnemyGrid().isShipSunk(ship);
     }
 
+    private boolean areAllEnemyShipsSunk(){
+        List<Ship> ships = getEnemyGrid().getShipList();
+        for (Ship ship : ships) {
+            if (!(isShipSunk(ship))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Grid getEnemyGrid() {
+        return this.current.equals(Player.First) ? this.second : this.first;
+    }
+
 
 }
-
