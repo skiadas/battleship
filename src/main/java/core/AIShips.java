@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * AIShips is an AI that places ships on an empty grid. This Class is Used with the {@link Grid}
- * class and {@link ShipSpec} class in order to function
+  *AIShips is an AI, places ships on an empty grid,
+ *  Used with the {@link Grid}
+  *class and {@link ShipSpec} class
  */
 class AIShips {
     private final Grid grid;
@@ -36,7 +37,7 @@ class AIShips {
         int tries = 0;
         while (currentShip != shipSpecs.length) {
             final Ship newShip = getShip(shipSpecs[currentShip]);
-            if (newShip.isWithinBounds(grid) && !conflicts(newShip)) {
+            if (grid.isShipOnGrid(newShip) && !conflicts(newShip)) {
                 ships.add(newShip);
                 currentShip += 1;
                 tries = 0;
