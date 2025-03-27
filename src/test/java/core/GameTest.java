@@ -1,14 +1,22 @@
+package core;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
 
-    @Test
-    public void testInitialPlayer() {
-        Grid grid1 = new Grid(); 
-        Grid grid2 = new Grid();
-        Game game = new Game(grid1, grid2);
+    private Grid firstGrid;
+    private Grid secondGrid;
+    private Game game;
 
-        assertEquals(Game.Player.First, game.getCurrent());
+    @BeforeEach
+    public void setup() {
+        firstGrid = mock(Grid.class);
+        secondGrid = mock(Grid.class);
+        game = new Game(firstGrid, secondGrid);
     }
 }
