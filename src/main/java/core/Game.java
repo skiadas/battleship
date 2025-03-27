@@ -25,6 +25,10 @@ public class Game {
         public abstract Player nextPlayer();
     }
 
+    public Player getCurrent() {
+        return current;
+    }
+
     public Grid getFirst() {
         return first;
     }
