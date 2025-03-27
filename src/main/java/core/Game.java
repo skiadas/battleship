@@ -48,6 +48,14 @@ public class Game {
         getEnemyGrid().shoot(coordinate);
     }
 
-    
+     public boolean isOver() {
+        return state == State.Over;
+    }
+
+    public boolean isShipSunk(final Ship ship) {
+        return getEnemyGrid().isShipSunk(ship);
+    }
+
+
 }
 
