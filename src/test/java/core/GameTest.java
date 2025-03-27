@@ -19,4 +19,22 @@ public class GameTest {
         secondGrid = mock(Grid.class);
         game = new Game(firstGrid, secondGrid);
     }
+
+     @Test
+    public void testInitialPlayerIsFirst() {
+        assertEquals(Game.Player.First, game.getCurrent());
+    }
+
+    @Test
+    public void testNextSwitchesToSecondPlayer() {
+        game.next();
+        assertEquals(Game.Player.Second, game.getCurrent());
+    }
+
+    @Test
+    public void testNextSwitchesBackToFirstPlayer() {
+        game.next(); // First -> Second
+        game.next(); // Second -> First
+        assertEquals(Game.Player.First, game.getCurrent());
+    }
 }
