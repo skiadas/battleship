@@ -33,5 +33,21 @@ public class Game {
     public Player getCurrent() {
         return current;
     }
+
+    public void next() {
+        if (state == State.Over) {
+            throw new RuntimeException("You should not be calling next if the game is over");
+        } else if (areAllEnemyShipsSunk()){
+            state = State.Over;
+        } else {
+            current = current.nextPLayer();
+        }
+    }
+
+    public void shoot(Coord coordinate) {
+        getEnemyGrid().shoot(coordinate);
+    }
+
+    
 }
 
