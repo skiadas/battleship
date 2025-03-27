@@ -3,13 +3,14 @@ package core;
 import java.util.List;
 
 public class Game {
-     enum Player {
+    enum Player {
         First {
-            public Player nextPLayer(){
+            public Player nextPLayer() {
                 return Player.Second;
             }
-        }, Second {
-            public Player nextPLayer(){
+        },
+        Second {
+            public Player nextPLayer() {
                 return Player.First;
             }
         };
@@ -18,9 +19,10 @@ public class Game {
     }
 
     enum State {
-         Turn, Over;
+        Turn,
+        Over;
     }
-    
+
     private Grid first;
 
     private Grid second;
@@ -41,7 +43,7 @@ public class Game {
     public void next() {
         if (state == State.Over) {
             throw new RuntimeException("You should not be calling next if the game is over");
-        } else if (areAllEnemyShipsSunk()){
+        } else if (areAllEnemyShipsSunk()) {
             state = State.Over;
         } else {
             current = current.nextPLayer();
@@ -51,7 +53,7 @@ public class Game {
     public void shoot(Coord coordinate) {
         getEnemyGrid().shoot(coordinate);
     }
-    
+
     public boolean isOver() {
         return state == State.Over;
     }
@@ -60,7 +62,7 @@ public class Game {
         return getEnemyGrid().isShipSunk(ship);
     }
 
-    private boolean areAllEnemyShipsSunk(){
+    private boolean areAllEnemyShipsSunk() {
         List<Ship> ships = getEnemyGrid().getShipList();
         for (Ship ship : ships) {
             if (!(isShipSunk(ship))) {
@@ -73,6 +75,4 @@ public class Game {
     private Grid getEnemyGrid() {
         return this.current.equals(Player.First) ? this.second : this.first;
     }
-
-
 }
