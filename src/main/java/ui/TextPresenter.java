@@ -97,12 +97,12 @@ public class TextPresenter implements Presenter {
             if (num == 0) {
                 output.print("   ");
             } else {
-                output.printf(" %2d ", (num));
+                output.printf(" %2d ", num);
             }
         }
         output.print("\n\n");
         for (int row = 1; row <= numOfRows; row++) {
-            output.print(" " + (letter[row]) + " ");
+            output.print(" " + letter[row] + " ");
             for (int col = 1; col <= numOfCols; col++) {
                 CellStatus cellStatus = g.getStatus(new Coord(row, col));
                 String symbol = converter.convert(cellStatus);
@@ -122,8 +122,8 @@ public class TextPresenter implements Presenter {
     public Coord askForCoordinate(Grid g) {
         Scanner scanner = new Scanner(input);
         while (true) {
-            String User_input = scanner.next();
-            Coord coordinate = new Coord(User_input);
+            String userInput = scanner.next();
+            Coord coordinate = new Coord(userInput);
             boolean answer = coordinate.isWithin(g);
             if (answer) {
                 return coordinate;
