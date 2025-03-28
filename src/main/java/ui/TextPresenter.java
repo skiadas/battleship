@@ -69,7 +69,7 @@ public class TextPresenter implements Presenter {
      * @param s
      */
     @Override
-    public void displayMessage(String s) {
+    public void displayMessage(final String s) {
         //        terminal.writer().println(s);
         output.println(s);
     }
