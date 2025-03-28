@@ -69,7 +69,6 @@ class ShipTest {
     public void shipStartCoordStoredInDatabase() {
         EntityManager entityManager = factory.createEntityManager();
         entityManager.getTransaction().begin();
-        System.out.println(ship.getStartcoordinate().getCoordString());
         entityManager.persist(ship);
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -78,5 +77,6 @@ class ShipTest {
         Ship ship2 = entityManager2.find(Ship.class, ship.getId());
         assertTrue(ship.getStartcoordinate().isEqual(ship2.getStartcoordinate()));
         assertTrue(ship2.getName().equals(ship.getName()));
+        entityManager2.close();
     }
 }
