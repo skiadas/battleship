@@ -34,7 +34,9 @@ public class GameDriver {
                 presenter.displayMessage("Insert a coordinate to shoot!");
                 Coord playerInputCoord = presenter.askForCoordinate(grid);
                 grid.shoot(playerInputCoord);
+                game.shoot(playerInputCoord);
                 reportIfShipSunk(grid, playerInputCoord);
+                game.next();
             } else {
                 break;
             }
