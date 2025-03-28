@@ -3,21 +3,20 @@ package core;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class GameTest {
-
+    private DefaultGridBuilder gridBuilder;
     private Grid firstGrid;
     private Grid secondGrid;
     private Game game;
 
     @BeforeEach
     public void setup() {
-        firstGrid = mock(Grid.class);
-        secondGrid = mock(Grid.class);
+        firstGrid = gridBuilder.defaultGrid();
+        secondGrid = gridBuilder.defaultGrid();
         game = new Game(firstGrid, secondGrid);
     }
 
@@ -26,14 +25,13 @@ public class GameTest {
         assertEquals(Game.Player.First, game.getCurrent());
     }
 
-    @Disabled
+    //    @Disabled
     @Test
     public void testNextSwitchesToSecondPlayer() {
         game.next();
         assertEquals(Game.Player.Second, game.getCurrent());
     }
 
-    @Disabled
     @Test
     public void testNextSwitchesBackToFirstPlayer() {
         game.next(); // First -> Second
@@ -45,7 +43,8 @@ public class GameTest {
     public void testShootDelegatesToEnemyGrid() {
         Coord coord = new Coord("A1");
         game.shoot(coord);
-        verify(secondGrid).shoot(coord); // secondGrid is enemy for Player.First
+        CellStatus status = secondGrid.getStatus(coord);
+        assertEquals(CellStatus.Empty, status);
     }
 
     @Test
@@ -55,28 +54,39 @@ public class GameTest {
 
     @Test
     public void testNextSetsGameOverWhenAllEnemyShipsSunk() {
-        Ship ship = mock(Ship.class);
-        when(secondGrid.getShipList()).thenReturn(Collections.singletonList(ship));
-        when(secondGrid.isShipSunk(ship)).thenReturn(true);
-
+        List<Ship> shiplist = secondGrid.getShipList();
+        for (Ship ship : shiplist) {
+            for (Coord cord : ship.getCoordList()) {
+                secondGrid.shoot(cord);
+            }
+        }
         game.next();
         assertTrue(game.isOver());
     }
 
     @Test
     public void testNextThrowsIfGameIsOver() {
-        Ship ship = mock(Ship.class);
-        when(secondGrid.getShipList()).thenReturn(Collections.singletonList(ship));
-        when(secondGrid.isShipSunk(ship)).thenReturn(true);
-
+        List<Ship> shiplist = secondGrid.getShipList();
+        for (Ship ship : shiplist) {
+            for (Coord cord : ship.getCoordList()) {
+                secondGrid.shoot(cord);
+            }
+        }
         game.next(); // Ends the game
         assertThrows(RuntimeException.class, () -> game.next());
     }
 
     @Test
     public void testIsShipSunkDelegatesToEnemyGrid() {
-        Ship ship = mock(Ship.class);
-        game.isShipSunk(ship);
-        verify(secondGrid).isShipSunk(ship);
+        List<Ship> shiplist = secondGrid.getShipList();
+        Boolean shipSunk = true;
+        for (Ship ship : shiplist) {
+            for (Coord cord : ship.getCoordList()) {
+                game.shoot(cord);
+            }
+            shipSunk = game.isShipSunk(ship);
+            break;
+        }
+        assertTrue(shipSunk);
     }
 }
