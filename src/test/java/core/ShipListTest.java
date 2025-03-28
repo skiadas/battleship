@@ -1,15 +1,12 @@
 package core;
 
+import static core.Ship.Direction.VERTICAL;
+import static org.junit.jupiter.api.Assertions.*;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static core.Ship.Direction.VERTICAL;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ShipListTest {
     Coord coordinate = new Coord(1, 2);
@@ -19,7 +16,7 @@ class ShipListTest {
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("test");
 
     @Test
-    public void addShipListToDatabase(){
+    public void addShipListToDatabase() {
         ShipList shipListOriginal = new ShipList();
         shipListOriginal.addShip(ship1);
         shipListOriginal.addShip(ship2);
@@ -37,12 +34,16 @@ class ShipListTest {
         em2.close();
 
         assertEquals(shipListOriginal.getShips().size(), shipList2.getShips().size());
-        assertEquals(shipListOriginal.getShips().get(0).getName(), shipList2.getShips().get(0).getName());
-        assertEquals(shipListOriginal.getShips().get(1).getName(), shipList2.getShips().get(1).getName());
+        assertEquals(
+                shipListOriginal.getShips().get(0).getName(),
+                shipList2.getShips().get(0).getName());
+        assertEquals(
+                shipListOriginal.getShips().get(1).getName(),
+                shipList2.getShips().get(1).getName());
     }
 
     @Test
-    public void addEmptyShipListToDatabase(){
+    public void addEmptyShipListToDatabase() {
         ShipList shipListOriginal = new ShipList();
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
@@ -59,7 +60,4 @@ class ShipListTest {
         assertEquals(shipListOriginal.getShips().size(), shipList2.getShips().size());
         assertEquals(shipListOriginal.getShips().isEmpty(), shipList2.getShips().isEmpty());
     }
-
-
-
 }
