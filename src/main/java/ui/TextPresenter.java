@@ -28,7 +28,7 @@ public class TextPresenter implements Presenter {
      *
      * @param converter
      */
-    public void setConvert(Converter converter) {
+    public void setConvert(final Converter converter) {
         this.converter = converter;
     }
 
@@ -47,7 +47,7 @@ public class TextPresenter implements Presenter {
      *
      * @param provider
      */
-    public TextPresenter(IOProvider provider) {
+    public TextPresenter(final IOProvider provider) {
         this(provider.out(), provider.in());
     }
 
@@ -57,7 +57,7 @@ public class TextPresenter implements Presenter {
      * @param output
      * @param input
      */
-    public TextPresenter(PrintStream output, InputStream input) {
+    public TextPresenter(final PrintStream output, final InputStream input) {
         this.output = output;
         this.input = input;
         this.scanner = new Scanner(input);
@@ -80,14 +80,14 @@ public class TextPresenter implements Presenter {
      * @param g
      */
     @Override
-    public void displayGrid(Grid g) {
+    public void displayGrid(final Grid g) {
         // These gets us the dimensions of the grid
-        int numOfRows = g.numRows();
-        int numOfCols = g.numCols();
+        final int numOfRows = g.numRows();
+        final int numOfCols = g.numCols();
         // create a if statement that throws a error if numRows()
         // return a number higher then 26
 
-        String[] letter = {
+        final String[] letter = {
             " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
             "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         };
@@ -104,8 +104,8 @@ public class TextPresenter implements Presenter {
         for (int row = 1; row <= numOfRows; row++) {
             output.print(" " + letter[row] + " ");
             for (int col = 1; col <= numOfCols; col++) {
-                CellStatus cellStatus = g.getStatus(new Coord(row, col));
-                String symbol = converter.convert(cellStatus);
+                final CellStatus cellStatus = g.getStatus(new Coord(row, col));
+                final String symbol = converter.convert(cellStatus);
                 output.print("  " + symbol + " ");
             }
             output.print("\n\n");
@@ -119,12 +119,12 @@ public class TextPresenter implements Presenter {
      * @return
      */
     @Override
-    public Coord askForCoordinate(Grid g) {
-        Scanner scanner = new Scanner(input);
+    public Coord askForCoordinate(final Grid g) {
+        final Scanner scanner = new Scanner(input);
         while (true) {
-            String userInput = scanner.next();
-            Coord coordinate = new Coord(userInput);
-            boolean answer = coordinate.isWithin(g);
+            final String userInput = scanner.next();
+            final Coord coordinate = new Coord(userInput);
+            final boolean answer = coordinate.isWithin(g);
             if (answer) {
                 return coordinate;
             } else {
@@ -140,13 +140,13 @@ public class TextPresenter implements Presenter {
      * @param choices
      */
     @Override
-    public void displayOptions(String prompt, Map<String, Runnable> choices) {
+    public void displayOptions(final String prompt, final Map<String, Runnable> choices) {
         output.println(prompt);
         printOptions(choices);
 
         while (true) {
             output.print("Enter your choice: ");
-            String userInput = scanner.nextLine();
+            final String userInput = scanner.nextLine();
             if (choices.containsKey(userInput)) {
                 choices.get(userInput).run();
                 return;
@@ -161,7 +161,7 @@ public class TextPresenter implements Presenter {
      *
      * @param choices
      */
-    private void printOptions(Map<String, Runnable> choices) {
+    private void printOptions(final Map<String, Runnable> choices) {
         choices.keySet().forEach(option -> output.println("- " + option));
     }
 }
