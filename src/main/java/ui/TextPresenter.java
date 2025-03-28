@@ -7,42 +7,78 @@ import java.io.PrintStream;
 import java.util.Map;
 import java.util.Scanner;
 
+/** Displays the grid */
 public class TextPresenter implements Presenter {
+    /** Sets the default converter */
     private Converter converter = new DefualtConverter();
+
+    /** Outputs user input */
     private PrintStream output;
+
+    /** takes user input */
     private InputStream input;
+
+    /** reads input data */
     private Scanner scanner;
 
     // Terminal terminal;
 
     /**
+     * Converts to something visible on the grid
+     *
      * @param converter
      */
     public void setConvert(Converter converter) {
         this.converter = converter;
     }
 
+    /**
+     * Displays text
+     *
+     * @throws IOException
+     */
     public TextPresenter() throws IOException {
         //        terminal = TerminalBuilder.builder().providers("ffm").build();
         this(System.out, System.in);
     }
 
+    /**
+     * Uses IOProvider interface
+     *
+     * @param provider
+     */
     public TextPresenter(IOProvider provider) {
         this(provider.out(), provider.in());
     }
 
+    /**
+     * Takes user input and displays it
+     *
+     * @param output
+     * @param input
+     */
     public TextPresenter(PrintStream output, InputStream input) {
         this.output = output;
         this.input = input;
         this.scanner = new Scanner(input);
     }
 
+    /**
+     * Shows message to user
+     *
+     * @param s
+     */
     @Override
     public void displayMessage(String s) {
         //        terminal.writer().println(s);
         output.println(s);
     }
 
+    /**
+     * Displays grid with labels for the cols and rows along with symbols
+     *
+     * @param g
+     */
     @Override
     public void displayGrid(Grid g) {
         // These gets us the dimensions of the grid
@@ -76,6 +112,12 @@ public class TextPresenter implements Presenter {
         }
     }
 
+    /**
+     * Prompts user for Coordinate selection and checks if it is within the Grid
+     *
+     * @param g
+     * @return
+     */
     @Override
     public Coord askForCoordinate(Grid g) {
         Scanner scanner = new Scanner(input);
@@ -91,6 +133,12 @@ public class TextPresenter implements Presenter {
         }
     }
 
+    /**
+     * Asks user their grid spot to shoot and makes sure its on the grid
+     *
+     * @param prompt
+     * @param choices
+     */
     @Override
     public void displayOptions(String prompt, Map<String, Runnable> choices) {
         output.println(prompt);
@@ -108,6 +156,11 @@ public class TextPresenter implements Presenter {
         }
     }
 
+    /**
+     * Prints a list of choices for the user
+     *
+     * @param choices
+     */
     private void printOptions(Map<String, Runnable> choices) {
         choices.keySet().forEach(option -> output.println("- " + option));
     }
