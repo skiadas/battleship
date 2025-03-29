@@ -105,7 +105,56 @@ public class TextPresenter implements Presenter {
             output.print(" " + letter[row] + " ");
             for (int col = 1; col <= numOfCols; col++) {
                 final CellStatus cellStatus = g.getStatus(new Coord(row, col));
-                final String symbol = converter.convert(cellStatus);
+                final String symbol = converter.convert(cellStatus, true);
+                output.print("  " + symbol + " ");
+            }
+            output.print("\n\n");
+        }
+    }
+
+    public void displayGame(final Grid player, final Grid enemy) {
+        // These gets us the dimensions of the grid
+        final int numOfRows = player.numRows();
+        final int numOfCols = player.numCols();
+        // create a if statement that throws a error if numRows()
+        // return a number higher then 26
+
+        final String[] letter = {
+            " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
+            "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+        };
+        String titles = "   Your Grid:";
+        for (int cols = 1; cols <= numOfCols; cols++) {
+            titles += "  ";
+        }
+        titles += "Enemy Grid:\n\n";
+        output.print(titles);
+        // display both grids first line
+        for (int i = 0; i <= 1; i++) {
+            for (int num = 0; num <= numOfCols; num++) {
+                if (num == 0) {
+                    output.print("   ");
+                    if (i == 1) {
+                        output.print("     ");
+                    }
+                } else {
+                    output.printf(" %2d ", num);
+                }
+            }
+        }
+        output.print("\n\n");
+        for (int row = 1; row <= numOfRows; row++) {
+            output.print(" " + letter[row] + " ");
+            for (int col = 1; col <= numOfCols; col++) {
+                final CellStatus cellStatus = player.getStatus(new Coord(row, col));
+                final String symbol = converter.convert(cellStatus, true);
+                output.print("  " + symbol + " ");
+            }
+            output.print("  |  ");
+            output.print(" " + letter[row] + " ");
+            for (int col = 1; col <= numOfCols; col++) {
+                final CellStatus cellStatus = enemy.getStatus(new Coord(row, col));
+                final String symbol = converter.convert(cellStatus, false);
                 output.print("  " + symbol + " ");
             }
             output.print("\n\n");

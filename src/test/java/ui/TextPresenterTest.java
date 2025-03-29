@@ -200,4 +200,33 @@ class TextPresenterTest {
                         """;
         assertEquals(expected, ioProvider.getOutput());
     }
+
+    @Test
+    void displayGameOn3x3Grids() {
+        Grid grid = new Grid(3, 3);
+        TestIOProvider ioProvider = TestIOProvider.withInput("B3\n");
+        TextPresenter presenter = new TextPresenter(ioProvider);
+        Coord a = new Coord(1, 1);
+        Ship bShip = new Ship(a, 2, Ship.Direction.HORIZONTAL, "a");
+        grid.addShip(bShip);
+        grid.shoot(a);
+        grid.shoot(new Coord(2, 1));
+        presenter.displayGame(grid, grid);
+        System.out.println(ioProvider.getOutput());
+    }
+
+    @Test
+    void displayGameOn5x5Grids() {
+        Grid grid = new Grid(5, 5);
+        Coord a = new Coord(1, 1);
+        Ship ship = new Ship(a, 2, Ship.Direction.HORIZONTAL, "a");
+        grid.addShip(ship);
+        grid.shoot(a);
+        Coord b = new Coord(3, 2);
+        grid.shoot(b);
+        TestIOProvider ioProvider = TestIOProvider.withInput("B5\n");
+        TextPresenter presenter = new TextPresenter(ioProvider);
+        presenter.displayGame(grid, grid);
+        System.out.println(ioProvider.getOutput());
+    }
 }

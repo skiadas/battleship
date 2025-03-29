@@ -8,5 +8,5 @@ public interface Converter {
      * @param cellStatus is the status of a cell on the grid
      * @return the visual representation off that cell
      */
-    String convert(CellStatus cellStatus);
+    String convert(CellStatus cellStatus, Boolean isPlayer);
 }
