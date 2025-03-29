@@ -1,7 +1,6 @@
 package core;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,21 +21,21 @@ public class GameTest {
 
     @Test
     public void testInitialPlayerIsFirst() {
-        assertEquals(Game.Player.First, game.getCurrent());
+        assertEquals(Game.Player.FIRST, game.getCurrent());
     }
 
     //    @Disabled
     @Test
     public void testNextSwitchesToSecondPlayer() {
         game.next();
-        assertEquals(Game.Player.Second, game.getCurrent());
+        assertEquals(Game.Player.SECOND, game.getCurrent());
     }
 
     @Test
     public void testNextSwitchesBackToFirstPlayer() {
         game.next(); // First -> Second
         game.next(); // Second -> First
-        assertEquals(Game.Player.First, game.getCurrent());
+        assertEquals(Game.Player.FIRST, game.getCurrent());
     }
 
     @Test
@@ -44,7 +43,7 @@ public class GameTest {
         Coord coord = new Coord("A1");
         game.shoot(coord);
         CellStatus status = secondGrid.getStatus(coord);
-        assertEquals(CellStatus.Empty, status);
+        assertEquals(CellStatus.EMPTY, status);
     }
 
     @Test

@@ -11,17 +11,17 @@ public class DefualtConverter implements Converter {
     @Override
     public String convert(final CellStatus cellStatus) {
         switch (cellStatus) {
-            case ShipHit -> {
+            case SHIP_HIT -> {
                 return "X";
             }
-            case ShipUnrevealed -> {
+            case SHIP_UNREVEALED -> {
                 return "~";
             }
-            case Empty -> {
+            case EMPTY -> {
                 return "*";
             }
 
-            case Unknown -> {
+            case UNKNOWN -> {
                 return "0";
             }
         }

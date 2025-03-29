@@ -28,12 +28,12 @@ class GridTest {
 
     @Test
     public void aNewGridCorrectlyMarksShips() {
-        assertEquals(CellStatus.ShipUnrevealed, testGrid.getStatus(new Coord(1, 2)));
-        assertEquals(CellStatus.ShipUnrevealed, testGrid.getStatus(new Coord(2, 2)));
-        assertEquals(CellStatus.ShipUnrevealed, testGrid.getStatus(new Coord(3, 2)));
-        assertEquals(CellStatus.ShipUnrevealed, testGrid.getStatus(new Coord(5, 2)));
-        assertEquals(CellStatus.Unknown, testGrid.getStatus(new Coord(4, 2)));
-        assertEquals(CellStatus.Unknown, testGrid.getStatus(new Coord(1, 1)));
+        assertEquals(CellStatus.SHIP_UNREVEALED, testGrid.getStatus(new Coord(1, 2)));
+        assertEquals(CellStatus.SHIP_UNREVEALED, testGrid.getStatus(new Coord(2, 2)));
+        assertEquals(CellStatus.SHIP_UNREVEALED, testGrid.getStatus(new Coord(3, 2)));
+        assertEquals(CellStatus.SHIP_UNREVEALED, testGrid.getStatus(new Coord(5, 2)));
+        assertEquals(CellStatus.UNKNOWN, testGrid.getStatus(new Coord(4, 2)));
+        assertEquals(CellStatus.UNKNOWN, testGrid.getStatus(new Coord(1, 1)));
     }
 
     @Test
@@ -65,7 +65,7 @@ class GridTest {
     public void whenShootingAndNotAlreadyShotChangeCellToShot() {
         testGrid.shoot(new Coord(2, 2));
         CellStatus shootCellStatus = testGrid.getStatus(new Coord(2, 2));
-        assertEquals(shootCellStatus, CellStatus.ShipHit);
+        assertEquals(shootCellStatus, CellStatus.SHIP_HIT);
     }
 
     @Test

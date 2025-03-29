@@ -11,17 +11,17 @@ public class EmojiConverter implements Converter {
     @Override
     public String convert(final CellStatus cellStatus) {
         switch (cellStatus) {
-            case ShipHit -> {
+            case SHIP_HIT -> {
                 return "☠";
             }
-            case ShipUnrevealed -> {
+            case SHIP_UNREVEALED -> {
                 return "\uD83D\uDEA2";
             }
-            case Empty -> {
+            case EMPTY -> {
                 return "\uD83D\uDEAB";
             }
 
-            case Unknown -> {
+            case UNKNOWN -> {
                 return "\uD83C\uDF0A";
             }
         }
