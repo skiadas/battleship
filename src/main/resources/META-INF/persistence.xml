@@ -14,9 +14,10 @@
     </persistence-unit>
 
     <persistence-unit name="test">
-        <class>
-            core.Ship
-        </class>
+        <class>core.Ship</class>
+        <class>core.ShipList</class>
+        <class>core.Grid</class>
+        <class>core.Coord</class>
         <properties>
             <property name="dialect" value="org.hibernate.dialect.H2dialect" />
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create" />
