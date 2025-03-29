@@ -9,13 +9,17 @@ public class DefualtConverter implements Converter {
      * @return a visulale respentaion of the cell for all computers
      */
     @Override
-    public String convert(final CellStatus cellStatus) {
+    public String convert(final CellStatus cellStatus, final Boolean isPlayer) {
         switch (cellStatus) {
             case SHIP_HIT -> {
                 return "X";
             }
             case SHIP_UNREVEALED -> {
-                return "~";
+                if (isPlayer) {
+                    return "~";
+                } else {
+                    return "0";
+                }
             }
             case EMPTY -> {
                 return "*";
