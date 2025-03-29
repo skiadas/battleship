@@ -62,10 +62,10 @@ public class Grid implements Bounding {
         final Cell cell = getCell(coordinate);
         for (final Ship ship : shipList.getShips()) {
             if (ship.containsCoord(coordinate)) {
-                return cell.hasBeenShot() ? CellStatus.ShipHit : CellStatus.ShipUnrevealed;
+                return cell.hasBeenShot() ? CellStatus.SHIP_HIT : CellStatus.SHIP_UNREVEALED;
             }
         }
-        return cell.hasBeenShot() ? CellStatus.Empty : CellStatus.Unknown;
+        return cell.hasBeenShot() ? CellStatus.EMPTY : CellStatus.UNKNOWN;
     }
 
     /**
@@ -100,7 +100,7 @@ public class Grid implements Bounding {
         for (final Ship ship : shipList.getShips()) {
             final List<Coord> coords = ship.getCoordList();
             for (final Coord coord : coords) {
-                if (!this.getStatus(coord).equals(CellStatus.ShipHit)) {
+                if (!this.getStatus(coord).equals(CellStatus.SHIP_HIT)) {
                     return false;
                 }
             }
@@ -125,7 +125,7 @@ public class Grid implements Bounding {
      */
     public boolean isShipSunk(final Ship ship) {
         for (final Coord coord : ship.getCoordList()) {
-            if (!this.getStatus(coord).equals(CellStatus.ShipHit)) {
+            if (!this.getStatus(coord).equals(CellStatus.SHIP_HIT)) {
                 return false;
             }
         }
@@ -142,7 +142,7 @@ public class Grid implements Bounding {
         }
         if (optionalShip.isEmpty()) return optionalShip;
         for (final Coord coord : optionalShip.get().getCoordList()) {
-            if (!this.getStatus(coord).equals(CellStatus.ShipHit)) {
+            if (!this.getStatus(coord).equals(CellStatus.SHIP_HIT)) {
                 if (!onlyReturnSunk) {
                     return optionalShip;
                 } else {
@@ -157,7 +157,7 @@ public class Grid implements Bounding {
     public void shoot(final Coord coordinate) {
         final Cell shipCell = getCell(coordinate);
         final CellStatus targetStatus = getStatus(coordinate);
-        if (!targetStatus.equals(CellStatus.ShipHit)) {
+        if (!targetStatus.equals(CellStatus.SHIP_HIT)) {
             shipCell.setAsShot();
         }
     }

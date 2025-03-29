@@ -2,36 +2,56 @@ package core;
 
 import java.util.List;
 
+/** Implements basic functions of a two-player game */
 public class Game {
+    /** The players of the Game */
     enum Player {
-        First {
+        FIRST {
+            @Override
             public Player nextPLayer() {
-                return Player.Second;
+                return Player.SECOND;
             }
         },
-        Second {
+        SECOND {
+            @Override
             public Player nextPLayer() {
-                return Player.First;
+                return Player.FIRST;
             }
         };
 
+        /**
+         * Function to switch turns between players
+         *
+         * @return next player's move
+         */
         public abstract Player nextPLayer();
     }
 
+    /** Describes game's state */
     enum State {
-        Turn,
-        Over;
+        TURN,
+        OVER;
     }
 
-    private Grid first;
+    /** Is the first player's {@link Grid} */
+    private final Grid first;
 
-    private Grid second;
+    /** Is the second player's {@link Grid} */
+    private final Grid second;
 
-    private Player current = Player.First;
+    /** The current player's turn */
+    private Player current = Player.FIRST;
 
-    private State state = State.Turn;
+    /** The {@link Game} current state */
+    private State state = State.TURN;
 
-    public Game(Grid first, Grid second) {
+    /**
+     * constructor of both player's {@link Grid}'s
+     *
+     * @param first first player's {@link Grid}
+     * @param second second player's {@link Grid}
+     */
+    public Game(final Grid first, final Grid second) {
         this.first = first;
         this.second = second;
     }
@@ -41,21 +61,21 @@ public class Game {
     }
 
     public void next() {
-        if (state == State.Over) {
+        if (state == State.OVER) {
             throw new RuntimeException("You should not be calling next if the game is over");
         } else if (areAllEnemyShipsSunk()) {
-            state = State.Over;
+            state = State.OVER;
         } else {
             current = current.nextPLayer();
         }
     }
 
-    public void shoot(Coord coordinate) {
+    public void shoot(final Coord coordinate) {
         getEnemyGrid().shoot(coordinate);
     }
 
     public boolean isOver() {
-        return state == State.Over;
+        return state == State.OVER;
     }
 
     public boolean isShipSunk(final Ship ship) {
@@ -63,8 +83,8 @@ public class Game {
     }
 
     private boolean areAllEnemyShipsSunk() {
-        List<Ship> ships = getEnemyGrid().getShipList();
-        for (Ship ship : ships) {
+        final List<Ship> ships = getEnemyGrid().getShipList();
+        for (final Ship ship : ships) {
             if (!(isShipSunk(ship))) {
                 return false;
             }
@@ -73,6 +93,6 @@ public class Game {
     }
 
     private Grid getEnemyGrid() {
-        return this.current.equals(Player.First) ? this.second : this.first;
+        return this.current.equals(Player.FIRST) ? this.second : this.first;
     }
 }
