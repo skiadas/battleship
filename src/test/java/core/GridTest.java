@@ -8,6 +8,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class GridTest {
@@ -126,7 +128,8 @@ class GridTest {
         assertTrue(testGrid.isShipSunk(ship));
     }
 
-    /*
+    //This tests needs to be corrected in the future.
+    @Disabled
     @Test
     public void gridStoredInDatabaseAndRestoredCorrectly() {
         EntityManager entityManager = factory.createEntityManager();
@@ -151,5 +154,4 @@ class GridTest {
         entityManager2.getTransaction().commit();
         entityManager2.close();
     }
-     */
 }

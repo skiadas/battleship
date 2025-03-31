@@ -8,7 +8,7 @@ import java.util.Optional;
 
 /** Grid is the cells marked as rows and cols. Adds ship functionality. */
 @Entity
-@Table(name = "Grid")
+@Table(name = "grid")
 public class Grid implements Bounding {
 
     @Id
@@ -18,11 +18,11 @@ public class Grid implements Bounding {
 
     /** The cells in a given horizontal line */
     @Column(name = "row")
-    private final int rows;
+    private int rows;
 
     /** The cells in a given vertical line */
     @Column(name = "cols")
-    private final int cols;
+    private int cols;
 
     /** The individual cell in a group of cells */
     @Convert(converter = CellArrayAttributeConverter.class)
