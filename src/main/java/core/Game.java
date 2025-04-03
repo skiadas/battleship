@@ -95,4 +95,8 @@ public class Game {
     public Grid getEnemyGrid() {
         return this.current.equals(Player.FIRST) ? this.second : this.first;
     }
+
+    public Grid getPlayerGrid() {
+        return this.current.equals(Player.FIRST) ? this.first : this.second;
+    }
 }
