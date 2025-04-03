@@ -40,8 +40,8 @@ public class GameDriver {
 
     private void displayWinner(Game game) {
         if (game.getCurrent() == Game.Player.FIRST)
-            presenter.displayMessage("Game is over! Winner is Player");
-        else presenter.displayMessage("Game is over! Winner is Enemy");
+            presenter.displayMessage("Game is over! Winner is Player 1");
+        else presenter.displayMessage("Game is over! Winner is Player 2");
     }
 
     private void reportIfShipSunk(Game game, Coord playerInputCoord) {
