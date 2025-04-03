@@ -31,16 +31,27 @@ public class GameDriver {
         while (true) {
             if (game.isOver() == false) {
                 presenter.displayGrid(grid);
+                presenter.displayGame(firstGrid, secondGrid);
                 presenter.displayMessage("Insert a coordinate to shoot!");
                 Coord playerInputCoord = presenter.askForCoordinate(grid);
                 grid.shoot(playerInputCoord);
                 game.shoot(playerInputCoord);
                 reportIfShipSunk(grid, playerInputCoord);
+                reportIfShipSunk(game, playerInputCoord);
                 game.next();
             } else {
                 break;
             }
         }
+        presenter.displayMessage(String.format("Game is over! Winner is %s", game.getCurrent()));
+    }
+
+    private void reportIfShipSunk(Game game, Coord playerInputCoord) {
+        Optional<Ship> currShip = game.getEnemyGrid().isShipSunk(playerInputCoord, true);
+        if (currShip.isPresent()) {
+            presenter.displayMessage("You sunk your opponents " + currShip.get().getName() + "!");
+        }
+
     }
 
     private void reportIfShipSunk(Grid grid, Coord playerInputCoord) {
