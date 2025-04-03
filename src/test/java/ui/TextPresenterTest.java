@@ -3,6 +3,7 @@ package ui;
 import static org.junit.jupiter.api.Assertions.*;
 
 import core.Coord;
+import core.Game;
 import core.Grid;
 import core.Ship;
 import java.io.ByteArrayInputStream;
@@ -211,7 +212,7 @@ class TextPresenterTest {
         grid.addShip(bShip);
         grid.shoot(a);
         grid.shoot(new Coord(2, 1));
-        presenter.displayGame(grid, grid);
+        presenter.displayGame(new Game(grid, grid));
         System.out.println(ioProvider.getOutput());
     }
 
@@ -226,7 +227,7 @@ class TextPresenterTest {
         grid.shoot(b);
         TestIOProvider ioProvider = TestIOProvider.withInput("B5\n");
         TextPresenter presenter = new TextPresenter(ioProvider);
-        presenter.displayGame(grid, grid);
+        presenter.displayGame(new Game(grid, grid));
         System.out.println(ioProvider.getOutput());
     }
 }
