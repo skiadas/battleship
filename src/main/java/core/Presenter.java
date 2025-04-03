@@ -10,4 +10,6 @@ public interface Presenter {
     Coord askForCoordinate(Grid g);
 
     void displayOptions(String prompt, Map<String, Runnable> choices);
+
+    void displayGame(Grid firstGrid, Grid secondGrid);
 }
