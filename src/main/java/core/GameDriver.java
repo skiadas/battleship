@@ -23,18 +23,14 @@ public class GameDriver {
     private void startGame() {
         presenter.displayMessage("Game is starting...");
         // User input for grid size
-        Grid grid = DefaultGridBuilder.defaultGrid();
-
         Grid firstGrid = gridBuilder.defaultGrid();
         Grid secondGrid = gridBuilder.defaultGrid();
         Game game = new Game(firstGrid, secondGrid); // Temporary default grids for both players
         while (true) {
             if (game.isOver() == false) {
-                presenter.displayGrid(grid);
                 presenter.displayGame(firstGrid, secondGrid);
                 presenter.displayMessage("Insert a coordinate to shoot!");
-                Coord playerInputCoord = presenter.askForCoordinate(grid);
-                grid.shoot(playerInputCoord);
+                Coord playerInputCoord = presenter.askForCoordinate(game.getEnemyGrid());
                 game.shoot(playerInputCoord);
                 reportIfShipSunk(game, playerInputCoord);
                 game.next();
@@ -42,7 +38,13 @@ public class GameDriver {
                 break;
             }
         }
-        presenter.displayMessage(String.format("Game is over! Winner is %s", game.getCurrent()));
+        displayWinner(game);
+    }
+
+    private void displayWinner(Game game) {
+        if (game.getCurrent() == Game.Player.FIRST)
+            presenter.displayMessage("Game is over! Winner is Player");
+        else presenter.displayMessage("Game is over! Winner is Enemy");
     }
 
     private void reportIfShipSunk(Game game, Coord playerInputCoord) {
@@ -50,7 +52,6 @@ public class GameDriver {
         if (currShip.isPresent()) {
             presenter.displayMessage("You sunk your opponents " + currShip.get().getName() + "!");
         }
-
     }
 
     private void stopGame() {
