@@ -92,7 +92,7 @@ public class Game {
         return true;
     }
 
-    private Grid getEnemyGrid() {
+    public Grid getEnemyGrid() {
         return this.current.equals(Player.FIRST) ? this.second : this.first;
     }
 }
