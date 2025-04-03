@@ -6,7 +6,6 @@ import java.util.Optional;
 
 public class GameDriver {
     private final Presenter presenter;
-    private DefaultGridBuilder gridBuilder;
 
     public GameDriver(Presenter presenter) {
         this.presenter = presenter;
@@ -23,17 +22,18 @@ public class GameDriver {
     private void startGame() {
         presenter.displayMessage("Game is starting...");
         // User input for grid size
-        Grid firstGrid = gridBuilder.defaultGrid();
-        Grid secondGrid = gridBuilder.defaultGrid();
-        Game game = new Game(firstGrid, secondGrid); // Temporary default grids for both players
+        Game game =
+                new Game(
+                        DefaultGridBuilder.defaultGrid(),
+                        DefaultGridBuilder
+                                .defaultGrid()); // Temporary default grids for both players
         while (!game.isOver()) {
-            presenter.displayGame(firstGrid, secondGrid);
+            presenter.displayGame(game);
             presenter.displayMessage("Insert a coordinate to shoot!");
             Coord playerInputCoord = presenter.askForCoordinate(game.getEnemyGrid());
             game.shoot(playerInputCoord);
             reportIfShipSunk(game, playerInputCoord);
             game.next();
-
         }
         displayWinner(game);
     }
