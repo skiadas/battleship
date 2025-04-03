@@ -36,7 +36,6 @@ public class GameDriver {
                 Coord playerInputCoord = presenter.askForCoordinate(grid);
                 grid.shoot(playerInputCoord);
                 game.shoot(playerInputCoord);
-                reportIfShipSunk(grid, playerInputCoord);
                 reportIfShipSunk(game, playerInputCoord);
                 game.next();
             } else {
@@ -52,13 +51,6 @@ public class GameDriver {
             presenter.displayMessage("You sunk your opponents " + currShip.get().getName() + "!");
         }
 
-    }
-
-    private void reportIfShipSunk(Grid grid, Coord playerInputCoord) {
-        Optional<Ship> currShip = grid.isShipSunk(playerInputCoord, true);
-        if (currShip.isPresent()) {
-            presenter.displayMessage("You sunk your opponents " + currShip.get().getName() + "!");
-        }
     }
 
     private void stopGame() {
