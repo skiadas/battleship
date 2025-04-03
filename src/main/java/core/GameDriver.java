@@ -26,17 +26,14 @@ public class GameDriver {
         Grid firstGrid = gridBuilder.defaultGrid();
         Grid secondGrid = gridBuilder.defaultGrid();
         Game game = new Game(firstGrid, secondGrid); // Temporary default grids for both players
-        while (true) {
-            if (game.isOver() == false) {
-                presenter.displayGame(firstGrid, secondGrid);
-                presenter.displayMessage("Insert a coordinate to shoot!");
-                Coord playerInputCoord = presenter.askForCoordinate(game.getEnemyGrid());
-                game.shoot(playerInputCoord);
-                reportIfShipSunk(game, playerInputCoord);
-                game.next();
-            } else {
-                break;
-            }
+        while (!game.isOver()) {
+            presenter.displayGame(firstGrid, secondGrid);
+            presenter.displayMessage("Insert a coordinate to shoot!");
+            Coord playerInputCoord = presenter.askForCoordinate(game.getEnemyGrid());
+            game.shoot(playerInputCoord);
+            reportIfShipSunk(game, playerInputCoord);
+            game.next();
+
         }
         displayWinner(game);
     }
