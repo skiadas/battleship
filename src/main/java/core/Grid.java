@@ -8,7 +8,7 @@ import java.util.Optional;
 
 /** Grid is the cells marked as rows and cols. Adds ship functionality. */
 @Entity
-@Table(name = "grid")
+@Table(name="grid")
 public class Grid implements Bounding {
 
     @Id
@@ -17,7 +17,7 @@ public class Grid implements Bounding {
     private long id;
 
     /** The cells in a given horizontal line */
-    @Column(name = "row")
+    @Column(name = "rows")
     private int rows;
 
     /** The cells in a given vertical line */
@@ -31,7 +31,7 @@ public class Grid implements Bounding {
 
     /** Holds the list of different ships */
     @ManyToOne
-    @JoinColumn(name = "ship_list_id", referencedColumnName = "id")
+    @JoinColumn(name = "ships", referencedColumnName = "id")
     private ShipList shipList;
 
     public Grid() {
@@ -136,6 +136,8 @@ public class Grid implements Bounding {
     public List<Ship> getShipList() {
         return shipList.getShips();
     }
+
+    public ShipList getShipListObject() {return shipList;}
 
     /**
      * checks if ship is sunk

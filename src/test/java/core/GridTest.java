@@ -8,7 +8,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class GridTest {
@@ -128,13 +127,15 @@ class GridTest {
     }
 
     // This tests needs to be corrected in the future.
-    @Disabled
+
     @Test
     public void gridStoredInDatabaseAndRestoredCorrectly() {
         EntityManager entityManager = factory.createEntityManager();
         entityManager.getTransaction().begin();
 
         Grid grid = new Grid(5, 5, DefaultGridBuilder.defaultShipsFor5x5());
+        ShipList shipList = grid.getShipListObject();
+        entityManager.persist(shipList);
         entityManager.persist(grid);
 
         entityManager.getTransaction().commit();
