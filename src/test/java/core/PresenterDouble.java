@@ -15,6 +15,10 @@ public class PresenterDouble implements Presenter {
         // TODO
     }
 
+    public void displayGame(Game game) {
+        // TODO
+    }
+
     public Coord askForCoordinate(Grid g) {
         return null;
     }
