@@ -4,9 +4,6 @@ import static core.Ship.Direction.HORIZONTAL;
 import static core.Ship.Direction.VERTICAL;
 import static org.junit.jupiter.api.Assertions.*;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -124,5 +121,4 @@ class GridTest {
         testGrid.shoot(c3);
         assertTrue(testGrid.isShipSunk(ship));
     }
-
 }
