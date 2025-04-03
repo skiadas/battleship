@@ -112,7 +112,9 @@ public class TextPresenter implements Presenter {
         }
     }
 
-    public void displayGame(final Grid player, final Grid enemy) {
+    public void displayGame(final Game game) {
+        final Grid player = game.getPlayerGrid();
+        final Grid enemy = game.getEnemyGrid();
         // These gets us the dimensions of the grid
         final int numOfRows = player.numRows();
         final int numOfCols = player.numCols();

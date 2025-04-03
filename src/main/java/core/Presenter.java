@@ -11,5 +11,5 @@ public interface Presenter {
 
     void displayOptions(String prompt, Map<String, Runnable> choices);
 
-    void displayGame(Grid firstGrid, Grid secondGrid);
+    void displayGame(Game game);
 }
