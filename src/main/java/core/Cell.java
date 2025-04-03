@@ -1,7 +1,9 @@
 package core;
 
+import java.io.Serializable;
+
 /** Cell is the individual spots of the grid. Used in the {@link Grid} class. */
-public class Cell {
+public class Cell implements Serializable {
     /** Keeps track of if the cell was shot. */
     private boolean shot;
 
