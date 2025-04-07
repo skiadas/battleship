@@ -1,15 +1,24 @@
 package core;
 
 import java.util.Map;
+import core.state.Action;
 
-public interface Presenter {
-    void displayMessage(String s);
+public abstract class Presenter {
+    protected Driver driver;
 
-    void displayGrid(Grid g);
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
 
-    Coord askForCoordinate(Grid g);
+    public abstract void displayMessage(String s);
 
-    void displayOptions(String prompt, Map<String, Runnable> choices);
+    public abstract void displayGrid(Grid g);
 
-    void displayGame(Game game);
+    public abstract Coord askForCoordinate(Grid g);
+
+    public abstract void displayOptions(String prompt, Map<String, Runnable> choices);
+
+    public abstract void displayGame(Game game);
+
+    public abstract Action askForGameAction(Grid g);
 }
