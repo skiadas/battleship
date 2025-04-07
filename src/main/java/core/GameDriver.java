@@ -3,8 +3,9 @@ package core;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import core.state.Action;
 
-public class GameDriver {
+public class GameDriver implements Driver {
     private final Presenter presenter;
 
     public GameDriver(Presenter presenter) {
@@ -12,6 +13,7 @@ public class GameDriver {
     }
 
     public void start() {
+        presenter.setDriver(this);
         presenter.displayMessage("Welcome to Battleship!");
         Map<String, Runnable> gameOptions = new HashMap<>();
         gameOptions.put("start", this::startGame);
@@ -21,37 +23,39 @@ public class GameDriver {
 
     private void startGame() {
         presenter.displayMessage("Game is starting...");
-        // User input for grid size
-        Game game =
-                new Game(
-                        DefaultGridBuilder.defaultGrid(),
-                        DefaultGridBuilder
-                                .defaultGrid()); // Temporary default grids for both players
+        Game game = new Game(DefaultGridBuilder.defaultGrid(), DefaultGridBuilder.defaultGrid());
+
         while (!game.isOver()) {
             presenter.displayGame(game);
-            presenter.displayMessage("Insert a coordinate to shoot!");
+            presenter.displayMessage("Insert a coordinate to shoot or type stop.");
             Coord playerInputCoord = presenter.askForCoordinate(game.getEnemyGrid());
             game.shoot(playerInputCoord);
             reportIfShipSunk(game, playerInputCoord);
             game.next();
         }
+
         displayWinner(game);
     }
 
     private void displayWinner(Game game) {
         if (game.getCurrent() == Game.Player.FIRST)
             presenter.displayMessage("Game is over! Winner is Player 1");
-        else presenter.displayMessage("Game is over! Winner is Player 2");
+        else
+            presenter.displayMessage("Game is over! Winner is Player 2");
     }
 
     private void reportIfShipSunk(Game game, Coord playerInputCoord) {
         Optional<Ship> currShip = game.getEnemyGrid().isShipSunk(playerInputCoord, true);
         if (currShip.isPresent()) {
-            presenter.displayMessage("You sunk your opponents " + currShip.get().getName() + "!");
+            presenter.displayMessage("You sunk your opponent's " + currShip.get().getName() + "!");
         }
     }
 
     private void stopGame() {
         presenter.displayMessage("Game is stopping...");
+    }
+
+    @Override
+    public void act(Action action) {
     }
 }
