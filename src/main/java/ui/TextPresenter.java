@@ -1,6 +1,11 @@
 package ui;
 
 import core.*;
+import core.state.Action;
+import core.state.SelectCoord;
+import core.state.Start;
+import core.state.Stop;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -8,7 +13,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 /** Displays the grid */
-public class TextPresenter implements Presenter {
+public class TextPresenter extends Presenter {
     /** Sets the default converter */
     private Converter converter = new DefualtConverter();
 
@@ -81,18 +86,14 @@ public class TextPresenter implements Presenter {
      */
     @Override
     public void displayGrid(final Grid g) {
-        // These gets us the dimensions of the grid
         final int numOfRows = g.numRows();
         final int numOfCols = g.numCols();
-        // create a if statement that throws a error if numRows()
-        // return a number higher then 26
 
         final String[] letter = {
-            " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
-            "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+                " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
+                "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         };
-        // now we need to display the grid using its rows and colunms
-        // while also displaying the numbers of the x-axis and letters on the y-axis
+
         for (int num = 0; num <= numOfCols; num++) {
             if (num == 0) {
                 output.print("   ");
@@ -101,6 +102,7 @@ public class TextPresenter implements Presenter {
             }
         }
         output.print("\n\n");
+
         for (int row = 1; row <= numOfRows; row++) {
             output.print(" " + letter[row] + " ");
             for (int col = 1; col <= numOfCols; col++) {
@@ -115,23 +117,22 @@ public class TextPresenter implements Presenter {
     public void displayGame(final Game game) {
         final Grid player = game.getPlayerGrid();
         final Grid enemy = game.getEnemyGrid();
-        // These gets us the dimensions of the grid
+
         final int numOfRows = player.numRows();
         final int numOfCols = player.numCols();
-        // create a if statement that throws a error if numRows()
-        // return a number higher then 26
 
         final String[] letter = {
-            " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
-            "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+                " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
+                "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         };
+
         String titles = "   Your Grid:";
         for (int cols = 1; cols <= numOfCols; cols++) {
             titles += "  ";
         }
         titles += "Enemy Grid:\n\n";
         output.print(titles);
-        // display both grids first line
+
         for (int i = 0; i <= 1; i++) {
             for (int num = 0; num <= numOfCols; num++) {
                 if (num == 0) {
@@ -145,6 +146,7 @@ public class TextPresenter implements Presenter {
             }
         }
         output.print("\n\n");
+
         for (int row = 1; row <= numOfRows; row++) {
             output.print(" " + letter[row] + " ");
             for (int col = 1; col <= numOfCols; col++) {
@@ -163,12 +165,6 @@ public class TextPresenter implements Presenter {
         }
     }
 
-    /**
-     * Prompts user for Coordinate selection and checks if it is within the Grid
-     *
-     * @param g
-     * @return
-     */
     @Override
     public Coord askForCoordinate(final Grid g) {
         final Scanner scanner = new Scanner(input);
@@ -184,12 +180,6 @@ public class TextPresenter implements Presenter {
         }
     }
 
-    /**
-     * Asks user their grid spot to shoot and makes sure its on the grid
-     *
-     * @param prompt
-     * @param choices
-     */
     @Override
     public void displayOptions(final String prompt, final Map<String, Runnable> choices) {
         output.println(prompt);
@@ -207,12 +197,38 @@ public class TextPresenter implements Presenter {
         }
     }
 
-    /**
-     * Prints a list of choices for the user
-     *
-     * @param choices
-     */
     private void printOptions(final Map<String, Runnable> choices) {
         choices.keySet().forEach(option -> output.println("- " + option));
+    }
+
+    /**
+     * Prompts user for a game action (start, stop, or coordinate)
+     *
+     * @param g the grid to validate coordinate input against
+     * @return an Action representing user intent
+     */
+    @Override
+    public Action askForGameAction(final Grid g) {
+        final Scanner scanner = new Scanner(input);
+        while (true) {
+            final String userInput = scanner.next().toLowerCase();
+            switch (userInput) {
+                case "start":
+                    return new Start();
+                case "stop":
+                    return new Stop();
+                default:
+                    try {
+                        Coord coord = new Coord(userInput);
+                        if (coord.isWithin(g)) {
+                            return new SelectCoord(coord);
+                        } else {
+                            output.println("Not within the Grid!");
+                        }
+                    } catch (Exception e) {
+                        output.println("Invalid input! Type a valid coordinate, 'start', or 'stop'.");
+                    }
+            }
+        }
     }
 }
