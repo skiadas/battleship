@@ -44,7 +44,7 @@ public class GameDriver implements Driver {
     }
 
     private void reportIfShipSunk(Game game, Coord playerInputCoord) {
-        Optional<Ship> currShip = game.getEnemyGrid().isShipSunk(playerInputCoord, true);
+        Optional<Ship> currShip = game.getEnemyGrid().isShipSunk(playerInputCoord);
         if (currShip.isPresent()) {
             presenter.displayMessage("You sunk your opponent's " + currShip.get().getName() + "!");
         }

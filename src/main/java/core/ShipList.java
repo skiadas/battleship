@@ -32,12 +32,12 @@ public class ShipList {
         return id;
     }
 
-    Optional<Ship> getShipAt(Coord coordinate, Optional<Ship> optionalShip, Grid grid) {
+    Optional<Ship> getShipAt(Coord coordinate, Grid grid) {
         for (Ship ship : getShips()) {
             if (ship.containsCoord(coordinate)) {
                 return Optional.of(ship);
             }
         }
-        return optionalShip;
+        return Optional.empty();
     }
 }
