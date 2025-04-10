@@ -35,8 +35,7 @@ public class ShipList {
     Optional<Ship> getShipAt(Coord coordinate, Optional<Ship> optionalShip, Grid grid) {
         for (Ship ship : getShips()) {
             if (ship.containsCoord(coordinate)) {
-                optionalShip = Optional.of(ship);
-                break;
+                return Optional.of(ship);
             }
         }
         return optionalShip;
