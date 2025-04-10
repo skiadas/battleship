@@ -158,12 +158,7 @@ public class Grid implements Bounding {
 
     public Optional<Ship> isShipSunk(Coord coordinate, Boolean onlyReturnSunk) {
         Optional<Ship> optionalShip = Optional.empty();
-        for (Ship ship : this.getShipList()) {
-            if (ship.containsCoord(coordinate)) {
-                optionalShip = Optional.of(ship);
-                break;
-            }
-        }
+        optionalShip = shipList.getShipAt(coordinate, optionalShip, this);
         if (optionalShip.isEmpty()) return optionalShip;
         for (final Coord coord : optionalShip.get().getCoordList()) {
             if (!this.getStatus(coord).equals(CellStatus.SHIP_HIT)) {

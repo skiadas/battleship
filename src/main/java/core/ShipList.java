@@ -3,6 +3,7 @@ package core;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class ShipList {
@@ -30,4 +31,15 @@ public class ShipList {
     public long getId() {
         return id;
     }
+
+    Optional<Ship> getShipAt(Coord coordinate, Optional<Ship> optionalShip, Grid grid) {
+        for (Ship ship : getShips()) {
+            if (ship.containsCoord(coordinate)) {
+                optionalShip = Optional.of(ship);
+                break;
+            }
+        }
+        return optionalShip;
+    }
+
 }
