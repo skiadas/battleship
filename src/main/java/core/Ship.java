@@ -3,6 +3,7 @@ package core;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import ui.CoordToStringAttributeConverter;
 
 /**
@@ -127,5 +128,14 @@ public class Ship {
             if (coord.col < 1 || coord.col > bounding.numCols()) return false;
         }
         return true;
+    }
+
+    public boolean any(Predicate<Coord> predicate) {
+        for (Coord coord : getCoordList()) {
+            if (predicate.test(coord)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
