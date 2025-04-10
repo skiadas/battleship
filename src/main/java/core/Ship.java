@@ -82,12 +82,7 @@ public class Ship {
     }
 
     public boolean containsCoord(Coord coord) {
-        for (Coord c : coordList) {
-            if (coord.isEqual(c)) {
-                return true;
-            }
-        }
-        return false;
+        return any(c -> coord.isEqual(c));
     }
 
     private List<Coord> genCoordList() {
@@ -109,12 +104,7 @@ public class Ship {
     }
 
     public boolean isOverlapping(Ship other) {
-        for (Coord coord : other.getCoordList()) {
-            if (this.containsCoord(coord)) {
-                return true;
-            }
-        }
-        return false;
+        return other.any(this::containsCoord);
     }
 
     /**
