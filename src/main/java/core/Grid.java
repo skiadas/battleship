@@ -162,11 +162,7 @@ public class Grid implements Bounding {
         if (optionalShip.isEmpty()) return optionalShip;
         for (final Coord coord : optionalShip.get().getCoordList()) {
             if (!this.getStatus(coord).equals(CellStatus.SHIP_HIT)) {
-                if (!onlyReturnSunk) {
-                    return optionalShip;
-                } else {
-                    return Optional.empty();
-                }
+                return Optional.empty();
             }
         }
         return optionalShip;
