@@ -1,9 +1,9 @@
 package core;
 
+import core.state.Action;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import core.state.Action;
 
 public class GameDriver implements Driver {
     private final Presenter presenter;
@@ -40,8 +40,7 @@ public class GameDriver implements Driver {
     private void displayWinner(Game game) {
         if (game.getCurrent() == Game.Player.FIRST)
             presenter.displayMessage("Game is over! Winner is Player 1");
-        else
-            presenter.displayMessage("Game is over! Winner is Player 2");
+        else presenter.displayMessage("Game is over! Winner is Player 2");
     }
 
     private void reportIfShipSunk(Game game, Coord playerInputCoord) {
@@ -56,6 +55,5 @@ public class GameDriver implements Driver {
     }
 
     @Override
-    public void act(Action action) {
-    }
+    public void act(Action action) {}
 }

@@ -5,7 +5,6 @@ import core.state.Action;
 import core.state.SelectCoord;
 import core.state.Start;
 import core.state.Stop;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -90,8 +89,8 @@ public class TextPresenter extends Presenter {
         final int numOfCols = g.numCols();
 
         final String[] letter = {
-                " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
-                "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+            " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
+            "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         };
 
         for (int num = 0; num <= numOfCols; num++) {
@@ -122,8 +121,8 @@ public class TextPresenter extends Presenter {
         final int numOfCols = player.numCols();
 
         final String[] letter = {
-                " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
-                "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+            " ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
+            "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         };
 
         String titles = "   Your Grid:";
@@ -226,7 +225,8 @@ public class TextPresenter extends Presenter {
                             output.println("Not within the Grid!");
                         }
                     } catch (Exception e) {
-                        output.println("Invalid input! Type a valid coordinate, 'start', or 'stop'.");
+                        output.println(
+                                "Invalid input! Type a valid coordinate, 'start', or 'stop'.");
                     }
             }
         }

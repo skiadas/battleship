@@ -1,7 +1,7 @@
 package core;
 
-import java.util.Map;
 import core.state.Action;
+import java.util.Map;
 
 public abstract class Presenter {
     protected Driver driver;
