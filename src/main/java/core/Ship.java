@@ -128,4 +128,13 @@ public class Ship {
         }
         return false;
     }
+
+    public boolean all(Predicate<Coord> predicate) {
+        for (Coord coord : getCoordList()) {
+            if (!predicate.test(coord)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
