@@ -2,7 +2,7 @@ package core.state;
 
 import java.util.Objects;
 
-public class Start extends Action {
+public class Start implements Action {
     @Override
     public boolean equals(Object obj) {
         return obj != null && this.getClass() == obj.getClass();

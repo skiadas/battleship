@@ -1,3 +1,3 @@
 package core.state;
 
-public class Action {}
+public interface Action {}

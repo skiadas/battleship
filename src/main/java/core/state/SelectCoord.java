@@ -3,7 +3,7 @@ package core.state;
 import core.Coord;
 import java.util.Objects;
 
-public class SelectCoord extends Action {
+public class SelectCoord implements Action {
     public final Coord coord;
 
     public SelectCoord(Coord coord) {
