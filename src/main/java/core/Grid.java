@@ -161,7 +161,7 @@ public class Grid implements Bounding {
         if (optionalShip.isEmpty()) return Optional.empty();
 
         Ship ship = optionalShip.get();
-        if (!ship.all(c -> !this.getStatus(c).equals(CellStatus.SHIP_HIT))) {
+        if (!ship.all(this::isShipHit)) {
             return Optional.empty();
         }
 
@@ -179,5 +179,9 @@ public class Grid implements Bounding {
 
     public long getId() {
         return id;
+    }
+
+    public boolean isShipHit(Coord coordinate) {
+        return (getStatus(coordinate).equals(CellStatus.SHIP_HIT));
     }
 }
