@@ -200,11 +200,6 @@ public class TextPresenter extends Presenter {
         choices.keySet().forEach(option -> output.println("- " + option));
     }
 
-    /**
-     * Prompts user for a game action (start, stop, or coordinate)
-     *
-     * @return an Action representing user intent
-     */
     @Override
     public Action askForGameAction() {
         final String userInput = scanner.next();
