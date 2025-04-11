@@ -44,11 +44,13 @@ public class GameDriver implements Driver {
     }
 
     private void reportIfShipSunk(Game game, Coord playerInputCoord) {
-        Optional<Ship> currShip = game.getEnemyGrid().getSunkShipAt(playerInputCoord);
-        if (currShip.isPresent()) {
-            presenter.displayMessage("You sunk your opponent's " + currShip.get().getName() + "!");
-        }
+        game.getEnemyGrid()
+                .getSunkShipAt(playerInputCoord)
+                .ifPresent(ship -> presenter.displayMessage(
+                        "You sunk your opponent's " + ship.getName() + "!"
+                ));
     }
+
 
     private void stopGame() {
         presenter.displayMessage("Game is stopping...");
