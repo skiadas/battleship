@@ -14,10 +14,10 @@ import org.mockito.ArgumentCaptor;
 public class GameStateTest {
 
     private GameState gameState;
+    private Presenter presenter = mock(Presenter.class);
 
     @Test
     public void whenMainMenuGameStateCreated_ThenDisplayOptionsActionIsProperlyCalled() {
-        Presenter presenter = mock(Presenter.class);
         gameState = new MainMenu(presenter);
         ArgumentCaptor<Map<String, Action>> choicesCaptor = ArgumentCaptor.forClass(Map.class);
         verify(presenter).displayOptionsActions(any(), choicesCaptor.capture());
@@ -29,21 +29,18 @@ public class GameStateTest {
 
     @Test
     public void whenRunningGameStateCreated_ThenGameStartMessageIsDisplayed() {
-        Presenter presenter = mock(Presenter.class);
         gameState = new RunningState(presenter);
         verify(presenter).displayMessage("Game is starting...");
     }
 
     @Test
     public void whenTerminatedGameStateCreated_ThenGameEndMessageIsDisplayed() {
-        Presenter presenter = mock(Presenter.class);
         gameState = new Terminated(presenter);
         verify(presenter).displayMessage("Goodbye!");
     }
 
     @Test
     public void whenGameActOnTerminated_ThenAnExceptionIsThrown() {
-        Presenter presenter = mock(Presenter.class);
         gameState = new Terminated(presenter);
         assertThrows(RuntimeException.class, () -> gameState.actOn(new Start()));
         assertThrows(RuntimeException.class, () -> gameState.actOn(new Stop()));
@@ -53,19 +50,19 @@ public class GameStateTest {
 
     @Test
     public void whenActingWithStopOnMainMenu_ThenMoveToTerminated() {
-        gameState = new MainMenu(mock(Presenter.class));
+        gameState = new MainMenu(presenter);
         assertInstanceOf(Terminated.class, gameState.actOn(new Stop()));
     }
 
     @Test
     public void whenActingWithStartOnMainMenu_ThenMoveToRunningState() {
-        gameState = new MainMenu(mock(Presenter.class));
+        gameState = new MainMenu(presenter);
         assertInstanceOf(RunningState.class, gameState.actOn(new Start()));
     }
 
     @Test
     public void whenInMainMenuStateStartAndStopAreOnlyActions() {
-        gameState = new MainMenu(mock(Presenter.class));
+        gameState = new MainMenu(presenter);
         assertThrows(
                 RuntimeException.class, () -> gameState.actOn(new SelectCoord(new Coord("A1"))));
     }
