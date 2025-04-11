@@ -32,4 +32,11 @@ public class GameStateTest {
         gameState = new RunningState(presenter);
         verify(presenter).displayMessage("Game is starting...");
     }
+
+    @Test
+    public void whenTerminatedGameStateCreated_ThenGameEndMessageIsDisplayed() {
+        Presenter presenter = mock(Presenter.class);
+        gameState = new Terminated(presenter);
+        verify(presenter).displayMessage("Goodbye!");
+    }
 }
