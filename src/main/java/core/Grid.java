@@ -173,4 +173,24 @@ public class Grid implements Bounding {
     public long getId() {
         return id;
     }
+
+    /**
+     * Checks if the two grids are the same
+     *
+     * @param other the grid it is comparing to
+     * @return false if the grids are not the same true if the grids are the same
+     */
+    public boolean isSameAs(Grid other) {
+        if (this.numRows() != other.numRows() || this.numCols() != other.numCols()) {
+            return false;
+        }
+        for (int row = 0; row < this.numRows(); row++) {
+            for (int col = 0; col < this.numCols(); col++) {
+                if (!this.cells[row][col].equals(other.cells[row][col])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
