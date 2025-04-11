@@ -83,13 +83,7 @@ public class Game {
     }
 
     private boolean areAllEnemyShipsSunk() {
-        final List<Ship> ships = getEnemyGrid().getShipList();
-        for (final Ship ship : ships) {
-            if (!(isShipSunk(ship))) {
-                return false;
-            }
-        }
-        return true;
+        return getEnemyGrid().allShipsAreSunk();
     }
 
     public Grid getEnemyGrid() {
