@@ -10,6 +10,6 @@ public class Terminated extends GameState {
 
     @Override
     GameState actOn(Action action) {
-        return null;
+        throw new RuntimeException("Should not act on a terminated game!");
     }
 }
