@@ -144,7 +144,7 @@ public class Grid implements Bounding {
      * @param ship is a ship in list of ships
      * @return boolean value for ship status
      */
-    public boolean isShipSunk(final Ship ship) {
+    public boolean getSunkShipAt(final Ship ship) {
         for (final Coord coord : ship.getCoordList()) {
             if (!this.getStatus(coord).equals(CellStatus.SHIP_HIT)) {
                 return false;
@@ -153,7 +153,7 @@ public class Grid implements Bounding {
         return true;
     }
 
-    public Optional<Ship> isShipSunk(Coord coordinate) {
+    public Optional<Ship> getSunkShipAt(Coord coordinate) {
         return shipList.getShipAt(coordinate, this).filter(ship -> ship.all(this::isShipHit));
     }
 
