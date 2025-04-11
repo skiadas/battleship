@@ -203,11 +203,10 @@ public class TextPresenter extends Presenter {
     /**
      * Prompts user for a game action (start, stop, or coordinate)
      *
-     * @param g the grid to validate coordinate input against
      * @return an Action representing user intent
      */
     @Override
-    public Action askForGameAction(final Grid g) {
+    public Action askForGameAction() {
         final String userInput = scanner.next();
         return switch (userInput) {
             case "start" -> new Start();

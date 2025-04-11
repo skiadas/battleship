@@ -34,7 +34,7 @@ public class PresenterDouble extends Presenter {
     }
 
     @Override
-    public Action askForGameAction(Grid g) {
+    public Action askForGameAction() {
         // Return null for now
         return null;
     }
