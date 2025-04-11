@@ -161,7 +161,7 @@ public class Grid implements Bounding {
         if (optionalShip.isEmpty()) return Optional.empty();
 
         Ship ship = optionalShip.get();
-        if (ship.any(c -> !this.getStatus(c).equals(CellStatus.SHIP_HIT))) {
+        if (!ship.all(c -> !this.getStatus(c).equals(CellStatus.SHIP_HIT))) {
             return Optional.empty();
         }
 
