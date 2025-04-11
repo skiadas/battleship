@@ -34,6 +34,9 @@ public class PresenterDouble extends Presenter {
     }
 
     @Override
+    public void displayOptionsActions(String prompt, Map<String, Action> choices) {}
+
+    @Override
     public Action askForGameAction() {
         // Return null for now
         return null;
