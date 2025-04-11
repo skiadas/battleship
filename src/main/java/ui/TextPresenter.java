@@ -196,6 +196,9 @@ public class TextPresenter extends Presenter {
         }
     }
 
+    @Override
+    public void displayOptionsActions(String prompt, Map<String, Action> choices) {}
+
     private void printOptions(final Map<String, Runnable> choices) {
         choices.keySet().forEach(option -> output.println("- " + option));
     }

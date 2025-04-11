@@ -18,6 +18,14 @@ public abstract class Presenter {
 
     public abstract void displayOptions(String prompt, Map<String, Runnable> choices);
 
+    /**
+     * Display a set of {@link core.state.Action} options
+     *
+     * @param prompt the prompt to show
+     * @param choices the possible action choices indexed by the trigger word
+     */
+    public abstract void displayOptionsActions(String prompt, Map<String, Action> choices);
+
     public abstract void displayGame(Game game);
 
     /**
