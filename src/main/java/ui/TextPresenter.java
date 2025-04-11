@@ -208,27 +208,11 @@ public class TextPresenter extends Presenter {
      */
     @Override
     public Action askForGameAction(final Grid g) {
-        final Scanner scanner = new Scanner(input);
-        while (true) {
-            final String userInput = scanner.next().toLowerCase();
-            switch (userInput) {
-                case "start":
-                    return new Start();
-                case "stop":
-                    return new Stop();
-                default:
-                    try {
-                        Coord coord = new Coord(userInput);
-                        if (coord.isWithin(g)) {
-                            return new SelectCoord(coord);
-                        } else {
-                            output.println("Not within the Grid!");
-                        }
-                    } catch (Exception e) {
-                        output.println(
-                                "Invalid input! Type a valid coordinate, 'start', or 'stop'.");
-                    }
-            }
-        }
+        final String userInput = scanner.next();
+        return switch (userInput) {
+            case "start" -> new Start();
+            case "stop" -> new Stop();
+            default -> new SelectCoord(new Coord(userInput));
+        };
     }
 }
