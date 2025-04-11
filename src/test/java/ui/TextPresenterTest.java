@@ -6,6 +6,10 @@ import core.Coord;
 import core.Game;
 import core.Grid;
 import core.Ship;
+import core.state.Action;
+import core.state.SelectCoord;
+import core.state.Start;
+import core.state.Stop;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -229,5 +233,32 @@ class TextPresenterTest {
         TextPresenter presenter = new TextPresenter(ioProvider);
         presenter.displayGame(new Game(grid, grid));
         System.out.println(ioProvider.getOutput());
+    }
+
+    @Test
+    void whenUserTypesCoordinate_ThenAskForGameActionReturnsSelectCoordAction() {
+        Grid grid = new Grid(5, 5); // Remove This
+        TestIOProvider ioProvider = TestIOProvider.withInput("B5\n");
+        TextPresenter presenter = new TextPresenter(ioProvider);
+        Action action = presenter.askForGameAction(grid);
+        assertEquals(new SelectCoord(new Coord("B5")), action);
+    }
+
+    @Test
+    void whenUserTypesStart_ThenAskForGameActionReturnsStartAction() {
+        Grid grid = new Grid(5, 5); // Remove This
+        TestIOProvider ioProvider = TestIOProvider.withInput("start\n");
+        TextPresenter presenter = new TextPresenter(ioProvider);
+        Action action = presenter.askForGameAction(grid);
+        assertEquals(new Start(), action);
+    }
+
+    @Test
+    void whenUserTypesStop_ThenAskForGameActionReturnsStopAction() {
+        Grid grid = new Grid(5, 5); // Remove This
+        TestIOProvider ioProvider = TestIOProvider.withInput("stop\n");
+        TextPresenter presenter = new TextPresenter(ioProvider);
+        Action action = presenter.askForGameAction(grid);
+        assertEquals(new Stop(), action);
     }
 }
