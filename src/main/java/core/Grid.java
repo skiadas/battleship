@@ -117,15 +117,12 @@ public class Grid implements Bounding {
      * @return boolean answer for check
      */
     public boolean allShipsAreSunk() {
-        for (final Ship ship : shipList.getShips()) {
-            final List<Coord> coords = ship.getCoordList();
-            for (final Coord coord : coords) {
-                if (!this.getStatus(coord).equals(CellStatus.SHIP_HIT)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return shipList.all(
+                ship ->
+                        ship.getCoordList().stream()
+                                .allMatch(
+                                        coord ->
+                                                this.getStatus(coord).equals(CellStatus.SHIP_HIT)));
     }
 
     /**
@@ -175,5 +172,25 @@ public class Grid implements Bounding {
 
     public boolean isShipHit(Coord coordinate) {
         return (getStatus(coordinate).equals(CellStatus.SHIP_HIT));
+    }
+
+    /**
+     * Checks if the two grids are the same
+     *
+     * @param other the grid it is comparing to
+     * @return false if the grids are not the same true if the grids are the same
+     */
+    public boolean isSameAs(Grid other) {
+        if (this.numRows() != other.numRows() || this.numCols() != other.numCols()) {
+            return false;
+        }
+        for (int row = 0; row < this.numRows(); row++) {
+            for (int col = 0; col < this.numCols(); col++) {
+                if (!this.cells[row][col].equals(other.cells[row][col])) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

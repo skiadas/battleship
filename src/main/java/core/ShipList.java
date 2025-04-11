@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Entity
 public class ShipList {
@@ -39,5 +40,20 @@ public class ShipList {
             }
         }
         return Optional.empty();
+    }
+
+    /**
+     * Checks if all ships in the list satisfy a given predicate.
+     *
+     * @param predicate the condition to apply to each ship
+     * @return true if the predicate returns true for all ships, otherwise false
+     */
+    public boolean all(Predicate<Ship> predicate) {
+        for (Ship ship : ships) {
+            if (!predicate.test(ship)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
