@@ -3,7 +3,6 @@ package core;
 import core.state.Action;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class GameDriver implements Driver {
     private final Presenter presenter;
@@ -46,11 +45,11 @@ public class GameDriver implements Driver {
     private void reportIfShipSunk(Game game, Coord playerInputCoord) {
         game.getEnemyGrid()
                 .getSunkShipAt(playerInputCoord)
-                .ifPresent(ship -> presenter.displayMessage(
-                        "You sunk your opponent's " + ship.getName() + "!"
-                ));
+                .ifPresent(
+                        ship ->
+                                presenter.displayMessage(
+                                        "You sunk your opponent's " + ship.getName() + "!"));
     }
-
 
     private void stopGame() {
         presenter.displayMessage("Game is stopping...");
