@@ -1,10 +1,11 @@
 package core.state;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import core.Coord;
 import core.Presenter;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -38,5 +39,34 @@ public class GameStateTest {
         Presenter presenter = mock(Presenter.class);
         gameState = new Terminated(presenter);
         verify(presenter).displayMessage("Goodbye!");
+    }
+
+    @Test
+    public void whenGameActOnTerminated_ThenAnExceptionIsThrown() {
+        Presenter presenter = mock(Presenter.class);
+        gameState = new Terminated(presenter);
+        assertThrows(RuntimeException.class, () -> gameState.actOn(new Start()));
+        assertThrows(RuntimeException.class, () -> gameState.actOn(new Stop()));
+        assertThrows(
+                RuntimeException.class, () -> gameState.actOn(new SelectCoord(new Coord("A1"))));
+    }
+
+    @Test
+    public void whenActingWithStopOnMainMenu_ThenMoveToTerminated() {
+        gameState = new MainMenu(mock(Presenter.class));
+        assertInstanceOf(Terminated.class, gameState.actOn(new Stop()));
+    }
+
+    @Test
+    public void whenActingWithStartOnMainMenu_ThenMoveToRunningState() {
+        gameState = new MainMenu(mock(Presenter.class));
+        assertInstanceOf(RunningState.class, gameState.actOn(new Start()));
+    }
+
+    @Test
+    public void whenInMainMenuStateStartAndStopAreOnlyActions() {
+        gameState = new MainMenu(mock(Presenter.class));
+        assertThrows(
+                RuntimeException.class, () -> gameState.actOn(new SelectCoord(new Coord("A1"))));
     }
 }
