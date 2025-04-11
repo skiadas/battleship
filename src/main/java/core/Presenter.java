@@ -20,5 +20,5 @@ public abstract class Presenter {
 
     public abstract void displayGame(Game game);
 
-    public abstract Action askForGameAction(Grid g);
+    public abstract Action askForGameAction();
 }
