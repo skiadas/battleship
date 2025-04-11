@@ -117,15 +117,8 @@ public class Grid implements Bounding {
      * @return boolean answer for check
      */
     public boolean allShipsAreSunk() {
-        for (final Ship ship : shipList.getShips()) {
-            final List<Coord> coords = ship.getCoordList();
-            for (final Coord coord : coords) {
-                if (!this.getStatus(coord).equals(CellStatus.SHIP_HIT)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return shipList.all(ship -> ship.getCoordList().stream()
+                .allMatch(coord -> this.getStatus(coord).equals(CellStatus.SHIP_HIT)));
     }
 
     /**
