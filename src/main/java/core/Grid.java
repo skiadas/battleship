@@ -154,15 +154,7 @@ public class Grid implements Bounding {
     }
 
     public Optional<Ship> isShipSunk(Coord coordinate) {
-        Optional<Ship> optionalShip = shipList.getShipAt(coordinate, this);
-        if (optionalShip.isEmpty()) return Optional.empty();
-
-        Ship ship = optionalShip.get();
-        if (!ship.all(this::isShipHit)) {
-            return Optional.empty();
-        }
-
-        return optionalShip;
+        return shipList.getShipAt(coordinate, this).filter(ship -> ship.all(this::isShipHit));
     }
 
     /** changes status of given cell to shoot */
