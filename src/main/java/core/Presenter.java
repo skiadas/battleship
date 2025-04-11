@@ -20,5 +20,10 @@ public abstract class Presenter {
 
     public abstract void displayGame(Game game);
 
+    /**
+     * Prompts user for a game action (start, stop, or coordinate)
+     *
+     * @return an Action representing user intent
+     */
     public abstract Action askForGameAction();
 }
