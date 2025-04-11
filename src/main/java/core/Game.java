@@ -1,7 +1,5 @@
 package core;
 
-import java.util.List;
-
 /** Implements basic functions of a two-player game */
 public class Game {
     /** The players of the Game */
