@@ -5,6 +5,7 @@ import static core.Ship.Direction.VERTICAL;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 class GridTest {
@@ -117,8 +118,38 @@ class GridTest {
         Coord c3 = new Coord(3, 2);
         testGrid.shoot(c1);
         testGrid.shoot(c2);
-        assertFalse(testGrid.isShipSunk(ship));
+        assertFalse(testGrid.getSunkShipAt(ship));
         testGrid.shoot(c3);
-        assertTrue(testGrid.isShipSunk(ship));
+        assertTrue(testGrid.getSunkShipAt(ship));
+    }
+
+    @Test
+    public void getSunkShipAtReturnsEmptyWhenNoShipAtCoordinate() {
+        Optional<Ship> result = testGrid.getSunkShipAt(new Coord(1, 1)); // Empty cell
+        assertTrue(result.isEmpty(), "Should return empty when no ship is at the coordinate");
+    }
+
+    @Test
+    public void getSunkShipAtReturnsEmptyWhenShipNotFullyHit() {
+        Ship ship = new Ship(new Coord(1, 2), 3, VERTICAL, "BattleShip");
+        Coord c1 = new Coord(1, 2);
+        Coord c2 = new Coord(2, 2);
+        Coord c3 = new Coord(3, 2);
+        testGrid.shoot(c1);
+        testGrid.shoot(c2);
+        Optional<Ship> result = testGrid.getSunkShipAt(c1);
+        assertTrue(result.isEmpty(), "Should return empty when ship is not fully hit");
+    }
+
+    @Test
+    public void getSunkShipAtReturnsShipWhenFullyHit() {
+        Ship ship = new Ship(new Coord(4, 4), 2, HORIZONTAL, "BattleShip");
+        testGrid.addShip(ship);
+        for (Coord coord : ship.getCoordList()) {
+            testGrid.shoot(coord);
+        }
+        Optional<Ship> result = testGrid.getSunkShipAt(ship.getCoordList().get(0));
+        assertTrue(result.isPresent());
+        assertEquals("BattleShip", result.get().getName());
     }
 }

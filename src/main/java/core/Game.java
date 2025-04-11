@@ -77,7 +77,7 @@ public class Game {
     }
 
     public boolean isShipSunk(final Ship ship) {
-        return getEnemyGrid().isShipSunk(ship);
+        return getEnemyGrid().getSunkShipAt(ship);
     }
 
     private boolean areAllEnemyShipsSunk() {
