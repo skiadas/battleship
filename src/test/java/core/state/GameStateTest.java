@@ -25,4 +25,11 @@ public class GameStateTest {
         assertEquals(new Stop(), choices.get("stop"));
         assertEquals(2, choices.size());
     }
+
+    @Test
+    public void whenRunningGameStateCreated_ThenGameStartMessageIsDisplayed() {
+        Presenter presenter = mock(Presenter.class);
+        gameState = new RunningState(presenter);
+        verify(presenter).displayMessage("Game is starting...");
+    }
 }
